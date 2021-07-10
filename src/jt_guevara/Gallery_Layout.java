@@ -2,33 +2,32 @@
  * DESCRIPTION: The Gallery_Layout Class handles the appearance and layout of the image gallery on the user interface	
  * 
  * FUNCTIONS:
- * 		public static void generate_gallery(Stage window, GridPane p);
- * 			PARAMETERS: Stage window			- window parameter used to bind gallery layout properties
- * 						GridPane p 				- main layout container used to insert a gallery layout component
+ *    public static void generate_gallery(Stage window, GridPane p);
+ *       PARAMETERS: Stage window - window parameter used to bind gallery layout properties
+ *                   GridPane p - main layout container used to insert a gallery layout component
  * 			
- * 			PREREQUISITE: 3 StackPane objects for canvases must be declared
- * 			RESULT: A grid layout component representing an image gallery containing three image canvases is added to the main layout(p) and placed on the window below the menu 
- * 					items. The private helper functions: set_gallery_appearance(), create_image_canvas() and bind_gallery() have already been called		
+ *       PREREQUISITE: 3 StackPane objects for canvases must be declared
+ *       RESULT: A grid layout component representing an image gallery containing three image canvases is added to the main layout(p) and placed on the 
+ *               window below the menu items. 		
+ * 		
+ *    private static void set_gallery_appearance(GridPane galleryLayout);
+ *       PARAMETERS: GridPane galleryLayout - gallery layout component used to set gallery properties and appearance
+ *       RESULT: The gallery layout properties are set.	
+ * 
+ * 
+ *    private StackPane create_image_canvas();
+ *       RESULT: An image canvas is returned with an embedded ImageView component. Image canvas and image view properties are set.
  * 
  * 		
- * 		private static void set_gallery_appearance(GridPane galleryLayout);
- * 			PARAMETERS: GridPane galleryLayout	- gallery layout component used to set gallery properties and appearance
- * 			RESULT: The gallery layout properties are set.	
- * 
- * 
- * 		private StackPane create_image_canvas();
- * 			RESULT:	An image canvas is returned with an embedded ImageView component. Image canvas and image view properties are set.
- * 
- * 		
- * 		private static void bind_gallery(Stage window, GridPane galleryLayout, Pane canvas1, Pane canvas2, Pane canvas3);
- * 			PARAMETERS: Stage window			- Window parameter for binding galleryLayout and canvas properties
- * 						GridPane galleryLayout  - gallery layout component used to bind height and width properties to window
- * 						Pane canvas1,			- layout sub-components used to bind height and width properties to gallery 
- * 							 canvas2,
- * 							 canvas3
+ *    private static void bind_gallery(Stage window, GridPane galleryLayout, Pane canvas1, Pane canvas2, Pane canvas3);
+ *       PARAMETERS: Stage window - Window parameter for binding galleryLayout and canvas properties
+ *                   GridPane galleryLayout - gallery layout component used to bind height and width properties to window
+ *                   Pane canvas1, - layout sub-components used to bind height and width properties to gallery 
+ *                        canvas2,
+ *                        canvas3
  * 			
- * 			RESULT: The height and width of the gallery layout and its canvas components are binded(synchronized) to the height and width of the application window
-                    so that the layout is resized along with the window when the window is resized
+ *       RESULT: The height and width of the gallery layout and its canvas components are binded(synchronized) to the height and width of the application window
+ *               so that the layout is resized along with the window when the window is resized by the user.
  */
 
 package jt_guevara;
