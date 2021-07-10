@@ -1,75 +1,76 @@
 /* FILE: Event_Handler.java
  * DESCRIPTION: 
- * 		The Event_Handler class handles the overall functionality and behavior of the application. The class sets event handlers(functions) to user interface components(gallery layout,
- * 			menu, buttons) that are called in response to the user's actions 
+ *    The Event_Handler class handles the overall functionality and behavior of the application. The class sets event handlers(functions) to user interface 
+ *    components(gallery layout, menu, buttons) that are called in response to the user's actions 
  * 
  * FUNCTIONS:
- * 		public static void load_event_handlers(Stage window, Scene s, GridPane p, Gallery imageGallery);
- * 			PARAMETERS:	Stage window			- Stage parameter used to set event handlers to menu items
- * 						GridPane p				- main layout container used to access sub-components(gallery layout, canvases) for setting event handlers
- * 						Gallery imageGallery	- Gallery object representing a collection of images; used to set the event handler for the load_gallery() helper function 
+ *    public static void load_event_handlers(Stage window, Scene s, GridPane p, Gallery imageGallery);
+ *       PARAMETERS: Stage window - Stage parameter used to set event handlers to menu items
+ *                   GridPane p - main layout container used to access sub-components(gallery layout, canvases) for setting event handlers
+ *                   Gallery imageGallery - Gallery object representing a collection of images; used to set the event handler for the load_gallery() helper 
+ *                                          function 
  * 
- * 			PREREQUISITE: The main functions: Window_Layout.setWindow(), Gallery_Layout.generate_gallery(), UI_Button_Layout.generate_UI_controls() must be called first
- * 			RESULT: Event functionality is set to all application components(menu items, gallery layout, buttons) so they perform the specified action when clicked by the 
- * 					user
+ *       PREREQUISITE: The main functions: Window_Layout.setWindow(), Gallery_Layout.generate_gallery(), UI_Button_Layout.generate_UI_controls() must be 
+ *                     called first
+ *       RESULT: Event functionality is set to all application components(menu items, gallery layout, buttons) so they perform the specified action when 
+ *               clicked by the user
  * 
  * 
- * 		private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- * 			PARAMETERS: Stage window			- Stage parameter used to open a file dialog screen through the user's operating system
- * 						Gallery imageGallery	- Gallery object used to add and clear images via activating the menu item
- * 						ImageView leftImgView,  - ImageView objects used to render images on the application window by manipulating the Gallery
- * 								  midImgView,
- * 								  rightImgView
+ *    private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+ *       PARAMETERS: Stage window - Stage parameter used to open a file dialog screen through the user's operating system
+ *                   Gallery imageGallery - Gallery object used to add and clear images via activating the menu item
+ *                   ImageView leftImgView, - ImageView objects used to render images on the application window by manipulating the Gallery
+ *                             midImgView,
+ *                             rightImgView
  * 
- * 			RESULT: Functionality is set to the menu item, 'Load Gallery'. When the user activates the menu item, a file dialog window appears on the user's system,
- * 				    prompting the user to choose image files from their directory. The image files are then placed inside the Gallery. Depending on the user's choice, the 
- * 					three image views(leftImgView, midImgView, rightImgView) will access the Gallery, set and render the first three images on the screen. 
- * 
- * 		
- * 		private static void load_UI_buttons(GridPane p, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- * 			PARAMETERS: GridPane p				- main layout container for retrieving UI pane and buttons
- * 						Gallery imageGallery	- Gallery object for setting event handlers to buttons
- * 						StackPane midCanvas		- sub-component for gallery layout for setting event handler to the zoom button
- * 						ImageView leftImgView,  - ImageView objects for setting event handlers to scroll buttons
- * 								  midImgView,
- * 								  rightImgView
- * 
- * 			RESULT: Functionality is set to the left-scroll, right-scroll and zoom buttons.
- * 
+ *       RESULT: Functionality is set to the menu item, 'Load Gallery'. When the user activates the menu item, a file dialog window appears on the user's
+ *               system, prompting the user to choose image files from their directory. The image files are then placed inside the Gallery. Depending on 
+ *               the user's choice, the three image views(leftImgView, midImgView, rightImgView) will access the Gallery, set and render the first three 
+ *               images on the screen. 
  * 
  * 		
- * 		private static void set_left_scroll(Button leftScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- * 			PARAMETERS: Button leftScroll		- left scroll button used to set event handler
- * 						Gallery imageGallery	- Gallery object for scrolling images
- * 						ImageView leftImgView,  - ImageView objects for rendering new images from the Gallery when scrolled
- * 								  midImgView,
- * 								  rightImgView
+ *    private static void load_UI_buttons(GridPane p, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+ *       PARAMETERS: GridPane p - main layout container for retrieving UI pane and buttons
+ *                   Gallery imageGallery - Gallery object for setting event handlers to buttons
+ *                   StackPane midCanvas - sub-component for gallery layout for setting event handler to the zoom button
+ *                   ImageView leftImgView, - ImageView objects for setting event handlers to scroll buttons
+ *                             midImgView,
+ *                             rightImgView
  * 
- * 			RESULT: Functionality is set to the left-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position to the right to 
- * 					simulate a left scrolling motion.
+ *       RESULT: Functionality is set to the left-scroll, right-scroll and zoom buttons.
  * 
- * 
- * 		private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- * 			PARAMETERS: Button leftScroll		- right scroll button used to set event handler
- * 						Gallery imageGallery	- Gallery object for scrolling images
- * 						ImageView leftImgView,  - ImageView objects for rendering new images from the Gallery when scrolled
- * 								  midImgView,
- * 								  rightImgView
- * 
- * 			RESULT: Functionality is set to the right-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position to the left to
- * 					 simulate a right scrolling motion.
  * 
  * 		
- * 		private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
- * 			PARAMETERS: Button zoom				- zoom button used to set event handler
- * 						StackPane midCanvas     - middle canvas of gallery layout used to access its image view
- * 						ImageView midImgView    - image view for applying zoom functionality
+ *    private static void set_left_scroll(Button leftScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+ *       PARAMETERS: Button leftScroll - left scroll button used to set event handler
+ *                   Gallery imageGallery - Gallery object for scrolling images
+ *                   ImageView leftImgView, - ImageView objects for rendering new images from the Gallery when scrolled
+ *                             midImgView,
+ *                             rightImgView
  * 
- * 			PREREQUISITE: midImgView must be set to point to an existing image in the gallery
- *  		RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is zoomed out and shrinks if it is zoomed in
- * 					
- * 			
- * 						 
+ *       RESULT: Functionality is set to the left-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position 
+ *               to the right to simulate a left scrolling motion.
+ * 
+ * 
+ *    private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+ *       PARAMETERS: Button leftScroll - right scroll button used to set event handler
+ *                   Gallery imageGallery - Gallery object for scrolling images
+ *                   ImageView leftImgView, - ImageView objects for rendering new images from the Gallery when scrolled
+ *                             midImgView,
+ *                             rightImgView
+ * 
+ *       RESULT: Functionality is set to the right-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position 
+ *               to the left to simulate a right scrolling motion.
+ * 
+ * 		
+ *    private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
+ *       PARAMETERS: Button zoom - zoom button used to set event handler
+ *                   StackPane midCanvas - middle canvas of gallery layout used to access its image view
+ *                   ImageView midImgView - image view for applying zoom functionality
+ * 
+ *       PREREQUISITE: midImgView must be set to point to an existing image in the gallery
+ *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is zoomed out and shrinks if it
+ *               is zoomed in						 
  */
 
 package jt_guevara;
