@@ -7,7 +7,7 @@
  * 
  * FILE: Main.java
  * DESCRIPTION:
- * 		Entry of application
+ *    Entry of application
  */
 
 package jt_guevara;
