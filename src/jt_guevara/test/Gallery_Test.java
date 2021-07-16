@@ -40,7 +40,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import jt_guevara.Gallery;
 
-public class Gallery_Test {
+public class Gallery_Test extends Application{
 	@BeforeAll
 	public static void FXLauncher() {//launcher function necessary for testing JavaFX objects
 		Application.launch();
