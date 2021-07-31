@@ -1,15 +1,4 @@
-/* FILE: Window_Layout.java
- * DESCRIPTION: Class used to set the style and layout of the application window and menu items	
- * 
- * FUNCTIONS: 
- *   public class void setWindow(Stage,GridPane);
- *      PARAMETERS: Stage window - window parameter for setting window properties
- *                  GridPane p - main layout container used to insert menu items, set menu item properties and set layout properties(style, padding)
- * 
- *      RESULT: The main application window's properties are set. Two menu items are created, their properties set and layed out on the window's 
- *              top-left corner.
- * 				
- */
+
 package jt_guevara;
 
 import javafx.geometry.Insets;
@@ -19,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Window_Layout {
+public class Main_Layout {
 	public static void setWindow(Stage window, GridPane p)
 	{
 		//Declare menu items to be used as clickable text for the user
