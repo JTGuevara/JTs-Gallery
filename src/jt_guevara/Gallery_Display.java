@@ -60,20 +60,7 @@ public class Gallery_Display {
 	
 	public Gallery_Display() {display = new GridPane();}//constructor
 	
-	public static void generate_gallery(Stage window,GridPane p)
-	{
-		GridPane galleryLayout = new GridPane();//gallery layout component(grid) for holding image canvases
-		set_gallery_appearance(galleryLayout);
-		StackPane canvas1 = create_image_canvas();//three image canvases used for placing inside gallery grid
-		StackPane canvas2 = create_image_canvas();
-		StackPane canvas3 = create_image_canvas();
-		bind_gallery(window,galleryLayout,canvas1,canvas2,canvas3); 
-		galleryLayout.add(canvas1, 0, 0);
-		galleryLayout.add(canvas2, 1, 0);
-		galleryLayout.add(canvas3, 2, 0);
-		p.add(galleryLayout, 0, 1);
-	}
-	
+	public GridPane getDisplay() {return display;}
 	
 	private static void set_gallery_appearance(GridPane galleryLayout) {
 		galleryLayout.setStyle("-fx-border-color: blue");
