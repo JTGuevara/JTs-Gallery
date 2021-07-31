@@ -62,18 +62,18 @@ public class Gallery_Display {
 	
 	public GridPane getDisplay() {return display;}
 	
-	private static void set_gallery_appearance(GridPane galleryLayout) {
-		galleryLayout.setStyle("-fx-border-color: blue");
-		galleryLayout.setAlignment(Pos.CENTER);
-		galleryLayout.setMinHeight(250);
-		galleryLayout.setMaxHeight(700);
-		galleryLayout.setHgap(20);
-		galleryLayout.setVgap(20);
-		galleryLayout.setPadding(new Insets(15,15,15,15));
+	private void set_gallery_style() {
+		display.setStyle("-fx-border-color: blue");
+		display.setAlignment(Pos.CENTER);
+		display.setMinHeight(250);
+		display.setMaxHeight(700);
+		display.setHgap(20);
+		display.setVgap(20);
+		display.setPadding(new Insets(15,15,15,15));
 	}
 	
 	
-	private static StackPane create_image_canvas()
+	private void set_image_canvas()
 	{
 		StackPane canvas = new StackPane();//canvas to be set and returned
 		canvas.setMinWidth(100);
@@ -81,6 +81,7 @@ public class Gallery_Display {
 		canvas.setMaxWidth(400);
 		canvas.setMaxHeight(560);
 		canvas.setStyle("-fx-border-color: green");
+		/*
 		ImageView imgView = new ImageView();//image view - object embedded inside the canvas for rendering image on the screen
 		imgView.minWidth(100);
 		imgView.minHeight(100);
@@ -91,7 +92,7 @@ public class Gallery_Display {
 		imgView.fitWidthProperty().bind(canvas.widthProperty().subtract(25));
 		imgView.fitHeightProperty().bind(canvas.heightProperty().subtract(25));
 		canvas.getChildren().add(imgView);
-		return canvas;
+		*/
 	}
 	
 	
