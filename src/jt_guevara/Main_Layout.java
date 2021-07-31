@@ -30,15 +30,10 @@ public class Main_Layout {
 	private final double MENU_FONT_SIZE = 12.4;//font size for menu items
 	public Main_Layout() {layout = new GridPane();}
 	public GridPane getLayout() {return layout;}
-	public static void setWindow(Stage window, GridPane p)
-	{
-		//Set menu item and layout appearance and properties
-		p.setStyle("-fx-background-color: black;-fx-border-color: blue");
-		p.setPadding(new Insets(10,10,10,10));
-		p.setGridLinesVisible(true);
-		window.setTitle("JT's Gallery");
-		window.setMinHeight(600);
-		window.setMinWidth(800);
+	
+	public void setLayout(){
+		layout.setStyle("-fx-background-color: black");
+		layout.setPadding(new Insets(10,10,10,10));
 	}
 	
 	public void set_menu_items(){
