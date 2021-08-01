@@ -85,9 +85,8 @@ public class Gallery_Display {
 	}
 	
 	
-	private void set_image_canvas()
+	private void set_image_canvas(StackPane canvas)
 	{
-		StackPane canvas = new StackPane();//canvas to be set and returned
 		canvas.setMinWidth(100);
 		canvas.setMinHeight(100);
 		canvas.setMaxWidth(400);
