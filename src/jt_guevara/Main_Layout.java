@@ -46,6 +46,6 @@ public class Main_Layout {
 		HBox menuBar = new HBox();
 		menuBar.getChildren().add(load_gallery);
 		menuBar.getChildren().add(exit);
-		p.add(menuBar, 0, 0);
+		layout.add(menuBar, 0, 0);
 	}
 }
