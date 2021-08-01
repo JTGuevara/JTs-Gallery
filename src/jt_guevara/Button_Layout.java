@@ -50,10 +50,9 @@ public class Button_Layout {
 	
 	public GridPane getButtonBar() {return buttonBar;}
 	
-	private static Button generate_scroll_button()
+	public void set_scroll_buttons()
 	{
-		Button scroll = new Button();	
-		//local array of doubles used to define a shape using points(in the form(x,y))(in this case, a triangle (<|))
+		//local array of doubles used to define a button shape using points(in the form(x,y))(in this case, a triangle (<|))
 		final double[] POINTS = {					
 				0.0, 0.0,
 				-30.0, 30.0,
@@ -61,11 +60,15 @@ public class Button_Layout {
 				0.0, 0.0
 			    };
 		//Polyline object used to set the shape of the zoom button using the points
-		Polyline icon = new Polyline(POINTS);
-		scroll.setShape(icon);
-		scroll.setScaleX(1.4);
-		scroll.setScaleY(1.5);
-		return scroll;
+		Polyline shape = new Polyline(POINTS);
+		left_scroll.setShape(shape);
+		left_scroll.setScaleX(1.4);
+		left_scroll.setScaleY(1.5);
+		//do the same for the right-scroll button
+		right_scroll.setShape(shape);
+		right_scroll.setScaleX(1.4);
+		right_scroll.setScaleY(1.5);
+		right_scroll.setRotate(180);//rotate button so it points right
 	}
 	
 	private static Button generate_zoom_button()
