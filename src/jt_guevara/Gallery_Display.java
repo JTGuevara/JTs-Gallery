@@ -115,7 +115,7 @@ public class Gallery_Display {
 	}
 	
 	
-	private void bind_gallery(Stage window)
+	public void bind_gallery(Stage window)
 	{
 		display.prefWidthProperty().bind(window.widthProperty());
 		display.prefHeightProperty().bind(window.heightProperty());
