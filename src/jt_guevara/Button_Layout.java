@@ -1,4 +1,4 @@
-/* FILE: UI_Button_Layout.java
+/* FILE: Button_Layout.java
  * CLASS DESCRIPTION: Class for generating a button layout. A Button_Layout consists of a button bar and buttons.
  * 
  * FUNCTIONS:  
@@ -107,9 +107,17 @@ public class Button_Layout {
 		buttonBar.setLayoutY(500);
 		buttonBar.setHgap(100);
 		buttonBar.setPadding(new Insets(15,15,15,15));
-		/*
-		UI_Pane.prefWidthProperty().bind(window.widthProperty());
-		UI_Pane.prefHeightProperty().bind(window.heightProperty());
-		*/
+	}
+	
+	public void add_buttons() {
+		buttonBar.add(left_scroll, 0, 0);
+		buttonBar.add(zoom, 1, 0);
+		buttonBar.add(right_scroll, 2, 0);
+	}
+	
+	
+	public void bind_button_layout(Stage window) {
+		buttonBar.prefWidthProperty().bind(window.widthProperty());
+		buttonBar.prefHeightProperty().bind(window.heightProperty());
 	}
 }
