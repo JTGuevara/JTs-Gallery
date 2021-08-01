@@ -62,6 +62,18 @@ public class Gallery_Display {
 	
 	public GridPane getDisplay() {return display;}
 	
+	public void setup_gallery()
+	{
+		set_gallery_style();
+		set_image_canvas(leftCanvas);
+		set_image_canvas(midCanvas);
+		set_image_canvas(rightCanvas);
+		set_image_view(leftCanvas);
+		set_image_view(midCanvas);
+		set_image_view(rightCanvas);
+		add_image_canvases();
+	}
+	
 	private void set_gallery_style() {
 		display.setStyle("-fx-border-color: blue");
 		display.setAlignment(Pos.CENTER);
@@ -104,15 +116,15 @@ public class Gallery_Display {
 	}
 	
 	
-	private static void bind_gallery(Stage window, GridPane galleryLayout, Pane canvas1, Pane canvas2, Pane canvas3)
+	private void bind_gallery(Stage window)
 	{
-		galleryLayout.prefWidthProperty().bind(window.widthProperty());
-		galleryLayout.prefHeightProperty().bind(window.heightProperty());
-		canvas1.prefWidthProperty().bind(galleryLayout.widthProperty());
-		canvas2.prefWidthProperty().bind(galleryLayout.widthProperty());
-		canvas1.prefHeightProperty().bind(galleryLayout.heightProperty());
-		canvas2.prefHeightProperty().bind(galleryLayout.heightProperty());
-		canvas3.prefWidthProperty().bind(galleryLayout.widthProperty());
-		canvas3.prefHeightProperty().bind(galleryLayout.heightProperty());
+		display.prefWidthProperty().bind(window.widthProperty());
+		display.prefHeightProperty().bind(window.heightProperty());
+		leftCanvas.prefWidthProperty().bind(display.widthProperty());
+		leftCanvas.prefHeightProperty().bind(display.heightProperty());
+		midCanvas.prefWidthProperty().bind(display.widthProperty());
+		midCanvas.prefHeightProperty().bind(display.heightProperty());
+		rightCanvas.prefWidthProperty().bind(display.widthProperty());
+		rightCanvas.prefHeightProperty().bind(display.heightProperty());
 	}
 }
