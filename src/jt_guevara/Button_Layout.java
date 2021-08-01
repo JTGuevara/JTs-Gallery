@@ -48,17 +48,7 @@ public class Button_Layout {
 	private Button zoom = new Button();
 	private GridPane buttonBar = new GridPane();//button bar that contains the above buttons
 	
-	public static void generate_UI_controls(Stage window, GridPane p) {
-		Button left_scroll = generate_scroll_button();
-		Button right_scroll = generate_scroll_button();
-		Button zoom = generate_zoom_button();
-		GridPane UI_Pane = generate_UI_Pane(window);
-		right_scroll.setRotate(180);
-		UI_Pane.add(left_scroll, 0, 0);
-		UI_Pane.add(zoom, 1, 0);
-		UI_Pane.add(right_scroll, 2, 0);
-		p.add(UI_Pane, 0, 2);
-	}
+	public GridPane getButtonBar() {return buttonBar;}
 	
 	private static Button generate_scroll_button()
 	{
