@@ -1,4 +1,36 @@
-
+/* FILE: UI_Button_Layout.java
+ * CLASS DESCRIPTION: Class for generating a button layout. A Button_Layout consists of a button bar and buttons.
+ * 
+ * FUNCTIONS:  
+ *    public Button_Layout(){}
+ *       DESCRIPTION: Creates a Button_Layout
+ *    
+ *    public GridPane getButtonBar();
+ *       DESCRIPTION: Returns the button bar
+ *       	
+ *    public void set_scroll_buttons();
+ *       DESCRIPTION: Sets the shape of the left-scroll(<|) and right-scroll(|>) buttons along with their 
+ *                    layout and style properties. 
+ * 
+ * 
+ *    public void set_zoom_button();
+ *       DESCRIPTION: Sets the shape of the zoom button(+) along with its layout and style properties. 
+ *       
+ *       
+ *    public void set_button_bar();
+ *       DESCRIPTION: Sets the button bar's layout and style properties. 
+ *    
+ *    
+ *    public void add_buttons();
+ *       DESCRIPTION: Adds the left-scroll, right-scroll and zoom buttons to the button bar
+ *       
+ *       
+ *    public void bind_button_layout(Stage window);
+ *       PARAMETER: Stage window - application window used to apply property binding 
+ *       DESCRIPTION: This function binds the width and height properties of the button bar to the width and height properties   
+ *                    of the application window so that the button bar is automatically resized along with the window when the 
+ *                    window changes.
+ */
 package jt_guevara;
 
 import javafx.geometry.Insets;
@@ -10,6 +42,12 @@ import javafx.stage.Stage;
 
 
 public class Button_Layout {
+	public Button_Layout() {}//constructor
+	private Button left_scroll = new Button();//left-scroll, right-scroll and zoom buttons
+	private Button right_scroll = new Button();
+	private Button zoom = new Button();
+	private GridPane buttonBar = new GridPane();//button bar that contains the above buttons
+	
 	public static void generate_UI_controls(Stage window, GridPane p) {
 		Button left_scroll = generate_scroll_button();
 		Button right_scroll = generate_scroll_button();
