@@ -96,20 +96,20 @@ public class Button_Layout {
 		zoom.setScaleY(2);
 	}
 	
-	private static GridPane generate_UI_Pane(Stage window)
+	public void set_button_bar()
 	{
-		GridPane UI_Pane = new GridPane();
-		UI_Pane.setAlignment(Pos.CENTER);
-		UI_Pane.setHgap(20);
-		UI_Pane.setStyle("-fx-border-color: lightblue");
-		UI_Pane.setMinHeight(50);
-		UI_Pane.setMaxHeight(100);
-		UI_Pane.setLayoutX(10);
-		UI_Pane.setLayoutY(500);
-		UI_Pane.setHgap(100);
-		UI_Pane.setPadding(new Insets(15,15,15,15));
+		buttonBar.setAlignment(Pos.CENTER);
+		buttonBar.setHgap(20);
+		buttonBar.setStyle("-fx-border-color: lightblue");
+		buttonBar.setMinHeight(50);
+		buttonBar.setMaxHeight(100);
+		buttonBar.setLayoutX(10);
+		buttonBar.setLayoutY(500);
+		buttonBar.setHgap(100);
+		buttonBar.setPadding(new Insets(15,15,15,15));
+		/*
 		UI_Pane.prefWidthProperty().bind(window.widthProperty());
 		UI_Pane.prefHeightProperty().bind(window.heightProperty());
-		return UI_Pane;
+		*/
 	}
 }
