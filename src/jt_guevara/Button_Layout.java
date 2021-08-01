@@ -1,28 +1,4 @@
-/* FILE: UI_Button_Layout.java
- * DESCRIPTION: Class for generating image gallery UI control buttons and setting their style, appearance and layout 
- * 
- * FUNCTIONS:
- *    public static void generate_UI_controls(Stage window, GridPane p);
- *       PARAMETERS: Stage window - Window parameter used to generate a UI pane to contain buttons
- *                   GridPane p - main layout container used to add the UI pane and buttons 
- *       
- *       RESULT: A user interface bar containing a left-scroll, right-scroll and zoom buttons is added to the main layout(p) and placed on the main window 
- *               with the left-scroll, zoom and right-scroll button placed in that order
- * 
- * 		
- *    private static Button generate_scroll_button();
- *       RESULT: A triangle-shaped Button is returned with its properties set and, by default, pointing to the left
- * 
- * 
- *    private static Button generate_zoom_button();
- *       RESULT: A Button in the shape of a plus sign(+) is returned with its properties set
- * 
- * 
- *    private static GridPane generate_UI_Pane(Stage window);
- *       PARAMETERS: Stage window - Window parameter used to bind the UI GridPane
- *       RESULT: A GridPane container is returned with its properties set. The GridPane's width and height properties are binded to the window.
- * 			
- */
+
 package jt_guevara;
 
 import javafx.geometry.Insets;
@@ -33,7 +9,7 @@ import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 
 
-public class UI_Button_Layout {
+public class Button_Layout {
 	public static void generate_UI_controls(Stage window, GridPane p) {
 		Button left_scroll = generate_scroll_button();
 		Button right_scroll = generate_scroll_button();
