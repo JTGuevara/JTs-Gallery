@@ -81,7 +81,9 @@ public class Gallery_Display {
 		canvas.setMaxWidth(400);
 		canvas.setMaxHeight(560);
 		canvas.setStyle("-fx-border-color: green");
-		/*
+	}
+	
+	private void set_image_view(StackPane canvas){
 		ImageView imgView = new ImageView();//image view - object embedded inside the canvas for rendering image on the screen
 		imgView.minWidth(100);
 		imgView.minHeight(100);
@@ -92,7 +94,13 @@ public class Gallery_Display {
 		imgView.fitWidthProperty().bind(canvas.widthProperty().subtract(25));
 		imgView.fitHeightProperty().bind(canvas.heightProperty().subtract(25));
 		canvas.getChildren().add(imgView);
-		*/
+	}
+	
+	
+	private void add_image_canvases() {
+		display.add(leftCanvas, 0, 0);
+		display.add(midCanvas, 1, 0);
+		display.add(rightCanvas, 2, 0);
 	}
 	
 	
