@@ -71,10 +71,8 @@ public class Button_Layout {
 		right_scroll.setRotate(180);//rotate button so it points right
 	}
 	
-	private static Button generate_zoom_button()
-	{
-		
-		Button zoom = new Button();	
+	public void set_zoom_button()
+	{	
 		//local array of doubles used to define a shape using points(in the form (x,y))(in this case a (+) sign)	
 		final double[] POINTS = {			
 			0.0, 0.0,
@@ -92,11 +90,10 @@ public class Button_Layout {
 			0.0, 0.0
 		};
 		//Polyline object used to set the shape of the zoom button using the points
-		Polyline icon = new Polyline(POINTS);	
-		zoom.setShape(icon);
+		Polyline shape = new Polyline(POINTS);	
+		zoom.setShape(shape);
 		zoom.setScaleX(2);
 		zoom.setScaleY(2);
-		return zoom;
 	}
 	
 	private static GridPane generate_UI_Pane(Stage window)
