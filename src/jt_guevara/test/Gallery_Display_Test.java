@@ -1,10 +1,19 @@
-/*UNIT TESTS FOR GALLERY_VIEW.JAVA
+/*UNIT TESTS FOR GALLERY_DISPLAY.JAVA
  * FILE: Gallery_Display_Test.java
  * DESCRIPTION: Unit test for Gallery_Display.java class
  * 
  * FUNCTIONS:
  *    public void constructor_test();
  *        DESCRIPTION: Verifies that the constructor works and that its field(display) is set
+ *        
+ *    public void test_left_canvas_field();
+ *        DESCRIPTION: Verifies that the Gallery_Display's leftCanvas field is set
+ *        
+ *    public void test_mid_canvas_field();
+ *        DESCRIPTION:  Verifies that the Gallery_Display's midCanvas field is set
+ *        
+ *    public void test_right_canvas_field();
+ *        DESCRIPTION:  Verifies that the Gallery_Display's rightCanvas field is set
  *        
  *    public GridPane getDisplay_test();
  *        DESCRIPTION: Verifies that a display(GridPane) is returned
@@ -54,19 +63,42 @@ import javafx.stage.Stage;
 import jt_guevara.Gallery_Display;
 
 public class Gallery_Display_Test extends Application{
-	//constructor test
+	//constructor test (Note: uncomment and set Gallery_Display fields to public for testing)
+	
+	/*
 	@Test
 	public void constructor_test() {
-		//(Note: set Gallery_Display fields to public for testing)
 		Gallery_Display galleryDisp = new Gallery_Display();
 		assertNotNull(galleryDisp.display);
 	}
 	
+	@Test
+	public void test_left_canvas_field() {
+		Gallery_Display galleryDisplay = new Gallery_Display();
+		StackPane expectedCanvas = galleryDisplay.leftCanvas;
+		assertNotNull(expectedCanvas);
+	}
+	
+	@Test
+	public void test_mid_canvas_field() {
+		Gallery_Display galleryDisplay = new Gallery_Display();
+		StackPane expectedCanvas = galleryDisplay.midCanvas;
+		assertNotNull(expectedCanvas);
+	}
+	
+	@Test
+	public void test_right_canvas_field() {
+		Gallery_Display galleryDisplay = new Gallery_Display();
+		StackPane expectedCanvas = galleryDisplay.rightCanvas;
+		assertNotNull(expectedCanvas);
+	}
+	*/
+	
 	//getDisplay() test
-	public GridPane getDisplay_test() {
+	@Test
+	public void getDisplay_test() {
 		GridPane display = new GridPane();
 		assertNotNull(display);
-		return display;
 	}
 	
 	//set_gallery_style() test
@@ -115,14 +147,13 @@ public class Gallery_Display_Test extends Application{
 	
 	//set_image_view() test
 	@Test
-	public StackPane bind_view_to_canvas() {
+	public void bind_view_to_canvas() {
 		StackPane canvas = new StackPane();
 		ImageView imgView = new ImageView();
 		imgView.fitHeightProperty().bind(canvas.heightProperty().subtract(25));
 		imgView.fitWidthProperty().bind(canvas.widthProperty().subtract(25));
 		assertEquals(imgView.fitHeightProperty().isBound(), true);
 		assertEquals(imgView.fitWidthProperty().isBound(), true);
-		return canvas;
 	}
 	
 
@@ -158,3 +189,4 @@ public class Gallery_Display_Test extends Application{
 		Application.launch();
 	}
 }
+
