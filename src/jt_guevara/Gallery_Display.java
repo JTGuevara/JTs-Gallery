@@ -76,7 +76,7 @@ public class Gallery_Display {
 	
 	private void set_gallery_style() {
 		display.setStyle("-fx-border-color: blue;-fx-border-width: 3px;-fx-border-color: royalblue;-fx-border-radius: 10px;"
-				+ "-fx-background-color: blue;-fx-background-radius: 10px");
+				+ "-fx-background-color: darkblue;-fx-background-radius: 10px");
 		display.setAlignment(Pos.CENTER);
 		display.setMinHeight(250);
 		display.setMaxHeight(700);
