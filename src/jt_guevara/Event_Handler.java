@@ -142,20 +142,20 @@ public class Event_Handler {
 		
 	}
 	
-	private static void load_UI_buttons(GridPane p, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
+	private void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//local variables needed to access user interface buttons
-		GridPane UI_Pane = (GridPane) p.getChildren().get(3);
-		Button leftScroll = (Button) UI_Pane.getChildren().get(0);
-		Button rightScroll = (Button) UI_Pane.getChildren().get(2);
-		Button zoom = (Button) UI_Pane.getChildren().get(1);
+		GridPane buttonBar = (GridPane) layout.getChildren().get(2);
+		Button leftScroll = (Button) buttonBar.getChildren().get(0);
+		Button rightScroll = (Button) buttonBar.getChildren().get(2);
+		Button zoom = (Button) buttonBar.getChildren().get(1);
 		set_left_scroll(leftScroll, imageGallery, leftImgView, midImgView, rightImgView);
 		set_right_scroll(rightScroll, imageGallery, leftImgView, midImgView, rightImgView);
 		set_zoom(zoom,midImgView, midCanvas);
 	}
 	
 	
-	private static void set_left_scroll(Button leftScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void set_left_scroll(Button leftScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		leftScroll.setOnAction(new EventHandler<ActionEvent>() {
 			//temporary images used to maintain order of the image gallery when scrolling
 			Image temp1, temp2;
@@ -165,7 +165,8 @@ public class Event_Handler {
 				if(imageGallery.getSize() < 3)
 					return;
 				
-				//series of statements to swap gallery images in the deque and shift them one position over 
+				//shift all Gallery images one position over to the right to simulate a left-scrolling motion with the user interface
+				//accessing and updating images with each shift
 				temp1 = imageGallery.getImages().getLast();
 				imageGallery.getImages().removeLast();
 				temp2 = imageGallery.getImages().getFirst();
