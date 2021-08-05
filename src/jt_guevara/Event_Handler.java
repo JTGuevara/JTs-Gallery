@@ -72,6 +72,8 @@
  */
 
 package jt_guevara;
+
+import javafx.application.Platform;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
