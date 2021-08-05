@@ -182,9 +182,9 @@ public class Event_Handler {
 	}
 	
 	
-	private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		rightScroll.setOnAction(new EventHandler<ActionEvent>() {
-			//temporary images used to maintain the order of the image gallery when scrolling
+			//temporary images used to maintain the order of the image gallery when scrolling(scrolling right is slightly different than scrolling left)
 			Image temp1, temp2, temp3;
 			@Override
 			public void handle(ActionEvent event) {
@@ -192,7 +192,8 @@ public class Event_Handler {
 				if(imageGallery.getSize() < 3) 
 					return;
 				
-				//series of statements to swap gallery images in the deque and shift them one position over 
+				//shift all Gallery images one position over to the left to simulate a right-scrolling motion with the user interface
+				//accessing and updating images with each shift
 				temp1 = imageGallery.getImages().getFirst();
 				imageGallery.getImages().removeFirst();
 				imageGallery.getImages().addLast(temp1);
