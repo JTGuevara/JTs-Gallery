@@ -42,15 +42,15 @@
  *                     the application window so that the gallery display is automatically resized with the window when the window changes. 
  *                     The same is done with each image canvas and the display. Each canvas is binded to the display so each canvas is resized
  *                     along with the display. 
+ *                     
  */
+
 package jt_guevara;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 public class Gallery_Display {
 	private GridPane display;//gallery display component that contains image canvases
@@ -75,7 +75,8 @@ public class Gallery_Display {
 	}
 	
 	private void set_gallery_style() {
-		display.setStyle("-fx-border-color: blue");
+		display.setStyle("-fx-border-color: blue;-fx-border-width: 3px;-fx-border-color: royalblue;-fx-border-radius: 10px;"
+				+ "-fx-background-color: darkblue;-fx-background-radius: 10px");
 		display.setAlignment(Pos.CENTER);
 		display.setMinHeight(250);
 		display.setMaxHeight(700);
@@ -91,7 +92,8 @@ public class Gallery_Display {
 		canvas.setMinHeight(100);
 		canvas.setMaxWidth(400);
 		canvas.setMaxHeight(560);
-		canvas.setStyle("-fx-border-color: green");
+		canvas.setStyle("-fx-border-width: 3px;-fx-border-color: royalblue;-fx-border-radius: 10px;"
+				+ "-fx-background-color: black;-fx-background-radius: 10px");
 	}
 	
 	private void set_image_view(StackPane canvas){

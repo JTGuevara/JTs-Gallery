@@ -1,18 +1,16 @@
 /* FILE: Event_Handler.java
  * DESCRIPTION: 
  *    The Event_Handler class handles the overall functionality and behavior of the application. The class sets event handlers(functions) to user interface 
- *    components(gallery layout, menu, buttons) that are called in response to the user's actions 
+ *    components(gallery display, menu, buttons) that are called in response to the user's actions 
  * 
  * FUNCTIONS:
- *    public static void load_event_handlers(Stage window, Scene s, GridPane p, Gallery imageGallery);
+ *    public static void load_event_handlers(Stage window, GridPane layout, Gallery imageGallery);
  *       PARAMETERS: Stage window - Stage parameter used to set event handlers to menu items
- *                   GridPane p - main layout container used to access sub-components(gallery layout, canvases) for setting event handlers
- *                   Gallery imageGallery - Gallery object representing a collection of images; used to set the event handler for the load_gallery() helper 
- *                                          function 
- * 
- *       PREREQUISITE: The main functions: Window_Layout.setWindow(), Gallery_Layout.generate_gallery(), UI_Button_Layout.generate_UI_controls() must be 
- *                     called first
- *       RESULT: Event functionality is set to all application components(menu items, gallery layout, buttons) so they perform the specified action when 
+ *                   GridPane layout - main layout container used to access sub-components(gallery display, canvases) for setting functions to them
+ *                   Gallery imageGallery - Gallery object representing a collection of images; used to set the event handler for the load_gallery() 
+ *                                          helper function 
+ *                                          
+ *       RESULT: Event functionality is set to all application components(menu items, gallery display, buttons) so they perform the specified action when 
  *               clicked by the user
  * 
  * 
@@ -29,11 +27,12 @@
  *               images on the screen. 
  * 
  * 		
- *    private static void load_UI_buttons(GridPane p, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- *       PARAMETERS: GridPane p - main layout container for retrieving UI pane and buttons
+ *    private static void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, 
+ *                  ImageView rightImgView);
+ *       PARAMETERS: GridPane layout - main layout container for retrieving button bar and buttons
  *                   Gallery imageGallery - Gallery object for setting event handlers to buttons
- *                   StackPane midCanvas - sub-component for gallery layout for setting event handler to the zoom button
- *                   ImageView leftImgView, - ImageView objects for setting event handlers to scroll buttons
+ *                   StackPane midCanvas - sub-component of gallery display for setting zoom function
+ *                   ImageView leftImgView, - ImageView objects for setting functions to scroll buttons
  *                             midImgView,
  *                             rightImgView
  * 
@@ -49,31 +48,32 @@
  *                             rightImgView
  * 
  *       RESULT: Functionality is set to the left-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position 
- *               to the right to simulate a left scrolling motion.
+ *               to the right to simulate a left scrolling motion. 
  * 
  * 
  *    private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- *       PARAMETERS: Button leftScroll - right scroll button used to set event handler
+ *       PARAMETERS: Button leftScroll - right scroll button used to set scrolling function
  *                   Gallery imageGallery - Gallery object for scrolling images
  *                   ImageView leftImgView, - ImageView objects for rendering new images from the Gallery when scrolled
  *                             midImgView,
  *                             rightImgView
  * 
- *       RESULT: Functionality is set to the right-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position 
- *               to the left to simulate a right scrolling motion.
+ *       RESULT: Functionality is set to the right-scroll button. When the user clicks the button, the images viewed on the canvas will 
+ *               switch one position to the left to simulate a right scrolling motion.
  * 
  * 		
  *    private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
  *       PARAMETERS: Button zoom - zoom button used to set event handler
- *                   StackPane midCanvas - middle canvas of gallery layout used to access its image view
+ *                   StackPane midCanvas - middle canvas of gallery display used to access its image view
  *                   ImageView midImgView - image view for applying zoom functionality
  * 
- *       PREREQUISITE: midImgView must be set to point to an existing image in the gallery
- *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is zoomed out and shrinks if it
- *               is zoomed in						 
+ *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is 
+ *               zoomed out and shrinks if it is zoomed in						 
  */
 
 package jt_guevara;
+
+import javafx.application.Platform;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -88,23 +88,25 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class Event_Handler {
-	private static boolean zoomStatus = false;//boolean used for zoom functionality(set_zoom() function)
+	public Event_Handler() {}
+	private static boolean zoomStatus = false;//boolean used in zoom function
 	
-	public static void load_event_handlers(Stage window, GridPane p, Gallery imageGallery)
+	public void load_event_handlers(Stage window, GridPane layout, Gallery imageGallery)
 	{
 		//local variables needed to access user interface components
-		GridPane galleryLayout = (GridPane) p.getChildren().get(2);
-		StackPane leftCanvas = (StackPane) galleryLayout.getChildren().get(0);
-		StackPane midCanvas = (StackPane) galleryLayout.getChildren().get(1);
-		StackPane rightCanvas = (StackPane) galleryLayout.getChildren().get(2);
-		ImageView leftImgView = (ImageView) leftCanvas.getChildren().get(0);
-		ImageView midImgView = (ImageView) midCanvas.getChildren().get(0);
-		ImageView rightImgView = (ImageView) rightCanvas.getChildren().get(0);
-		//menu bar used to access menu items and set event handlers to them
-		HBox menuBar = (HBox) p.getChildren().get(1);
+		HBox menuBar = (HBox) layout.getChildren().get(0);
+		GridPane display = (GridPane) layout.getChildren().get(1);
+		StackPane left_canvas = (StackPane) display.getChildren().get(0);
+		StackPane mid_canvas = (StackPane) display.getChildren().get(1);
+		StackPane right_canvas = (StackPane) display.getChildren().get(2);
+		ImageView leftImgView = (ImageView) left_canvas.getChildren().get(0);
+		ImageView midImgView = (ImageView) mid_canvas.getChildren().get(0);
+		ImageView rightImgView = (ImageView) right_canvas.getChildren().get(0);
+		System.out.println(layout.toString());
+		//set functions to menu items
 		menuBar.getChildren().get(0).setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		menuBar.getChildren().get(1).setOnMouseClicked(event->window.close());
-		load_UI_buttons(p,imageGallery, midCanvas, leftImgView, midImgView, rightImgView);
+		menuBar.getChildren().get(1).setOnMouseClicked(event->Platform.exit());
+		load_buttons(layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
 	
@@ -142,20 +144,20 @@ public class Event_Handler {
 		
 	}
 	
-	private static void load_UI_buttons(GridPane p, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
+	private void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//local variables needed to access user interface buttons
-		GridPane UI_Pane = (GridPane) p.getChildren().get(3);
-		Button leftScroll = (Button) UI_Pane.getChildren().get(0);
-		Button rightScroll = (Button) UI_Pane.getChildren().get(2);
-		Button zoom = (Button) UI_Pane.getChildren().get(1);
+		GridPane buttonBar = (GridPane) layout.getChildren().get(2);
+		Button leftScroll = (Button) buttonBar.getChildren().get(0);
+		Button rightScroll = (Button) buttonBar.getChildren().get(2);
+		Button zoom = (Button) buttonBar.getChildren().get(1);
 		set_left_scroll(leftScroll, imageGallery, leftImgView, midImgView, rightImgView);
 		set_right_scroll(rightScroll, imageGallery, leftImgView, midImgView, rightImgView);
 		set_zoom(zoom,midImgView, midCanvas);
 	}
 	
 	
-	private static void set_left_scroll(Button leftScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void set_left_scroll(Button leftScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		leftScroll.setOnAction(new EventHandler<ActionEvent>() {
 			//temporary images used to maintain order of the image gallery when scrolling
 			Image temp1, temp2;
@@ -165,7 +167,8 @@ public class Event_Handler {
 				if(imageGallery.getSize() < 3)
 					return;
 				
-				//series of statements to swap gallery images in the deque and shift them one position over 
+				//shift all Gallery images one position over to the right to simulate a left-scrolling motion with the user interface
+				//accessing and updating images with each shift
 				temp1 = imageGallery.getImages().getLast();
 				imageGallery.getImages().removeLast();
 				temp2 = imageGallery.getImages().getFirst();
@@ -181,9 +184,9 @@ public class Event_Handler {
 	}
 	
 	
-	private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		rightScroll.setOnAction(new EventHandler<ActionEvent>() {
-			//temporary images used to maintain the order of the image gallery when scrolling
+			//temporary images used to maintain the order of the image gallery when scrolling(scrolling right is slightly different than scrolling left)
 			Image temp1, temp2, temp3;
 			@Override
 			public void handle(ActionEvent event) {
@@ -191,7 +194,8 @@ public class Event_Handler {
 				if(imageGallery.getSize() < 3) 
 					return;
 				
-				//series of statements to swap gallery images in the deque and shift them one position over 
+				//shift all Gallery images one position over to the left to simulate a right-scrolling motion with the user interface
+				//accessing and updating images with each shift
 				temp1 = imageGallery.getImages().getFirst();
 				imageGallery.getImages().removeFirst();
 				imageGallery.getImages().addLast(temp1);
