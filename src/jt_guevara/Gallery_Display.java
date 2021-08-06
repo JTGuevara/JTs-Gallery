@@ -51,6 +51,7 @@ import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class Gallery_Display {
 	private GridPane display;//gallery display component that contains image canvases
