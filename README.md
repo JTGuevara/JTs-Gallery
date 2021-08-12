@@ -19,10 +19,13 @@ through and zoom on them. The following screenshots demonstrate the application.
   </ol>
   
 
-  
-<h2>USING THE IMAGE GALLERY</h2>
+<h2>RUNNING THE IMAGE GALLERY</h2>
 <ol>
-  <li>Click the 'Load Gallery' menu item on the top-left corner of the application to upload and view images of your choice.</li>
-  <li>Use the left-scroll and right-scroll buttons to cycle through images and the zoom button(the plus sign) to zoom in and out on the center image.</li>
-  <li>Click 'Exit' to close the application.</li>
+  <li>Download the project (.zip folder) or clone the repository locally on your machine</li>
+  <li>Navigate to the project's root directory (/JTs-Gallery/..)</li>
+  <li>Open your system's command-line interface and input the following commands:
+  
+        java -classpath ./bin --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls jt_guevara.Main
+  </li>
+  <li>Press enter</li>
   </ol>
