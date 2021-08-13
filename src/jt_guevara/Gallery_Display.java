@@ -51,6 +51,7 @@ import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class Gallery_Display {
 	private GridPane display;//gallery display component that contains image canvases
@@ -79,7 +80,7 @@ public class Gallery_Display {
 				+ "-fx-background-color: darkblue;-fx-background-radius: 10px");
 		display.setAlignment(Pos.CENTER);
 		display.setMinHeight(250);
-		display.setMaxHeight(700);
+		display.setMaxHeight(750);
 		display.setHgap(20);
 		display.setVgap(20);
 		display.setPadding(new Insets(15,15,15,15));
@@ -126,6 +127,6 @@ public class Gallery_Display {
 		midCanvas.prefWidthProperty().bind(display.widthProperty());
 		midCanvas.prefHeightProperty().bind(display.heightProperty());
 		rightCanvas.prefWidthProperty().bind(display.widthProperty());
-		rightCanvas.prefHeightProperty().bind(display.heightProperty());
+		rightCanvas.prefHeightProperty().bind(display.heightProperty());	
 	}
 }
