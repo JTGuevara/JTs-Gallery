@@ -146,9 +146,9 @@ public class Button_Layout_Test extends Application{
 	@Test
 	public void button_bar_height_test() {
 		GridPane buttonBar = new GridPane();
-		buttonBar.setMinHeight(50);
+		buttonBar.setMinHeight(70);
 		buttonBar.setMaxHeight(100);
-		assertEquals(buttonBar.getMinHeight(), 50);
+		assertEquals(buttonBar.getMinHeight(), 70);
 		assertEquals(buttonBar.getMaxHeight(), 100);
 	}
 	
