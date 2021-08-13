@@ -25,7 +25,7 @@ through and zoom on them. The following screenshots demonstrate the application.
   <li>Navigate to the project's root directory (/JTs-Gallery/..)</li>
   <li>Open your system's command-line interface and input the following commands:
   
-        java -classpath ./bin --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls jt_guevara.Main
+    java -classpath ./bin --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls -jar gallery.jar
   </li>
   <li>Press enter</li>
   </ol>
