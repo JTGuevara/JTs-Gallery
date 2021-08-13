@@ -28,8 +28,8 @@ public class Main extends Application{
 		
 		//declare application components
 		final String APPLICATION_NAME = "JT's Gallery";//application name
-	        final double MIN_WINDOW_WIDTH = 800.0;//minimum window width and height
-	        final double MIN_WINDOW_HEIGHT = 600.0;
+	    final double MIN_WINDOW_WIDTH = 800.0;//minimum window width and height
+	    final double MIN_WINDOW_HEIGHT = 600.0;
 		Main_Layout mainLayout = new Main_Layout();//main user interface layout container for application
 		Scene s = new Scene(mainLayout.getLayout(),800,600);//required JavaFX structure to hold layout components
 		Gallery imageGallery = new Gallery();//collection class to hold images		

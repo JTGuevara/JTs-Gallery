@@ -108,6 +108,7 @@ public class Button_Layout {
 		buttonBar.setLayoutY(500);
 		buttonBar.setHgap(100);
 		buttonBar.setPadding(new Insets(15,15,15,15));
+		
 	}
 	
 	public void add_buttons() {

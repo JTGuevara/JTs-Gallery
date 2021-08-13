@@ -60,7 +60,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import jt_guevara.Gallery_Display;
 
 public class Gallery_Display_Test extends Application{
 	//constructor test (Note: uncomment and set Gallery_Display fields to public for testing)

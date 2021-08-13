@@ -91,6 +91,8 @@ public class Event_Handler {
 	public Event_Handler() {}
 	private static boolean zoomStatus = false;//boolean used in zoom function
 	
+	
+	
 	public void load_event_handlers(Stage window, GridPane layout, Gallery imageGallery)
 	{
 		//local variables needed to access user interface components
@@ -153,7 +155,7 @@ public class Event_Handler {
 		Button zoom = (Button) buttonBar.getChildren().get(1);
 		set_left_scroll(leftScroll, imageGallery, leftImgView, midImgView, rightImgView);
 		set_right_scroll(rightScroll, imageGallery, leftImgView, midImgView, rightImgView);
-		set_zoom(zoom,midImgView, midCanvas);
+		set_zoom(zoom,midImgView, midCanvas, layout);
 	}
 	
 	
@@ -215,10 +217,11 @@ public class Event_Handler {
 		});
 	}
 	
-	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas) {
+	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
 		zoom.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				
 				//an image in a zoomed-in state is enlarged by 50%; an image in a zoomed-out state is shrunk by 50%
 				if(zoomStatus == false) {
 					zoomStatus = true;
@@ -234,6 +237,7 @@ public class Event_Handler {
 					midImgView.maxWidth(midImgView.getFitWidth() / 1.5);
 					midImgView.maxHeight(midImgView.getFitHeight() / 1.5);
 				}
+				
 			}
 		});
 	}

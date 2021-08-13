@@ -80,7 +80,7 @@ public class Gallery_Display {
 				+ "-fx-background-color: darkblue;-fx-background-radius: 10px");
 		display.setAlignment(Pos.CENTER);
 		display.setMinHeight(250);
-		display.setMaxHeight(700);
+		display.setMaxHeight(750);
 		display.setHgap(20);
 		display.setVgap(20);
 		display.setPadding(new Insets(15,15,15,15));
@@ -127,6 +127,6 @@ public class Gallery_Display {
 		midCanvas.prefWidthProperty().bind(display.widthProperty());
 		midCanvas.prefHeightProperty().bind(display.heightProperty());
 		rightCanvas.prefWidthProperty().bind(display.widthProperty());
-		rightCanvas.prefHeightProperty().bind(display.heightProperty());
+		rightCanvas.prefHeightProperty().bind(display.heightProperty());	
 	}
 }
