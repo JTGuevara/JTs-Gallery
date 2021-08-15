@@ -14,18 +14,18 @@ through and zoom on them. The following screenshots demonstrate the application.
 
 <h2>REQUIREMENTS</h2>
 <ol>
-  <li>Java Development Kit (version 16.0.1)(OpenJDK)</li>
-  <li>JavaFX Development Kit (version 11.0.2)(OpenJFX)</li>
+  <li>Java Development Kit (version 16.0.1) (OpenJDK) (Source: https://jdk.java.net/16/)</li>
+  <li>JavaFX Development Kit (version 11.0.2) (OpenJFX) (Source: https://openjfx.io/)</li>
   </ol>
   
 
 <h2>RUNNING THE IMAGE GALLERY</h2>
 <ol>
-  <li>Download the project (.zip folder) or clone the repository locally on your machine</li>
+  <li>Download the project (.zip folder) or clone the repository locally on your machine. Also make sure that you have downloaded both Java SDKs to your system.</li>
   <li>Navigate to the project's root directory (/JTs-Gallery/..)</li>
   <li>Open your system's command-line interface and input the following commands:
   
     java -classpath ./bin --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls -jar gallery.jar
   </li>
-  <li>Press enter</li>
+  <li>Press Enter</li>
   </ol>
