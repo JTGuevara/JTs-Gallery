@@ -187,6 +187,7 @@ public class Event_Handler {
 			
 		});
 		
+		//change color of button on mouse hover
 		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");});
 		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: white");});
 	}
@@ -222,6 +223,7 @@ public class Event_Handler {
 			
 		});
 		
+		//change color of button on mouse hover
 		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");});
 		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");});
 	}
@@ -250,6 +252,7 @@ public class Event_Handler {
 			}
 		});
 		
+		//change color of button on mouse hover
 		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");});
 		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");});
 	}
