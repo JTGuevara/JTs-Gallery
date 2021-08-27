@@ -240,6 +240,9 @@ public class Event_Handler {
 				
 			}
 		});
+		
+		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");});
+		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");});
 	}
 	
 }
