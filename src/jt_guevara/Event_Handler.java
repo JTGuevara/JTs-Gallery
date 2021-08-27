@@ -48,7 +48,8 @@
  *                             rightImgView
  * 
  *       RESULT: Functionality is set to the left-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position 
- *               to the right to simulate a left scrolling motion. 
+ *               to the right to simulate a left scrolling motion. Also, the button changes color from default when hovered over and back to default when hovered 
+ *               out.
  * 
  * 
  *    private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
@@ -184,6 +185,9 @@ public class Event_Handler {
 			}
 			
 		});
+		
+		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");});
+		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: white");});
 	}
 	
 	
