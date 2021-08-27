@@ -68,7 +68,8 @@
  *                   ImageView midImgView - image view for applying zoom functionality
  * 
  *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is 
- *               zoomed out and shrinks if it is zoomed in						 
+ *               zoomed out and shrinks if it is zoomed in. Also, the button changes color from default when hovered over and back to default when hovered 
+ *               out.					 
  */
 
 package jt_guevara;
