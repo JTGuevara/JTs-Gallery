@@ -60,9 +60,10 @@
  *                             rightImgView
  * 
  *       RESULT: Functionality is set to the right-scroll button. When the user clicks the button, the images viewed on the canvas will 
- *               switch one position to the left to simulate a right scrolling motion.
+ *               switch one position to the left to simulate a right scrolling motion. Also, the button changes color from default when hovered over and back to 
+ *               default when hovered out.
  * 
- * 		
+ * 
  *    private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
  *       PARAMETERS: Button zoom - zoom button used to set event handler
  *                   StackPane midCanvas - middle canvas of gallery display used to access its image view
@@ -220,6 +221,9 @@ public class Event_Handler {
 			}
 			
 		});
+		
+		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");});
+		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");});
 	}
 	
 	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
