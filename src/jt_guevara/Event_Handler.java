@@ -225,9 +225,11 @@ public class Event_Handler {
 			
 		});
 		
-		//change color of button on mouse hover
-		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");});
-		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");});
+		//change size and color of button on mouse hover
+		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");rightScroll.setScaleX(rightScroll.getScaleX() * 1.2);
+			rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);});
+		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
+			rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
 	}
 	
 	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
