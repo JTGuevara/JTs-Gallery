@@ -252,9 +252,11 @@ public class Event_Handler {
 			}
 		});
 		
-		//change color of button on mouse hover
-		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");});
-		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");});
+		//change size and color of button on mouse hover
+		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");zoom.setScaleX(zoom.getScaleX() * 1.2);
+			zoom.setScaleY(zoom.getScaleY() * 1.2);});
+		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");zoom.setScaleX(zoom.getScaleX() / 1.2);
+			zoom.setScaleY(zoom.getScaleY() / 1.2);});
 	}
 	
 }
