@@ -187,9 +187,11 @@ public class Event_Handler {
 			
 		});
 		
-		//change color of button on mouse hover
-		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");});
-		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: white");});
+		//change size and color of button on mouse hover
+		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");leftScroll.setScaleX(leftScroll.getScaleX() * 1.2);
+			leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);});
+		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: white");leftScroll.setScaleX(leftScroll.getScaleX() / 1.2);
+			leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
 	}
 	
 	
