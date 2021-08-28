@@ -48,8 +48,8 @@
  *                             rightImgView
  * 
  *       RESULT: Functionality is set to the left-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position 
- *               to the right to simulate a left scrolling motion. Also, the button changes color from default when hovered over and back to default when hovered 
- *               out.
+ *               to the right to simulate a left scrolling motion. Also, the button changes size and color from default when hovered over and back to default 
+ *               when hovered out.
  * 
  * 
  *    private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
@@ -60,8 +60,8 @@
  *                             rightImgView
  * 
  *       RESULT: Functionality is set to the right-scroll button. When the user clicks the button, the images viewed on the canvas will 
- *               switch one position to the left to simulate a right scrolling motion. Also, the button changes color from default when hovered over and back to 
- *               default when hovered out.
+ *               switch one position to the left to simulate a right scrolling motion. Also, the button changes size and color from default when hovered 
+ *               over and back to default when hovered out.
  * 
  * 
  *    private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
@@ -70,8 +70,8 @@
  *                   ImageView midImgView - image view for applying zoom functionality
  * 
  *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is 
- *               zoomed out and shrinks if it is zoomed in. Also, the button changes color from default when hovered over and back to default when hovered 
- *               out.					 
+ *               zoomed out and shrinks if it is zoomed in. Also, the button changes size and color from default when hovered over 
+ *               and back to default when hovered out.					 
  */
 
 package jt_guevara;
