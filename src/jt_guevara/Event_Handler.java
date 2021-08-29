@@ -12,6 +12,15 @@
  *                                          
  *       RESULT: Event functionality is set to all application components(menu items, gallery display, buttons) so they perform the specified action when 
  *               clicked by the user
+ *               
+ * 
+ *    private static void set_menu_items(HBox menuBar, Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+ *       PARAMETERS: HBox menuBar - menu bar for setting functions to menu items 
+ *                   Stage window, Gallery imageGallery, - window and gallery components used to set a function to a specific menu item for uploading a gallery  
+ *                   ImageView leftImgView, midImgView, 
+ *                   rightImgView
+ *                   
+ *       RESULT: Functionality is set to all menu items.
  * 
  * 
  *    private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
