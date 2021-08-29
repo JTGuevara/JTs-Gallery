@@ -21,7 +21,7 @@
  *                   rightImgView
  *                   
  *       RESULT: Functionality is set to all menu items. Each menu item is set to execute its appropriate function when the item is clicked. Also each menu item
- *               changes size and color when the mouse is hovered over it.
+ *               changes color when the mouse is hovered over it.
  * 
  * 
  *    private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
