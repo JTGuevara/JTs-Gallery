@@ -109,11 +109,16 @@ public class Event_Handler {
 		ImageView rightImgView = (ImageView) right_canvas.getChildren().get(0);
 		System.out.println(layout.toString());
 		//set functions to menu items
-		menuBar.getChildren().get(0).setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		menuBar.getChildren().get(1).setOnMouseClicked(event->Platform.exit());
+		set_menu_items(menuBar,window, imageGallery, leftImgView, midImgView, rightImgView);
 		load_buttons(layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
+	private static void set_menu_items(HBox menuBar, Stage window, Gallery imageGallery, ImageView leftImgView, 
+			ImageView midImgView, ImageView rightImgView) {
+		//set click functions
+		menuBar.getChildren().get(0).setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
+		menuBar.getChildren().get(1).setOnMouseClicked(event->Platform.exit());
+	}
 	
 	
 	private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
