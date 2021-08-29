@@ -20,7 +20,8 @@
  *                   ImageView leftImgView, midImgView, 
  *                   rightImgView
  *                   
- *       RESULT: Functionality is set to all menu items.
+ *       RESULT: Functionality is set to all menu items. Each menu item is set to execute its appropriate function when the item is clicked. Also each menu item
+ *               changes size and color when the mouse is hovered over it.
  * 
  * 
  *    private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
@@ -95,6 +96,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -122,11 +125,32 @@ public class Event_Handler {
 		load_buttons(layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
+	
 	private static void set_menu_items(HBox menuBar, Stage window, Gallery imageGallery, ImageView leftImgView, 
 			ImageView midImgView, ImageView rightImgView) {
+		//local variables to access menu items
+		Text gallery = (Text) menuBar.getChildren().get(0);
+		Text exit = (Text) menuBar.getChildren().get(1);
 		//set click functions
-		menuBar.getChildren().get(0).setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		menuBar.getChildren().get(1).setOnMouseClicked(event->Platform.exit());
+		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
+		exit.setOnMouseClicked(event->Platform.exit());
+		//set menu items to change size and color on hover
+		gallery.setOnMouseEntered(event->{
+			gallery.setFill(Color.BLUE);
+			gallery.setScaleX(gallery.getScaleX() * 1.1);
+			gallery.setScaleY(gallery.getScaleY() * 1.1);});
+		gallery.setOnMouseExited(event->{
+			gallery.setFill(Color.WHITE);
+			gallery.setScaleX(gallery.getScaleX() / 1.1);
+			gallery.setScaleY(gallery.getScaleY() / 1.1);});
+		exit.setOnMouseEntered(event->{
+			exit.setFill(Color.BLUE);
+			exit.setScaleX(exit.getScaleX() * 1.1);
+			gallery.setScaleY(exit.getScaleY() * 1.1);});
+		exit.setOnMouseExited(event->{
+			exit.setFill(Color.WHITE);
+			exit.setScaleX(exit.getScaleX() / 1.1);
+			exit.setScaleY(exit.getScaleY() / 1.1);});
 	}
 	
 	
