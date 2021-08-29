@@ -134,24 +134,12 @@ public class Event_Handler {
 		//set click functions
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
 		exit.setOnMouseClicked(event->Platform.exit());
-		//set menu items to change size and color on hover
-		gallery.setOnMouseEntered(event->{
-			gallery.setFill(Color.BLUE);
-			gallery.setScaleX(gallery.getScaleX() * 1.1);
-			gallery.setScaleY(gallery.getScaleY() * 1.1);});
-		gallery.setOnMouseExited(event->{
-			gallery.setFill(Color.WHITE);
-			gallery.setScaleX(gallery.getScaleX() / 1.1);
-			gallery.setScaleY(gallery.getScaleY() / 1.1);});
-		exit.setOnMouseEntered(event->{
-			exit.setFill(Color.BLUE);
-			exit.setScaleX(exit.getScaleX() * 1.1);
-			gallery.setScaleY(exit.getScaleY() * 1.1);});
-		exit.setOnMouseExited(event->{
-			exit.setFill(Color.WHITE);
-			exit.setScaleX(exit.getScaleX() / 1.1);
-			exit.setScaleY(exit.getScaleY() / 1.1);});
-	}
+		//set menu items to change color on hover
+		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);});
+		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
+		exit.setOnMouseEntered(event->{exit.setFill(Color.BLUE);});
+		exit.setOnMouseExited(event->{exit.setFill(Color.WHITE);});
+		}
 	
 	
 	private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
