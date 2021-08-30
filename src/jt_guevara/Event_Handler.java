@@ -12,6 +12,16 @@
  *                                          
  *       RESULT: Event functionality is set to all application components(menu items, gallery display, buttons) so they perform the specified action when 
  *               clicked by the user
+ *               
+ * 
+ *    private static void set_menu_items(HBox menuBar, Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+ *       PARAMETERS: HBox menuBar - menu bar for setting functions to menu items 
+ *                   Stage window, Gallery imageGallery, - window and gallery components used to set a function to a specific menu item for uploading a gallery  
+ *                   ImageView leftImgView, midImgView, 
+ *                   rightImgView
+ *                   
+ *       RESULT: Functionality is set to all menu items. Each menu item is set to execute its appropriate function when the item is clicked. Also each menu item
+ *               changes color when the mouse is hovered over it.
  * 
  * 
  *    private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
@@ -48,7 +58,8 @@
  *                             rightImgView
  * 
  *       RESULT: Functionality is set to the left-scroll button. When the user clicks the button, the images viewed on the canvas will switch one position 
- *               to the right to simulate a left scrolling motion. 
+ *               to the right to simulate a left scrolling motion. Also, the button changes size and color from default when hovered over and back to default 
+ *               when hovered out.
  * 
  * 
  *    private static void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
@@ -59,16 +70,18 @@
  *                             rightImgView
  * 
  *       RESULT: Functionality is set to the right-scroll button. When the user clicks the button, the images viewed on the canvas will 
- *               switch one position to the left to simulate a right scrolling motion.
+ *               switch one position to the left to simulate a right scrolling motion. Also, the button changes size and color from default when hovered 
+ *               over and back to default when hovered out.
  * 
- * 		
+ * 
  *    private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
  *       PARAMETERS: Button zoom - zoom button used to set event handler
  *                   StackPane midCanvas - middle canvas of gallery display used to access its image view
  *                   ImageView midImgView - image view for applying zoom functionality
  * 
  *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is 
- *               zoomed out and shrinks if it is zoomed in						 
+ *               zoomed out and shrinks if it is zoomed in. Also, the button changes size and color from default when hovered over 
+ *               and back to default when hovered out.					 
  */
 
 package jt_guevara;
@@ -83,6 +96,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -106,11 +121,25 @@ public class Event_Handler {
 		ImageView rightImgView = (ImageView) right_canvas.getChildren().get(0);
 		System.out.println(layout.toString());
 		//set functions to menu items
-		menuBar.getChildren().get(0).setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		menuBar.getChildren().get(1).setOnMouseClicked(event->Platform.exit());
+		set_menu_items(menuBar,window, imageGallery, leftImgView, midImgView, rightImgView);
 		load_buttons(layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
+	
+	private static void set_menu_items(HBox menuBar, Stage window, Gallery imageGallery, ImageView leftImgView, 
+			ImageView midImgView, ImageView rightImgView) {
+		//local variables to access menu items
+		Text gallery = (Text) menuBar.getChildren().get(0);
+		Text exit = (Text) menuBar.getChildren().get(1);
+		//set click functions
+		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
+		exit.setOnMouseClicked(event->Platform.exit());
+		//set menu items to change color on hover
+		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);});
+		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
+		exit.setOnMouseEntered(event->{exit.setFill(Color.BLUE);});
+		exit.setOnMouseExited(event->{exit.setFill(Color.WHITE);});
+		}
 	
 	
 	private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
@@ -183,6 +212,12 @@ public class Event_Handler {
 			}
 			
 		});
+		
+		//change size and color of button on mouse hover
+		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");leftScroll.setScaleX(leftScroll.getScaleX() * 1.2);
+			leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);});
+		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: white");leftScroll.setScaleX(leftScroll.getScaleX() / 1.2);
+			leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
 	}
 	
 	
@@ -215,6 +250,12 @@ public class Event_Handler {
 			}
 			
 		});
+		
+		//change size and color of button on mouse hover
+		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");rightScroll.setScaleX(rightScroll.getScaleX() * 1.2);
+			rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);});
+		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
+			rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
 	}
 	
 	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
@@ -240,6 +281,12 @@ public class Event_Handler {
 				
 			}
 		});
+		
+		//change size and color of button on mouse hover
+		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");zoom.setScaleX(zoom.getScaleX() * 1.2);
+			zoom.setScaleY(zoom.getScaleY() * 1.2);});
+		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");zoom.setScaleX(zoom.getScaleX() / 1.2);
+			zoom.setScaleY(zoom.getScaleY() / 1.2);});
 	}
 	
 }

@@ -102,7 +102,7 @@ public class Button_Layout {
 		buttonBar.setHgap(20);
 		buttonBar.setStyle("-fx-border-color: lightblue;-fx-border-radius: 10px;-fx-background-radius: 10px;"
 				+ "-fx-border-width: 3px;-fx-background-color: darkblue;-fx-border-color: royalblue");
-		buttonBar.setMinHeight(70);
+		buttonBar.setMinHeight(80);
 		buttonBar.setMaxHeight(100);
 		buttonBar.setLayoutX(10);
 		buttonBar.setLayoutY(500);
