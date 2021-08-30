@@ -41,7 +41,7 @@ public class Main_Layout {
 	
 	public void set_menu_items(){
 		//Declare menu items to be used as clickable text for the user
-		Text load_gallery = new Text("Load Gallery");
+		Text load_gallery = new Text("Gallery");
 		Text exit = new Text("Exit");
 		load_gallery.setFill(Color.WHITE);
 		load_gallery.setFont(Font.font(MENU_FONT_SIZE));
