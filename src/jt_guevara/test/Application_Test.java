@@ -1,3 +1,11 @@
+/*FILE: Application_Test.java
+ *DESCRIPTION: Main class for testing application. The Application_Test class will use automated testing to run the application
+ *     in a testing environment. The automated test will simulate a user clicking on the user interface and testing the functionality 
+ *     of each component (gallery upload, left-scroll, right-scroll, etc.). The Application_Test class also serves as the application's
+ *     second entry point.
+ *
+ */
+
 package jt_guevara.test;
 
 import javafx.application.Application;
@@ -17,7 +25,7 @@ public class Application_Test extends Application{
 
 	@Override
 	public void start(Stage window) throws Exception {
-		//START TEST PROGRAM	
+		//START JAVAFX TEST PROGRAM	
 		
 				//declare application components
 				final String APPLICATION_NAME = "JT's Gallery";//application name
