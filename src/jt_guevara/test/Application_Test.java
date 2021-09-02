@@ -8,8 +8,13 @@
 
 package jt_guevara.test;
 
+import javafx.scene.robot.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import jt_guevara.Button_Layout;
 import jt_guevara.Event_Handler;
@@ -22,43 +27,55 @@ public class Application_Test extends Application{
 	public static void main(String[] args) {
 		jt_guevara.Main.launch(args);
 	}
-
+		
+	
 	@Override
 	public void start(Stage window) throws Exception {
-		//START JAVAFX TEST PROGRAM	
+	//START JAVAFX TEST PROGRAM	
+		//Screen dimensions for simulating mouse movement regardless of resolution
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		final double WIDTH = screenSize.getWidth();
+		final double HEIGHT = screenSize.getHeight();
 		
-				//declare application components
-				final String APPLICATION_NAME = "JT's Gallery";//application name
-			    final double MIN_WINDOW_WIDTH = 800.0;//minimum window width and height
-			    final double MIN_WINDOW_HEIGHT = 600.0;
-				Main_Layout mainLayout = new Main_Layout();//main user interface layout container for application
-				Scene s = new Scene(mainLayout.getLayout(),800,600);//required JavaFX structure to hold layout components
-				Gallery imageGallery = new Gallery();//collection class to hold images		
-				Gallery_Display display = new Gallery_Display();//layout sub-component for displaying images 
-				Button_Layout buttonLayout = new Button_Layout();//layout sub-component for manipulating images
-				Event_Handler handler = new Event_Handler();//class to set functionality to user interface components
+		//declare application components
+		final String APPLICATION_NAME = "JT's Gallery";//application name
+		final double MIN_WINDOW_WIDTH = 800.0;//minimum window width and height
+		final double MIN_WINDOW_HEIGHT = 600.0;
+		Main_Layout mainLayout = new Main_Layout();//main user interface layout container for application
+		Scene s = new Scene(mainLayout.getLayout(),800,600);//required JavaFX structure to hold layout components
+		Gallery imageGallery = new Gallery();//collection class to hold images		
+		Gallery_Display display = new Gallery_Display();//layout sub-component for displaying images 
+		Button_Layout buttonLayout = new Button_Layout();//layout sub-component for manipulating images
+		Event_Handler handler = new Event_Handler();//class to set functionality to user interface components
 				
-				//set up components
-				mainLayout.setLayout();
-				mainLayout.set_menu_items();
-				display.setup_gallery();
-				display.bind_gallery(window);
-				buttonLayout.set_scroll_buttons();
-				buttonLayout.set_zoom_button();
-				buttonLayout.set_button_bar();
-				buttonLayout.add_buttons();
-				buttonLayout.bind_button_layout(window);
-				mainLayout.getLayout().add(display.getDisplay(), 0, 1);
-				mainLayout.getLayout().add(buttonLayout.getButtonBar(), 0, 2);
-				handler.load_event_handlers(window, mainLayout.getLayout(), imageGallery);
+		//set up components
+		mainLayout.setLayout();
+		mainLayout.set_menu_items();
+		display.setup_gallery();
+		display.bind_gallery(window);
+		buttonLayout.set_scroll_buttons();
+		buttonLayout.set_zoom_button();
+		buttonLayout.set_button_bar();
+		buttonLayout.add_buttons();
+		buttonLayout.bind_button_layout(window);
+		mainLayout.getLayout().add(display.getDisplay(), 0, 1);
+		mainLayout.getLayout().add(buttonLayout.getButtonBar(), 0, 2);
+		handler.load_event_handlers(window, mainLayout.getLayout(), imageGallery);
 				
-				//set up JavaFX stage
-				window.setTitle(APPLICATION_NAME);
-				window.setMinWidth(MIN_WINDOW_WIDTH);
-				window.setMinHeight(MIN_WINDOW_HEIGHT);
-				window.setScene(s);
+		//set up JavaFX stage
+		window.setTitle(APPLICATION_NAME);
+		window.setMinWidth(MIN_WINDOW_WIDTH);
+		window.setMinHeight(MIN_WINDOW_HEIGHT);
+		window.setScene(s);
 				
-				//show time!
-				window.show();
+		//show stage
+		window.show();
+				
+		
+		//Initialize automated test
+		Robot testBot = new Robot();
+		testBot.mouseMove(WIDTH / 3.2, HEIGHT / 6);
+		testBot.mouseMove(500, 1000);
+		testBot.mouseClick(MouseButton.PRIMARY);		
 	}
 }
