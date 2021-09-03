@@ -154,6 +154,9 @@ public class Event_Handler {
 		fc.setTitle("Select Image(s)");
 		fc.getExtensionFilters().add(new ExtensionFilter("Image Files","*.jpg","*.png","*.jpeg"));
 		
+		//set initial directory - (created for testing purposes, change directory for your specific system but disable when not needed or program will fail)
+		fc.setInitialDirectory(new File("C:/Users/Joan/Documents/Programs/Git Projects/JTs-Gallery/"));
+		
 		//array list used to store file and directory paths from user
 		java.util.List<File> files = fc.showOpenMultipleDialog(window);
 		
@@ -161,7 +164,7 @@ public class Event_Handler {
 		if(files == null)
 			return;
 		
-		//add images to the gallery by 
+		//add images to the gallery, set the first three images to be displayed
 		for(int i = 0;i < files.size();++i) {
 			imageGallery.addImage(new Image("file:" + files.get(i).getAbsolutePath()));
 			if(i == 0)
