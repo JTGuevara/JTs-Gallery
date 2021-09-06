@@ -26,7 +26,7 @@
  *                  
  *      DESCRIPTION: Starts automated button test. Uses a robot to simulate a user clicking on the button interface on the lower portion of 
  *         the screen. The test consists of a series of animations where each mouse movement and click is recorded in a frame. The button 
- *         test ends when the application is minimized.
+ *         test ends when the application is minimized and exited.
  */
 
 package jt_guevara.test;
@@ -49,23 +49,23 @@ import jt_guevara.Main_Layout;
 public class Application_Test extends Application{
 	
 	public void initialize_test(Robot testBot, Stage window) throws InterruptedException {
-		double x = testBot.getMouseX();
+		double x = testBot.getMouseX();//get current mouse coordinates
 		double y = testBot.getMouseY();
-		Timeline t = new Timeline( //execute animation
+		Timeline t = new Timeline( //execute animation (
 				new KeyFrame(Duration.ZERO, event -> {moveMousePointer(testBot,x,x,y,y);}),
-				new KeyFrame(Duration.seconds(0.5), event -> {moveMousePointer(testBot,x,x + 20,y,y + 50);}),  
+				new KeyFrame(Duration.seconds(0.5), event -> {moveMousePointer(testBot,x,x + 30,y,y + 50);}), //upload gallery 
 				new KeyFrame(Duration.seconds(1), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-				new KeyFrame(Duration.seconds(1.5), event -> {moveMousePointer(testBot,x + 20,x + 150,y + 50,y + 250);}),
+				new KeyFrame(Duration.seconds(1.5), event -> {moveMousePointer(testBot,x + 20,x + 150,y + 50,y + 250);}),//click on images in file-chooser
 				new KeyFrame(Duration.seconds(2), event -> {testBot.keyPress(KeyCode.CONTROL);}),
 				new KeyFrame(Duration.seconds(2), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-				new KeyFrame(Duration.seconds(2.5), event -> {moveMousePointer(testBot,x + 150, x + 300,y + 250, y + 250);}),
-				new KeyFrame(Duration.seconds(3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-				new KeyFrame(Duration.seconds(3.5), event -> {moveMousePointer(testBot,x + 300, x + 450,y + 250, y + 250);}),
+				new KeyFrame(Duration.seconds(2.3), event -> {moveMousePointer(testBot,x + 150, x + 300,y + 250, y + 250);}),
+				new KeyFrame(Duration.seconds(2.6), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+				new KeyFrame(Duration.seconds(2.9), event -> {moveMousePointer(testBot,x + 300, x + 450,y + 250, y + 250);}),
+				new KeyFrame(Duration.seconds(3.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+				new KeyFrame(Duration.seconds(3.5), event -> {testBot.keyRelease(KeyCode.CONTROL);}),
+				new KeyFrame(Duration.seconds(3.9), event -> {moveMousePointer(testBot,x + 450, x + 800,y + 250, y + 580);}),//click open to close file
 				new KeyFrame(Duration.seconds(4), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-				new KeyFrame(Duration.seconds(4.5), event -> {testBot.keyRelease(KeyCode.CONTROL);}),
-				new KeyFrame(Duration.seconds(4.7), event -> {moveMousePointer(testBot,x + 450, x + 800,y + 250, y + 580);}),
-				new KeyFrame(Duration.seconds(5.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-				new KeyFrame(Duration.seconds(5.5), event -> {button_test(testBot, window);}) //starts button test
+				new KeyFrame(Duration.seconds(4.5), event -> {button_test(testBot, window);}) //starts button test
 				);
 		t.setCycleCount(1);
 		t.play();
@@ -84,19 +84,30 @@ public class Application_Test extends Application{
 		double x = testBot.getMouseX();//get current mouse coordinates
 		double y = testBot.getMouseY();
 		
-		Timeline t = new Timeline( //execute animation
+		Timeline t = new Timeline( //execute animation 
 			new KeyFrame(Duration.ZERO, event -> {moveMousePointer(testBot,x,x,y,y);}),	
-			new KeyFrame(Duration.seconds(1), event -> {moveMousePointer(testBot,x,x - 50,y,y - 570);}),
-			new KeyFrame(Duration.seconds(1.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-			new KeyFrame(Duration.seconds(2), event -> {moveMousePointer(testBot,x - 50,x - 500,y - 570,y + 160);}),
+			new KeyFrame(Duration.seconds(0.5), event -> {moveMousePointer(testBot,x,x - 50,y,y - 570);}),//navigate to maximize to full-screen
+			new KeyFrame(Duration.seconds(0.9), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(1.7), event -> {moveMousePointer(testBot,x - 50,window.getWidth() / 2,y - 570,window.getHeight() / 1.2);}),//navigate to buttons
 			new KeyFrame(Duration.seconds(2.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-			new KeyFrame(Duration.seconds(3.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-			new KeyFrame(Duration.seconds(4.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-			new KeyFrame(Duration.seconds(4.7), event -> {moveMousePointer(testBot,testBot.getMouseX(),testBot.getMouseX() + 100,y + 160,y + 160);})
+			new KeyFrame(Duration.seconds(2.9), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(3.5), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(4.1), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(4.7), event -> {moveMousePointer(testBot,testBot.getMouseX(),testBot.getMouseX() + 100,y + 160,y + 160);}),//move to right-scroll
+			new KeyFrame(Duration.seconds(5.6), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(6.2), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(6.9), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(7.5), event -> {moveMousePointer(testBot,testBot.getMouseX(),testBot.getMouseX() - 230,y + 160,y + 160);}),//move to left-scroll
+			new KeyFrame(Duration.seconds(8.1), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(8.7), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(9.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(9.7), event -> {moveMousePointer(testBot,testBot.getMouseX() - 230,window.getWidth() - 100,y + 160,10);}),//navigate to minimize screen
+			new KeyFrame(Duration.seconds(9.9), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(10.4), event -> {moveMousePointer(testBot,testBot.getMouseX() - 100,window.getX() + 70, window.getY(),window.getY() + 50);}),//navigate to exit
+			new KeyFrame(Duration.seconds(10.8), event -> {testBot.mouseClick(MouseButton.PRIMARY);})
 			);
 		t.setCycleCount(1);
 		t.play();
-		//STILL IN PROGRESS.....
 	}
 	
 	public static void main(String[] args) {
