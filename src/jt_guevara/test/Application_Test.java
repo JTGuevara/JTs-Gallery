@@ -6,7 +6,7 @@
  *FUNCTIONS:
  *	public void initialize_test(Robot testBot);
  *      PARAMETERS: Robot testBot - robot class for automation
- *                  Stage window - Stage parameter for obtaining mouse coordinates
+ *                  Stage window - window for obtaining mouse coordinates relative to the user's monitor
  *      DESCRIPTION: Starts the automated test. The function uses a robot to automate a user clicking a menu item to upload images and clicking
  *         the lower buttons to manipulate images. The test consists of a series of animations where each mouse movement and click is recorded 
  *         in a frame. The images used are sample images located in the project's directory. The initial test ends when the application is 
@@ -22,7 +22,7 @@
  *  
  *  public void button_test(Robot testBot, Stage window);
  *      PARAMETERS: Robot testBot - robot class for automating button tests
- *                  Stage window - window parameter for obtaining mouse coordinates
+ *                  Stage window - window parameter for obtaining mouse coordinates relative to the user's monitor
  *                  
  *      DESCRIPTION: Starts automated button test. Uses a robot to simulate a user clicking on the button interface on the lower portion of 
  *         the screen. The test consists of a series of animations where each mouse movement and click is recorded in a frame. The button 
