@@ -10,6 +10,9 @@
  *   
  *   public GridPane getLayout();
  *      DESCRIPTION: Returns layout
+ *      
+ *   public HBox getMenuBar();
+ *      DESCRIPTION: Returns menu bar
  *                  
  *   public void setMenuItems();
  *      DESCRIPTION: Two text menu items are created, their style properties set and added to a menu bar. The menu bar is then added to
@@ -32,6 +35,7 @@ public class Main_Layout {
 	private final double MENU_FONT_SIZE = 12.4;//font size for menu items
 	public Main_Layout() {layout = new GridPane();}
 	public GridPane getLayout() {return layout;}
+	public HBox getMenuBar() {return menuBar;}
 	
 	public void setLayout(){
 		layout.setStyle("-fx-background-color: black");
