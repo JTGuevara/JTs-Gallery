@@ -10,6 +10,9 @@
  *    public GridPane getDisplay();
  *        DESCRIPTION: Returns the display
  *        
+ *    
+ *    public StackPane getLeftCanvas(), getMidCanvas(), getRightCanvas();
+ *        DESCRIPTION: These three functions return the left canvas, mid canvas and right canvas respectively
  *        
  *    public void setup_gallery();
  *        DESCRIPTION: Sets up gallery by setting style properties to the gallery display, setting style properties for each image canvas, 
@@ -60,8 +63,10 @@ public class Gallery_Display {
 	private StackPane rightCanvas = new StackPane();
 	
 	public Gallery_Display() {display = new GridPane();}//constructor
-	
-	public GridPane getDisplay() {return display;}
+	public GridPane getDisplay() {return display;}//get methods for display and canvases
+	public StackPane getLeftCanvas() {return leftCanvas;}
+	public StackPane getMidCanvas() {return midCanvas;}
+	public StackPane getRightCanvas() {return rightCanvas;}
 	
 	public void setup_gallery()
 	{
