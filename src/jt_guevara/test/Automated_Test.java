@@ -27,6 +27,18 @@
  *         the screen. The test consists of a series of animations where each mouse movement and click is recorded in a frame. The button 
  *         test ends when the application is minimized from full-screen and exited.
  *         
+ *         
+ *  private void testGalleryMenuItem(HBox menuBar, String result);
+ *      PARAMETERS: HBox menuBar - application menu bar for testing menu item
+ *                  String result - for recording test results
+ *      DESCRIPTION: Tests menu item 'Gallery' and records the result
+ *      
+ *      
+ *  private void testGalleryUpload(HBox menuBar, String result);
+ *      PARAMETERS: Gallery_Display display - gallery display for testing upload
+ *                  String result - for recording test results
+ *      DESCRIPTION: Tests gallery uploading of images and records the result
+ *         
  *   ------------------     
  *        (NOTES):
  *   ------------------
@@ -51,7 +63,7 @@ import jt_guevara.Gallery_Display;
 
 public class Automated_Test {
 	public Automated_Test() {}//constructor
-	public String result = "";//string to hold test results
+	public StringBuilder result = new StringBuilder();//string to hold test results
 	
 	public void initialize_test(Robot testBot, Stage window, HBox menuBar, Gallery_Display display) throws InterruptedException {
 		double x = testBot.getMouseX();//get current mouse coordinates
@@ -59,7 +71,7 @@ public class Automated_Test {
 		Timeline t = new Timeline( //define animation 
 			new KeyFrame(Duration.ZERO, event -> {moveMousePointer(testBot,x,x,y,y);}),
 			new KeyFrame(Duration.seconds(0.5), event -> {moveMousePointer(testBot,x,x + 30,y,y + 50);}), //upload gallery 
-			new KeyFrame(Duration.seconds(1), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),//gallery menu item test
+			new KeyFrame(Duration.seconds(1), event -> {testBot.mouseClick(MouseButton.PRIMARY);testGalleryMenuItem(menuBar,result);}),//gallery menu item test
 			new KeyFrame(Duration.seconds(1.5), event -> {moveMousePointer(testBot,x + 20,x + 150,y + 50,y + 250);}),
 			new KeyFrame(Duration.seconds(2), event -> {testBot.keyPress(KeyCode.CONTROL);}),
 			new KeyFrame(Duration.seconds(2), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
@@ -69,7 +81,7 @@ public class Automated_Test {
 			new KeyFrame(Duration.seconds(3.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
 			new KeyFrame(Duration.seconds(3.5), event -> {testBot.keyRelease(KeyCode.CONTROL);}),
 			new KeyFrame(Duration.seconds(3.9), event -> {moveMousePointer(testBot,x + 450, x + 800,y + 250, y + 580);}),//click open to close file dialog
-			new KeyFrame(Duration.seconds(4), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),//gallery upload test
+			new KeyFrame(Duration.seconds(4), event -> {testBot.mouseClick(MouseButton.PRIMARY);testGalleryUpload(display,result);}),//gallery upload test
 			new KeyFrame(Duration.seconds(4.5), event -> {button_test(testBot, window);}) //button test
 			);
 		t.setCycleCount(1);
@@ -117,5 +129,30 @@ public class Automated_Test {
 		t.play();
 	}
 	
+	private void testGalleryMenuItem(HBox menuBar, StringBuilder result) {
+		//if menu bar is null, not pressed, disabled, not visible or does not have focus, fail	
+	    if(menuBar == null)
+	    	result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
+	    else if(menuBar.getChildren().get(0).isDisabled())  
+	    	result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
+		else if(!(menuBar.getChildren().get(0).isFocused()))
+			result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
+		else if(!menuBar.getChildren().get(0).isVisible())
+			result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
+		else
+			result.append("MENU ITEM TEST(GALLERY UPLOAD): PASS\n");
+	}
 	
+	
+	private void testGalleryUpload(Gallery_Display display, StringBuilder result) {
+		//if any canvas is null, disabled, not visible
+		if(display.getLeftCanvas().isDisabled() || display.getMidCanvas().isDisabled() || display.getRightCanvas().isDisabled()) //test gallery upload
+			result.append("GALLERY UPLOAD: FAIL\n");
+		else if(!(display.getLeftCanvas().isVisible()) || !(display.getMidCanvas().isVisible()) || !(display.getRightCanvas().isVisible()))
+			result.append("GALLERY UPLOAD: FAIL\n");
+		else if(display.getLeftCanvas() == null || display.getMidCanvas() == null || display.getRightCanvas() == null)
+			result.append("GALLERY UPLOAD: FAIL\n");
+		else 
+			result.append("GALLERY UPLOAD: PASS\n");
+	}
 }
