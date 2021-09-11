@@ -70,6 +70,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -104,8 +105,9 @@ public class Automated_Test {
 			new KeyFrame(Duration.seconds(3.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
 			new KeyFrame(Duration.seconds(3.5), event -> {testBot.keyRelease(KeyCode.CONTROL);}),
 			new KeyFrame(Duration.seconds(3.9), event -> {moveMousePointer(testBot,x + 450, x + 800,y + 250, y + 580);}),//click open to close file dialog
-			new KeyFrame(Duration.seconds(4), event -> {testBot.mouseClick(MouseButton.PRIMARY);testGalleryUpload(display);}),//gallery upload test
-			new KeyFrame(Duration.seconds(4.5), event -> {result.append("(BUTTON TEST)\n\n");button_test(testBot, buttonBar, window);}) //button test
+			new KeyFrame(Duration.seconds(4.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
+			new KeyFrame(Duration.seconds(5), event -> {testGalleryUpload(display);}),//gallery upload test
+			new KeyFrame(Duration.seconds(5.4), event -> {result.append("(BUTTON TEST)\n\n");button_test(testBot, buttonBar, window);}) //button test
 			);
 		t.setCycleCount(1);
 		t.play();
@@ -160,16 +162,24 @@ public class Automated_Test {
 	
 	
 	private void testGalleryUpload(Gallery_Display display) {
+		//get canvases and image views from display
+		StackPane leftCanv = (StackPane) display.getDisplay().getChildren().get(0);
+		StackPane midCanv = (StackPane) display.getDisplay().getChildren().get(1);
+		StackPane rightCanv = (StackPane) display.getDisplay().getChildren().get(2);
+		ImageView left = (ImageView) leftCanv.getChildren().get(0);
+		ImageView mid = (ImageView) midCanv.getChildren().get(0);
+		ImageView right = (ImageView) rightCanv.getChildren().get(0);
+		
 		//if any canvas is null, contains no image, is disabled or not visible, fail
-		if(display.getLeftCanvas() == null || display.getMidCanvas() == null || display.getRightCanvas() == null)
+		if(leftCanv == null || midCanv == null || rightCanv == null)
 			result.append("GALLERY UPLOAD: FAIL\n");
-		else if(((ImageView) display.getLeftCanvas().getChildren().get(0)).getImage() == null || ((ImageView) display.getMidCanvas().getChildren().get(0)).getImage() == null)
+		else if(left.getImage() == null || mid.getImage() == null || right.getImage() == null)
 			result.append("GALLERY UPLOAD: FAIL\n");
-		else if(((ImageView) display.getRightCanvas().getChildren().get(0)).getImage() == null )
+		else if(((ImageView)midCanv.getChildren().get(0)).getImage() == null )
 			result.append("GALLERY UPLOAD: FAIL\n");
-		else if(display.getLeftCanvas().isDisabled() || display.getMidCanvas().isDisabled() || display.getRightCanvas().isDisabled()) 
+		else if(leftCanv.isDisabled() || midCanv.isDisabled() || rightCanv.isDisabled()) 
 			result.append("GALLERY UPLOAD: FAIL\n");
-		else if(!(display.getLeftCanvas().isVisible()) || !(display.getMidCanvas().isVisible()) || !(display.getRightCanvas().isVisible()))
+		else if(!(leftCanv.isVisible()) || !(midCanv.isVisible()) || !(rightCanv.isVisible()))
 			result.append("GALLERY UPLOAD: FAIL\n");
 		else 
 			result.append("GALLERY UPLOAD: PASS\n");
