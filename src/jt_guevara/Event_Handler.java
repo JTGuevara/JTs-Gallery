@@ -135,7 +135,7 @@ public class Event_Handler {
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
 		exit.setOnMouseClicked(event->Platform.exit());
 		//set menu items to change color on hover
-		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);});
+		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
 		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
 		exit.setOnMouseEntered(event->{exit.setFill(Color.BLUE);});
 		exit.setOnMouseExited(event->{exit.setFill(Color.WHITE);});
@@ -215,7 +215,7 @@ public class Event_Handler {
 		
 		//change size and color of button on mouse hover
 		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");leftScroll.setScaleX(leftScroll.getScaleX() * 1.2);
-			leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);});
+			leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);leftScroll.requestFocus();});
 		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: white");leftScroll.setScaleX(leftScroll.getScaleX() / 1.2);
 			leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
 	}
@@ -251,7 +251,7 @@ public class Event_Handler {
 		
 		//change size and color of button on mouse hover
 		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");rightScroll.setScaleX(rightScroll.getScaleX() * 1.2);
-			rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);});
+			rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);rightScroll.requestFocus();});
 		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
 			rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
 	}
@@ -282,7 +282,7 @@ public class Event_Handler {
 		
 		//change size and color of button on mouse hover
 		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");zoom.setScaleX(zoom.getScaleX() * 1.2);
-			zoom.setScaleY(zoom.getScaleY() * 1.2);});
+			zoom.setScaleY(zoom.getScaleY() * 1.2);zoom.requestFocus();});
 		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");zoom.setScaleX(zoom.getScaleX() / 1.2);
 			zoom.setScaleY(zoom.getScaleY() / 1.2);});
 	}

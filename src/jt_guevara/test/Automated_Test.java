@@ -65,6 +65,7 @@ package jt_guevara.test;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -142,7 +143,7 @@ public class Automated_Test {
 	}
 	
 	private void testGalleryMenuItem(HBox menuBar) {
-		//if menu bar is null, not pressed, disabled, not visible or does not have focus, fail	
+		//if menu item is null, disabled, not visible, does not have focus, or does not change state when hovered over, fail	
 	    if(menuBar == null)
 	    	result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
 	    else if(menuBar.getChildren().get(0).isDisabled())  
@@ -151,16 +152,22 @@ public class Automated_Test {
 			result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
 		else if(!menuBar.getChildren().get(0).isVisible())
 			result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
+		else if(!menuBar.getChildren().get(0).isHover())
+			result.append("MENU ITEM TEST(GALLERY UPLOAD): FAIL\n");
 		else
 			result.append("MENU ITEM TEST(GALLERY UPLOAD): PASS\n");
 	}
 	
 	
 	private void testGalleryUpload(Gallery_Display display) {
-		//if any canvas is null, disabled or not visible, fail
+		//if any canvas is null, contains no image, is disabled or not visible, fail
 		if(display.getLeftCanvas() == null || display.getMidCanvas() == null || display.getRightCanvas() == null)
 			result.append("GALLERY UPLOAD: FAIL\n");
-		else if(display.getLeftCanvas().isDisabled() || display.getMidCanvas().isDisabled() || display.getRightCanvas().isDisabled()) //test gallery upload
+		else if(((ImageView) display.getLeftCanvas().getChildren().get(0)).getImage() == null || ((ImageView) display.getMidCanvas().getChildren().get(0)).getImage() == null)
+			result.append("GALLERY UPLOAD: FAIL\n");
+		else if(((ImageView) display.getRightCanvas().getChildren().get(0)).getImage() == null )
+			result.append("GALLERY UPLOAD: FAIL\n");
+		else if(display.getLeftCanvas().isDisabled() || display.getMidCanvas().isDisabled() || display.getRightCanvas().isDisabled()) 
 			result.append("GALLERY UPLOAD: FAIL\n");
 		else if(!(display.getLeftCanvas().isVisible()) || !(display.getMidCanvas().isVisible()) || !(display.getRightCanvas().isVisible()))
 			result.append("GALLERY UPLOAD: FAIL\n");
@@ -169,42 +176,44 @@ public class Automated_Test {
 	}
 	
 	private void testZoomButton(GridPane buttonBar) {
-		//if zoom button is null, disable, not visible or not pressed, fail
+		//if zoom button is null, disabled, not visible, does not have focus, or does not change state when hovered over, fail
 		if(buttonBar == null)
 			result.append("ZOOM BUTTON TEST: FAIL\n");
 		else if(buttonBar.getChildren().get(1).isDisabled())
 			result.append("ZOOM BUTTON TEST: FAIL\n");
+		else if(!(buttonBar.getChildren().get(1).isFocused()))
+			result.append("ZOOM BUTTON TEST: FAIL\n");
 		else if(!(buttonBar.getChildren().get(1).isVisible()))
 			result.append("ZOOM BUTTON TEST: FAIL\n");
-		else if(!(buttonBar.getChildren().get(1).isPressed()))
+		else if(!buttonBar.getChildren().get(1).isHover())
 			result.append("ZOOM BUTTON TEST: FAIL\n");
 		else
 			result.append("ZOOM BUTTON TEST: PASS\n");
 	}
 	
 	private void testLeftScroll(GridPane buttonBar) {
-		//if left-scroll button is null, disable, not visible or not pressed, fail
+		//if left-scroll button is null, disabled, not visible, does not have focus, or does not change state when hovered over, fail
 		if(buttonBar == null)
 			result.append("LEFT-SCROLL BUTTON TEST: FAIL\n");
 		else if(buttonBar.getChildren().get(0).isDisabled())
 			result.append("LEFT-SCROLL BUTTON TEST: FAIL\n");
-		else if(!(buttonBar.getChildren().get(0).isVisible()))
+		else if(!(buttonBar.getChildren().get(0).isFocused()))
 			result.append("LEFT-SCROLL BUTTON TEST: FAIL\n");
-		else if(!(buttonBar.getChildren().get(0).isPressed()))
+		else if(!(buttonBar.getChildren().get(0).isVisible()))
 			result.append("LEFT-SCROLL BUTTON TEST: FAIL\n");
 		else
 			result.append("LEFT-SCROLL BUTTON TEST: PASS\n");
 	}
 	
 	private void testRightScroll(GridPane buttonBar) {
-		//if right-scroll button is null, disable, not visible or not pressed, fail
+		//if right-scroll button is null, disabled, not visible, does not have focus, or does not change state when hovered over, fail
 		if(buttonBar == null)
 			result.append("RIGHT-SCROLL BUTTON TEST: FAIL\n");
 		else if(buttonBar.getChildren().get(2).isDisabled())
 			result.append("RIGHT-SCROLL BUTTON TEST: FAIL\n");
-		else if(!(buttonBar.getChildren().get(2).isVisible()))
+		else if(!(buttonBar.getChildren().get(2).isFocused()))
 			result.append("RIGHT-SCROLL BUTTON TEST: FAIL\n");
-		else if(!(buttonBar.getChildren().get(2).isPressed()))
+		else if(!(buttonBar.getChildren().get(2).isVisible()))
 			result.append("RIGHT-SCROLL BUTTON TEST: FAIL\n");
 		else
 			result.append("RIGHT-SCROLL BUTTON TEST: PASS\n");
