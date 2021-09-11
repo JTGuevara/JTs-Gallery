@@ -5,14 +5,10 @@
 package jt_guevara.test;
 
 import javafx.scene.robot.*;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import jt_guevara.Button_Layout;
 import jt_guevara.Event_Handler;
 import jt_guevara.Gallery;
@@ -27,7 +23,7 @@ public class Main_Test extends Application{
 		
 	@Override
 	public void start(Stage window) throws Exception {
-	//START JAVAFX TEST PROGRAM	
+	  //START PROGRAM	
 		//declare application components
 		final String APPLICATION_NAME = "JT's Gallery";//application name
 		final double MIN_WINDOW_WIDTH = 800.0;//minimum window width and height
@@ -64,11 +60,13 @@ public class Main_Test extends Application{
 		window.show();
 				
 		
-		//Set up and initialize automated test
+	  //SET UP AND INITIALIZE AUTOMATED TEST
 		Robot testBot = new Robot();
+		Automated_Test test = new Automated_Test();
 		double initialX = testBot.getMouseX();//initial mouse coordinates
 		double initialY = testBot.getMouseY();
-		moveMousePointer(testBot,initialX, window.getX(),initialY, window.getY());//move mouse to top-left of application screen
-		initialize_test(testBot, window);
+		test.moveMousePointer(testBot,initialX, window.getX(),initialY, window.getY());//move mouse to top-left of application screen
+		test.initialize_test(testBot, window, mainLayout.getMenuBar(), display, buttonLayout.getButtonBar());
+		testBot.mouseClick(MouseButton.PRIMARY);//at menu item 'Exit' coordinates - click exit to close program
 	}
 }

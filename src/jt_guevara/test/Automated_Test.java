@@ -25,7 +25,7 @@
  *                  
  *      DESCRIPTION: Starts automated button test. Uses a robot to simulate a user clicking on the button interface on the lower portion of 
  *         the screen. The test consists of a series of animations where each mouse movement and click is recorded in a frame. The button 
- *         test ends when the application is minimized from full-screen and exited.
+ *         test ends when the application is minimized from full-screen.
  *         
  *         
  *  private void testGalleryMenuItem(HBox menuBar);
