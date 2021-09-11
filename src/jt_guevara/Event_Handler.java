@@ -154,6 +154,9 @@ public class Event_Handler {
 		fc.setTitle("Select Image(s)");
 		fc.getExtensionFilters().add(new ExtensionFilter("Image Files","*.jpg","*.png","*.jpeg"));
 		
+		//set initial directory - (created for testing purposes, change directory for your specific system but disable when not needed or program will fail)
+		fc.setInitialDirectory(new File("C:/Users/Joan/Documents/Programs/Git Projects/JTs-Gallery/src/jt_guevara/test/"));
+		
 		//array list used to store file and directory paths from user
 		java.util.List<File> files = fc.showOpenMultipleDialog(window);
 		
@@ -161,7 +164,7 @@ public class Event_Handler {
 		if(files == null)
 			return;
 		
-		//add images to the gallery by 
+		//add images to the gallery, set the first three images in the image array to be displayed
 		for(int i = 0;i < files.size();++i) {
 			imageGallery.addImage(new Image("file:" + files.get(i).getAbsolutePath()));
 			if(i == 0)
@@ -170,10 +173,9 @@ public class Event_Handler {
 				midImgView.setImage(imageGallery.getImages().getLast());
 			if(i == 2)
 				rightImgView.setImage(imageGallery.getImages().getLast());
-			
 			}
-		
 	}
+
 	
 	private void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
@@ -198,8 +200,7 @@ public class Event_Handler {
 				if(imageGallery.getSize() < 3)
 					return;
 				
-				//shift all Gallery images one position over to the right to simulate a left-scrolling motion with the user interface
-				//accessing and updating images with each shift
+				//shift each image in array one position over to simulate scroll 
 				temp1 = imageGallery.getImages().getLast();
 				imageGallery.getImages().removeLast();
 				temp2 = imageGallery.getImages().getFirst();
@@ -210,7 +211,6 @@ public class Event_Handler {
 				imageGallery.getImages().addFirst(temp1);
 				leftImgView.setImage(temp1);
 			}
-			
 		});
 		
 		//change size and color of button on mouse hover
@@ -231,8 +231,7 @@ public class Event_Handler {
 				if(imageGallery.getSize() < 3) 
 					return;
 				
-				//shift all Gallery images one position over to the left to simulate a right-scrolling motion with the user interface
-				//accessing and updating images with each shift
+				//shift each image in array one position over to simulate scroll 
 				temp1 = imageGallery.getImages().getFirst();
 				imageGallery.getImages().removeFirst();
 				imageGallery.getImages().addLast(temp1);
@@ -248,7 +247,6 @@ public class Event_Handler {
 				imageGallery.getImages().addFirst(temp2);
 				leftImgView.setImage(imageGallery.getImages().getFirst());
 			}
-			
 		});
 		
 		//change size and color of button on mouse hover
@@ -257,6 +255,7 @@ public class Event_Handler {
 		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
 			rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
 	}
+	
 	
 	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
 		zoom.setOnAction(new EventHandler<ActionEvent>() {
@@ -278,7 +277,6 @@ public class Event_Handler {
 					midImgView.maxWidth(midImgView.getFitWidth() / 1.5);
 					midImgView.maxHeight(midImgView.getFitHeight() / 1.5);
 				}
-				
 			}
 		});
 		
@@ -288,6 +286,5 @@ public class Event_Handler {
 		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");zoom.setScaleX(zoom.getScaleX() / 1.2);
 			zoom.setScaleY(zoom.getScaleY() / 1.2);});
 	}
-	
 }
 
