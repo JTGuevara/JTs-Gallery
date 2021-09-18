@@ -122,7 +122,7 @@ public class Automated_Test {
 			new KeyFrame(Duration.ZERO, event -> {moveMousePointer(testBot,x,x,y,y);}),	
 			new KeyFrame(Duration.seconds(0.7), event -> {moveMousePointer(testBot,x,x - 50,y,y - 570);}),//navigate to maximize icon for full-screen
 			new KeyFrame(Duration.seconds(1.1), event -> {testBot.mouseClick(MouseButton.PRIMARY);}),
-			new KeyFrame(Duration.seconds(1.7), event -> {moveMousePointer(testBot,x - 50,window.getWidth() / 2,y - 570,window.getHeight() / 1.2);}),//navigate to zoom button
+			new KeyFrame(Duration.seconds(1.7), event -> {moveMousePointer(testBot,x - 50,window.getWidth() / 2,y - 570,window.getHeight() / 1.22);}),//navigate to zoom button
 			new KeyFrame(Duration.seconds(2.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);testZoomButton(buttonBar);}),//zoom button test
 			new KeyFrame(Duration.seconds(2.9), event -> {testBot.mouseClick(MouseButton.PRIMARY);testZoomButton(buttonBar);}),
 			new KeyFrame(Duration.seconds(3.5), event -> {testBot.mouseClick(MouseButton.PRIMARY);testZoomButton(buttonBar);}),
@@ -131,7 +131,7 @@ public class Automated_Test {
 			new KeyFrame(Duration.seconds(5.6), event -> {testBot.mouseClick(MouseButton.PRIMARY);testRightScroll(buttonBar);}),//right-scroll test
 			new KeyFrame(Duration.seconds(6.2), event -> {testBot.mouseClick(MouseButton.PRIMARY);testRightScroll(buttonBar);}),
 			new KeyFrame(Duration.seconds(6.9), event -> {testBot.mouseClick(MouseButton.PRIMARY);testRightScroll(buttonBar);}),
-			new KeyFrame(Duration.seconds(7.5), event -> {moveMousePointer(testBot,testBot.getMouseX(),testBot.getMouseX() - 230,y + 160,y + 160);}),//move to left-scroll
+			new KeyFrame(Duration.seconds(7.5), event -> {moveMousePointer(testBot,testBot.getMouseX(),testBot.getMouseX() - 225,y + 160,y + 160);}),//move to left-scroll
 			new KeyFrame(Duration.seconds(8.1), event -> {testBot.mouseClick(MouseButton.PRIMARY);testLeftScroll(buttonBar);}),//left-scroll test
 			new KeyFrame(Duration.seconds(8.7), event -> {testBot.mouseClick(MouseButton.PRIMARY);testLeftScroll(buttonBar);}),
 			new KeyFrame(Duration.seconds(9.3), event -> {testBot.mouseClick(MouseButton.PRIMARY);testLeftScroll(buttonBar);}),
