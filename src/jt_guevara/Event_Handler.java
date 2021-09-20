@@ -124,7 +124,6 @@ public class Event_Handler {
 		ImageView leftImgView = (ImageView) left_canvas.getChildren().get(0);
 		ImageView midImgView = (ImageView) mid_canvas.getChildren().get(0);
 		ImageView rightImgView = (ImageView) right_canvas.getChildren().get(0);
-		System.out.println(layout.toString());
 		//set functions to menu items
 		set_menu_items(menuBar,window, imageGallery, leftImgView, midImgView, rightImgView);
 		load_buttons(layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
