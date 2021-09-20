@@ -86,9 +86,6 @@
 
 package jt_guevara;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import java.io.File;
 import javafx.event.ActionEvent;
@@ -103,15 +100,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.util.Duration;
 import javafx.stage.Stage;
 
 public class Event_Handler {
 	public Event_Handler() {}
 	private static boolean zoomState = false;//used to track the zoom state of the center image
-	private static Timeline zoomIn = new Timeline();
-	private static Timeline zoomOut = new Timeline();
-	
 	
 	public void load_event_handlers(Stage window, GridPane layout, Gallery imageGallery)
 	{
@@ -262,34 +255,23 @@ public class Event_Handler {
 	
 	
 	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
-		//define and set zoom animations 
-		zoomIn.setCycleCount(1);
-		zoomIn.getKeyFrames().add(new KeyFrame(Duration.seconds(0),
-				new KeyValue(midCanvas.maxWidthProperty(),midCanvas.getMaxWidth()),
-				new KeyValue(midCanvas.maxHeightProperty(),midCanvas.getMaxHeight())));
-		zoomIn.getKeyFrames().add(new KeyFrame(Duration.seconds(0.1),
-				new KeyValue(midCanvas.maxWidthProperty(),midCanvas.getMaxWidth() * 1.7),
-				new KeyValue(midCanvas.maxHeightProperty(),midCanvas.getMaxHeight() * 1.7)));
-		
-		zoomOut.setCycleCount(1);
-		zoomOut.getKeyFrames().add(new KeyFrame(Duration.seconds(0),
-				new KeyValue(midCanvas.maxWidthProperty(),midCanvas.getMaxWidth() * 1.7),
-				new KeyValue(midCanvas.maxHeightProperty(),midCanvas.getMaxHeight() * 1.7)));
-		zoomOut.getKeyFrames().add(new KeyFrame(Duration.seconds(0.1),
-				new KeyValue(midCanvas.maxWidthProperty(),midCanvas.getMaxWidth()),
-				new KeyValue(midCanvas.maxHeightProperty(),midCanvas.getMaxHeight())));
 		zoom.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				//an image in a zoomed-in state is enlarged by 70%; an image in a zoomed-out state is shrunk by 70%
 				if(zoomState == false) {
 					zoomState = true;
-					zoomIn.play();
+					midCanvas.setMaxWidth(midCanvas.getMaxWidth() * 1.5);
+					midCanvas.setMaxHeight(midCanvas.getMaxHeight() * 1.5);
+					midImgView.maxWidth(midImgView.getFitWidth() * 1.5);
+					midImgView.maxHeight(midImgView.getFitHeight() * 1.5);
 				}
-				else
-				{
+				else {
 					zoomState = false;
-					zoomOut.play();
+					midCanvas.setMaxWidth(midCanvas.getMaxWidth() / 1.5);
+					midCanvas.setMaxHeight(midCanvas.getMaxHeight() / 1.5);
+					midImgView.maxWidth(midImgView.getFitWidth() / 1.5);
+					midImgView.maxHeight(midImgView.getFitHeight() / 1.5);
 				}
 			}
 		});
