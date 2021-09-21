@@ -31,7 +31,7 @@ public class Main extends Application{
 	    final double MIN_WINDOW_WIDTH = 800.0;//minimum window width and height
 	    final double MIN_WINDOW_HEIGHT = 600.0;
 		Main_Layout mainLayout = new Main_Layout();//main user interface layout container for application
-		Scene s = new Scene(mainLayout.getLayout(),800,600);//required JavaFX structure to hold layout components
+		Scene s = new Scene(mainLayout.layout,800,600);//required JavaFX structure to hold layout components
 		Gallery imageGallery = new Gallery();//collection class to hold images		
 		Gallery_Display display = new Gallery_Display();//layout sub-component for displaying images 
 		Button_Layout buttonLayout = new Button_Layout();//layout sub-component for manipulating images
@@ -47,9 +47,9 @@ public class Main extends Application{
 		buttonLayout.set_button_bar();
 		buttonLayout.add_buttons();
 		buttonLayout.bind_button_layout(window);
-		mainLayout.getLayout().add(display.getDisplay(), 0, 1);
-		mainLayout.getLayout().add(buttonLayout.getButtonBar(), 0, 2);
-		handler.load_event_handlers(window, mainLayout.getLayout(), imageGallery);
+		mainLayout.layout.add(display.getDisplay(), 0, 1);
+		mainLayout.layout.add(buttonLayout.getButtonBar(), 0, 2);
+		handler.load_event_handlers(window, mainLayout.layout, imageGallery);
 		
 		//set up JavaFX stage
 		window.setTitle(APPLICATION_NAME);
