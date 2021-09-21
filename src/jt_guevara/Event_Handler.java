@@ -90,11 +90,13 @@ import javafx.application.Platform;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -119,7 +121,7 @@ public class Event_Handler {
 		ImageView rightImgView = (ImageView) right_canvas.getChildren().get(0);
 		//set functions to menu items
 		set_menu_items(menuBar,window, imageGallery, leftImgView, midImgView, rightImgView);
-		load_buttons(layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
+		load_buttons(window,layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
 	
@@ -174,7 +176,7 @@ public class Event_Handler {
 	}
 
 	
-	private void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
+	private void load_buttons(Stage window,GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//local variables needed to access user interface buttons
 		GridPane buttonBar = (GridPane) layout.getChildren().get(2);
@@ -183,7 +185,7 @@ public class Event_Handler {
 		Button zoom = (Button) buttonBar.getChildren().get(1);
 		set_left_scroll(leftScroll, imageGallery, leftImgView, midImgView, rightImgView);
 		set_right_scroll(rightScroll, imageGallery, leftImgView, midImgView, rightImgView);
-		set_zoom(zoom,midImgView, midCanvas, layout);
+		set_zoom(window,zoom,midImgView, midCanvas, layout);
 	}
 	
 	
@@ -254,24 +256,32 @@ public class Event_Handler {
 	}
 	
 	
-	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
+	private static void set_zoom(Stage window,Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
+		
 		zoom.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				//an image in a zoomed-in state is enlarged by 70%; an image in a zoomed-out state is shrunk by 70%
+				Stage popup = new Stage();//stage for zoomed image
+				
+				//if image is zoomed out, enlarge it by 30%, if image is zoomed in, shrink by 30%
 				if(zoomState == false) {
+					Pane p = new Pane();
+					ImageView zoomedImage = new ImageView();
+					Scene s = new Scene(p,midCanvas.getWidth() * 1.3,midCanvas.getHeight() * 1.3);
 					zoomState = true;
-					midCanvas.setMaxWidth(midCanvas.getMaxWidth() * 1.5);
-					midCanvas.setMaxHeight(midCanvas.getMaxHeight() * 1.5);
-					midImgView.maxWidth(midImgView.getFitWidth() * 1.5);
-					midImgView.maxHeight(midImgView.getFitHeight() * 1.5);
+					zoomedImage.fitWidthProperty().bind(popup.widthProperty());
+					zoomedImage.fitHeightProperty().bind(popup.heightProperty());
+					zoomedImage.setImage(midImgView.getImage());
+					p.getChildren().add(zoomedImage);
+					popup.setScene(s);
+					popup.centerOnScreen();
+					popup.setX(window.getX() + window.getWidth() / 3.4);
+					popup.setY(window.getY() / 1.1);
+					popup.show();
 				}
 				else {
 					zoomState = false;
-					midCanvas.setMaxWidth(midCanvas.getMaxWidth() / 1.5);
-					midCanvas.setMaxHeight(midCanvas.getMaxHeight() / 1.5);
-					midImgView.maxWidth(midImgView.getFitWidth() / 1.5);
-					midImgView.maxHeight(midImgView.getFitHeight() / 1.5);
+					popup.close();
 				}
 			}
 		});
