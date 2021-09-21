@@ -4,14 +4,26 @@
  * FUNCTIONS:  
  *    public Button_Layout(){}
  *       DESCRIPTION: Creates a Button_Layout
- *    
+ *       
+ *    public Button getLeftScroll();
+ *       DESCRIPTION: Returns left-scroll button.
+ *       
+ *       
+ *    public Button getRightScroll();
+ *       DESCRIPTION: Returns right-scroll button.
+ *       
+ *       
+ *    public Button getZoom();
+ *       DESCRIPTION: Returns zoom button.
+ *       
+ *       
  *    public GridPane getButtonBar();
  *       DESCRIPTION: Returns the button bar
  *       	
  *    public void set_scroll_buttons();
  *       DESCRIPTION: Sets the shape of the left-scroll(<|) and right-scroll(|>) buttons along with their 
  *                    layout and style properties. 
- * 
+ *
  * 
  *    public void set_zoom_button();
  *       DESCRIPTION: Sets the shape of the zoom button(+) along with its layout and style properties. 
@@ -47,6 +59,9 @@ public class Button_Layout {
 	private Button right_scroll = new Button();
 	private Button zoom = new Button();
 	private GridPane buttonBar = new GridPane();//button bar that contains the above buttons
+	public Button getLeftScroll() {return left_scroll;}
+	public Button getRightScroll() {return right_scroll;}
+	public Button getZoom() {return zoom;}
 	
 	public GridPane getButtonBar() {return buttonBar;}
 	
