@@ -74,14 +74,15 @@
  *               over and back to default when hovered out.
  * 
  * 
- *    private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
- *       PARAMETERS: Button zoom - zoom button used to set event handler
+ *    private static void set_zoom(Stage window, Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
+ *       PARAMETERS: Stage window - owner window for declaring a child pop-up window
+ *                   Button zoom - zoom button used to set event handler
  *                   StackPane midCanvas - middle canvas of gallery display used to access its image view
  *                   ImageView midImgView - image view for applying zoom functionality
  * 
- *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is 
- *               zoomed out and shrinks if it is zoomed in. Also, the button changes size and color from default when hovered over 
- *               and back to default when hovered out.					 
+ *       RESULT: Functionality is set to the zoom button. When the user clicks the zoom button, the center image enlarges if it is 
+ *               zoomed out by opening a new pop-up window and rendering an enlarged image in the center of the user interface. When clicked again, 
+ *               the pop-up window closes. Also, the button changes size and color from default when hovered over and back to default when hovered out.					 
  */
 
 package jt_guevara;
@@ -107,6 +108,7 @@ import javafx.stage.Stage;
 public class Event_Handler {
 	public Event_Handler() {}
 	private static boolean zoomState = false;//used to track the zoom state of the center image
+	private static Stage popup = new Stage();//pop-up window for zoomed image
 	
 	public void load_event_handlers(Stage window, GridPane layout, Gallery imageGallery)
 	{
@@ -261,22 +263,25 @@ public class Event_Handler {
 		zoom.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				Stage popup = new Stage();//stage for zoomed image
-				
-				//if image is zoomed out, enlarge it by 30%, if image is zoomed in, shrink by 30%
+				//if image is zoomed out(zoomState = false), enlarge it by 30% by opening a pop-up window
+				//if image is zoomed in(zoomState = true), close pop-up window
 				if(zoomState == false) {
+					zoomState = true;
+					//declare necessary JavaFX nodes for pop-up window
 					Pane p = new Pane();
 					ImageView zoomedImage = new ImageView();
 					Scene s = new Scene(p,midCanvas.getWidth() * 1.3,midCanvas.getHeight() * 1.3);
-					zoomState = true;
+					//set up pop-up window
+					popup.setWidth(midCanvas.getWidth() * 1.3);
+					popup.setHeight(midCanvas.getHeight() * 1.27);
 					zoomedImage.fitWidthProperty().bind(popup.widthProperty());
 					zoomedImage.fitHeightProperty().bind(popup.heightProperty());
 					zoomedImage.setImage(midImgView.getImage());
 					p.getChildren().add(zoomedImage);
+					//place pop-up window in the center of the application screen
+					popup.setX(window.getX() + window.getWidth() / 2 - popup.getWidth() / 2);
+					popup.setY(window.getY() + (window.getHeight() / 2 - popup.getHeight() / 2) * 0.4);
 					popup.setScene(s);
-					popup.centerOnScreen();
-					popup.setX(window.getX() + window.getWidth() / 3.4);
-					popup.setY(window.getY() / 1.1);
 					popup.show();
 				}
 				else {
