@@ -59,9 +59,6 @@ public class Main extends Application{
 		window.setHeight(MIN_WINDOW_HEIGHT);
 		window.setScene(s);
 		
-		System.out.println("width: " + window.getMinWidth());
-		System.out.println("height" + window.getMinHeight());
-		
 		//show time!
 		window.show();
 	}
