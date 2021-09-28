@@ -11,7 +11,6 @@ package jt_guevara.test;
 import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import jt_guevara.Main;
 
