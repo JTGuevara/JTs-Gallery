@@ -146,8 +146,12 @@ public class Event_Handler {
 	private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//check to see if a previous gallery was loaded by user and should be cleared for the new one 
-		if(imageGallery.getSize() > 0)
+		if(imageGallery.getSize() > 0) {
 			imageGallery.clearGallery();
+			leftImgView.setImage(null);
+			midImgView.setImage(null);
+			rightImgView.setImage(null);
+		}
 		
 		
 		//file dialog screen for user filtered to choose only image files
