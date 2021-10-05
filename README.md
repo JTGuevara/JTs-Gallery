@@ -7,9 +7,9 @@ With JT's Gallery, you will be able to upload and re-upload images from your com
 through and zoom on them. The following screenshots demonstrate the application.
 
 <table>
-<td><img src="https://user-images.githubusercontent.com/84116849/128273531-2679db68-3984-4067-bb3c-afcae8982199.png" width=340></td>
-<td><img src="https://user-images.githubusercontent.com/84116849/128273546-185a7093-7a92-49a4-80fa-796a67644e17.png" width=340></td>
-<td><img src="https://user-images.githubusercontent.com/84116849/128273552-9939d931-16ac-46c4-881a-8911d3234692.png" width=340></td>
+<td><img src="" width=340></td>
+<td><img src="" width=340></td>
+<td><img src="" width=340></td>
 </table>
 
 <h2>REQUIREMENTS</h2>
