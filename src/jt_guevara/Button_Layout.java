@@ -4,14 +4,26 @@
  * FUNCTIONS:  
  *    public Button_Layout(){}
  *       DESCRIPTION: Creates a Button_Layout
- *    
+ *       
+ *    public Button getLeftScroll();
+ *       DESCRIPTION: Returns left-scroll button.
+ *       
+ *       
+ *    public Button getRightScroll();
+ *       DESCRIPTION: Returns right-scroll button.
+ *       
+ *       
+ *    public Button getZoom();
+ *       DESCRIPTION: Returns zoom button.
+ *       
+ *       
  *    public GridPane getButtonBar();
  *       DESCRIPTION: Returns the button bar
  *       	
  *    public void set_scroll_buttons();
  *       DESCRIPTION: Sets the shape of the left-scroll(<|) and right-scroll(|>) buttons along with their 
  *                    layout and style properties. 
- * 
+ *
  * 
  *    public void set_zoom_button();
  *       DESCRIPTION: Sets the shape of the zoom button(+) along with its layout and style properties. 
@@ -47,6 +59,9 @@ public class Button_Layout {
 	private Button right_scroll = new Button();
 	private Button zoom = new Button();
 	private GridPane buttonBar = new GridPane();//button bar that contains the above buttons
+	public Button getLeftScroll() {return left_scroll;}
+	public Button getRightScroll() {return right_scroll;}
+	public Button getZoom() {return zoom;}
 	
 	public GridPane getButtonBar() {return buttonBar;}
 	
@@ -64,11 +79,13 @@ public class Button_Layout {
 		left_scroll.setShape(shape);
 		left_scroll.setScaleX(1.4);
 		left_scroll.setScaleY(1.5);
+		left_scroll.setStyle("-fx-background-color: lightblue");
 		//do the same for the right-scroll button
 		right_scroll.setShape(shape);
 		right_scroll.setScaleX(1.4);
 		right_scroll.setScaleY(1.5);
 		right_scroll.setRotate(180);//rotate button so it points right
+		right_scroll.setStyle("-fx-background-color: lightblue");
 	}
 	
 	public void set_zoom_button()
@@ -94,14 +111,16 @@ public class Button_Layout {
 		zoom.setShape(shape);
 		zoom.setScaleX(2);
 		zoom.setScaleY(2);
+		zoom.setStyle("-fx-background-color: lightblue");
 	}
 	
 	public void set_button_bar()
 	{
 		buttonBar.setAlignment(Pos.CENTER);
 		buttonBar.setHgap(20);
-		buttonBar.setStyle("-fx-border-color: lightblue;-fx-border-radius: 10px;-fx-background-radius: 10px;"
-				+ "-fx-border-width: 3px;-fx-background-color: darkblue;-fx-border-color: royalblue");
+		buttonBar.setStyle("-fx-border-color: royalblue;-fx-border-radius: 10px;-fx-background-radius: 10px;"
+				+ "-fx-border-width: 5px;-fx-background-color: darkblue;");
+		buttonBar.setOpacity(.9);
 		buttonBar.setMinHeight(80);
 		buttonBar.setMaxHeight(100);
 		buttonBar.setLayoutX(10);

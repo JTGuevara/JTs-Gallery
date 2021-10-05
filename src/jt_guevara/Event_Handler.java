@@ -74,14 +74,15 @@
  *               over and back to default when hovered out.
  * 
  * 
- *    private static void set_zoom(Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
- *       PARAMETERS: Button zoom - zoom button used to set event handler
+ *    private static void set_zoom(Stage window, Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
+ *       PARAMETERS: Stage window - owner window for declaring a child pop-up window
+ *                   Button zoom - zoom button used to set event handler
  *                   StackPane midCanvas - middle canvas of gallery display used to access its image view
  *                   ImageView midImgView - image view for applying zoom functionality
  * 
- *       RESULT: Functionality is set to the zoom button. When the user clicks the button, the center image enlarges if it is 
- *               zoomed out and shrinks if it is zoomed in. Also, the button changes size and color from default when hovered over 
- *               and back to default when hovered out.					 
+ *       RESULT: Functionality is set to the zoom button. When the user clicks the zoom button, the center image enlarges if it is 
+ *               zoomed out by opening a new pop-up window and rendering an enlarged image in the center of the user interface. When clicked again, 
+ *               the pop-up window closes. Also, the button changes size and color from default when hovered over and back to default when hovered out.					 
  */
 
 package jt_guevara;
@@ -90,11 +91,13 @@ import javafx.application.Platform;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -104,9 +107,8 @@ import javafx.stage.Stage;
 
 public class Event_Handler {
 	public Event_Handler() {}
-	private static boolean zoomStatus = false;//boolean used in zoom function
-	
-	
+	private static boolean zoomState = false;//used to track the zoom state of the center image
+	private static Stage popup = new Stage();//pop-up window for zoomed image
 	
 	public void load_event_handlers(Stage window, GridPane layout, Gallery imageGallery)
 	{
@@ -119,10 +121,9 @@ public class Event_Handler {
 		ImageView leftImgView = (ImageView) left_canvas.getChildren().get(0);
 		ImageView midImgView = (ImageView) mid_canvas.getChildren().get(0);
 		ImageView rightImgView = (ImageView) right_canvas.getChildren().get(0);
-		System.out.println(layout.toString());
 		//set functions to menu items
 		set_menu_items(menuBar,window, imageGallery, leftImgView, midImgView, rightImgView);
-		load_buttons(layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
+		load_buttons(window,layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
 	
@@ -135,7 +136,7 @@ public class Event_Handler {
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
 		exit.setOnMouseClicked(event->Platform.exit());
 		//set menu items to change color on hover
-		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);});
+		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
 		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
 		exit.setOnMouseEntered(event->{exit.setFill(Color.BLUE);});
 		exit.setOnMouseExited(event->{exit.setFill(Color.WHITE);});
@@ -145,8 +146,12 @@ public class Event_Handler {
 	private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//check to see if a previous gallery was loaded by user and should be cleared for the new one 
-		if(imageGallery.getSize() > 0)
+		if(imageGallery.getSize() > 0) {
 			imageGallery.clearGallery();
+			leftImgView.setImage(null);
+			midImgView.setImage(null);
+			rightImgView.setImage(null);
+		}
 		
 		
 		//file dialog screen for user filtered to choose only image files
@@ -177,7 +182,7 @@ public class Event_Handler {
 	}
 
 	
-	private void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
+	private void load_buttons(Stage window,GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//local variables needed to access user interface buttons
 		GridPane buttonBar = (GridPane) layout.getChildren().get(2);
@@ -186,7 +191,7 @@ public class Event_Handler {
 		Button zoom = (Button) buttonBar.getChildren().get(1);
 		set_left_scroll(leftScroll, imageGallery, leftImgView, midImgView, rightImgView);
 		set_right_scroll(rightScroll, imageGallery, leftImgView, midImgView, rightImgView);
-		set_zoom(zoom,midImgView, midCanvas, layout);
+		set_zoom(window,zoom,midImgView, midCanvas, layout);
 	}
 	
 	
@@ -215,8 +220,8 @@ public class Event_Handler {
 		
 		//change size and color of button on mouse hover
 		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");leftScroll.setScaleX(leftScroll.getScaleX() * 1.2);
-			leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);});
-		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: white");leftScroll.setScaleX(leftScroll.getScaleX() / 1.2);
+			leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);leftScroll.requestFocus();});
+		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: lightblue");leftScroll.setScaleX(leftScroll.getScaleX() / 1.2);
 			leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
 	}
 	
@@ -251,39 +256,49 @@ public class Event_Handler {
 		
 		//change size and color of button on mouse hover
 		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");rightScroll.setScaleX(rightScroll.getScaleX() * 1.2);
-			rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);});
-		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: white");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
+			rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);rightScroll.requestFocus();});
+		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: lightblue");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
 			rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
 	}
 	
 	
-	private static void set_zoom(Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
+	private static void set_zoom(Stage window,Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
+		
 		zoom.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				
-				//an image in a zoomed-in state is enlarged by 50%; an image in a zoomed-out state is shrunk by 50%
-				if(zoomStatus == false) {
-					zoomStatus = true;
-					midCanvas.setMaxWidth(midCanvas.getMaxWidth() * 1.5);
-					midCanvas.setMaxHeight(midCanvas.getMaxHeight() * 1.5);
-					midImgView.maxWidth(midImgView.getFitWidth() * 1.5);
-					midImgView.maxHeight(midImgView.getFitHeight() * 1.5);
+				//if image is zoomed out(zoomState = false), enlarge it by 30% by opening a pop-up window
+				//if image is zoomed in(zoomState = true), close pop-up window
+				if(zoomState == false) {
+					zoomState = true;
+					//declare necessary JavaFX nodes for pop-up window
+					Pane p = new Pane();
+					ImageView zoomedImage = new ImageView();
+					Scene s = new Scene(p,midCanvas.getWidth() * 1.3,midCanvas.getHeight() * 1.3);
+					//set up pop-up window
+					popup.setWidth(midCanvas.getWidth() * 1.3);
+					popup.setHeight(midCanvas.getHeight() * 1.27);
+					zoomedImage.fitWidthProperty().bind(popup.widthProperty());
+					zoomedImage.fitHeightProperty().bind(popup.heightProperty());
+					zoomedImage.setImage(midImgView.getImage());
+					p.getChildren().add(zoomedImage);
+					//place pop-up window in the center of the application screen
+					popup.setX(window.getX() + window.getWidth() / 2 - popup.getWidth() / 2);
+					popup.setY(window.getY() + (window.getHeight() / 2 - popup.getHeight() / 2) * 0.4);
+					popup.setScene(s);
+					popup.show();
 				}
 				else {
-					zoomStatus = false;
-					midCanvas.setMaxWidth(midCanvas.getMaxWidth() / 1.5);
-					midCanvas.setMaxHeight(midCanvas.getMaxHeight() / 1.5);
-					midImgView.maxWidth(midImgView.getFitWidth() / 1.5);
-					midImgView.maxHeight(midImgView.getFitHeight() / 1.5);
+					zoomState = false;
+					popup.close();
 				}
 			}
 		});
 		
 		//change size and color of button on mouse hover
 		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");zoom.setScaleX(zoom.getScaleX() * 1.2);
-			zoom.setScaleY(zoom.getScaleY() * 1.2);});
-		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: white");zoom.setScaleX(zoom.getScaleX() / 1.2);
+			zoom.setScaleY(zoom.getScaleY() * 1.2);zoom.requestFocus();});
+		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: lightblue");zoom.setScaleX(zoom.getScaleX() / 1.2);
 			zoom.setScaleY(zoom.getScaleY() / 1.2);});
 	}
 }

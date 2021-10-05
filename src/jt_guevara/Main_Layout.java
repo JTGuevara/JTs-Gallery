@@ -30,12 +30,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Main_Layout {
-	private GridPane layout;//main layout used for application
-	private HBox menuBar = new HBox();//menu bar to store menu items
-	private final double MENU_FONT_SIZE = 12.4;//font size for menu items
+	public GridPane layout;//main layout used for application
+	public Text gallery = new Text("Gallery");//menu items
+	public Text exit = new Text("Exit");
+	public HBox menuBar = new HBox();//menu bar to store menu items
+	public final double MENU_FONT_SIZE = 12.4;//font size for menu items
 	public Main_Layout() {layout = new GridPane();}
-	public GridPane getLayout() {return layout;}
 	public HBox getMenuBar() {return menuBar;}
+	
 	
 	public void setLayout(){
 		layout.setStyle("-fx-background-color: black");
@@ -45,16 +47,14 @@ public class Main_Layout {
 	}
 	
 	public void set_menu_items(){
-		//Declare menu items to be used as clickable text for the user
-		Text load_gallery = new Text("Gallery");
-		Text exit = new Text("Exit");
-		load_gallery.setFill(Color.WHITE);
-		load_gallery.setFont(Font.font(MENU_FONT_SIZE));
+		//set menu items to be used as clickable text for the user
+		gallery.setFill(Color.WHITE);
+		gallery.setFont(Font.font(MENU_FONT_SIZE));
 		exit.setFill(Color.WHITE);
 		exit.setFont(Font.font(MENU_FONT_SIZE));
 		//set menu bar properties
 		menuBar.setSpacing(10.0);
-		menuBar.getChildren().add(load_gallery);
+		menuBar.getChildren().add(gallery);
 		menuBar.getChildren().add(exit);
 		layout.add(menuBar, 0, 0);
 	}
