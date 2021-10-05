@@ -79,11 +79,13 @@ public class Button_Layout {
 		left_scroll.setShape(shape);
 		left_scroll.setScaleX(1.4);
 		left_scroll.setScaleY(1.5);
+		left_scroll.setStyle("-fx-background-color: lightblue");
 		//do the same for the right-scroll button
 		right_scroll.setShape(shape);
 		right_scroll.setScaleX(1.4);
 		right_scroll.setScaleY(1.5);
 		right_scroll.setRotate(180);//rotate button so it points right
+		right_scroll.setStyle("-fx-background-color: lightblue");
 	}
 	
 	public void set_zoom_button()
@@ -109,14 +111,16 @@ public class Button_Layout {
 		zoom.setShape(shape);
 		zoom.setScaleX(2);
 		zoom.setScaleY(2);
+		zoom.setStyle("-fx-background-color: lightblue");
 	}
 	
 	public void set_button_bar()
 	{
 		buttonBar.setAlignment(Pos.CENTER);
 		buttonBar.setHgap(20);
-		buttonBar.setStyle("-fx-border-color: lightblue;-fx-border-radius: 10px;-fx-background-radius: 10px;"
-				+ "-fx-border-width: 3px;-fx-background-color: darkblue;-fx-border-color: royalblue");
+		buttonBar.setStyle("-fx-border-color: royalblue;-fx-border-radius: 10px;-fx-background-radius: 10px;"
+				+ "-fx-border-width: 5px;-fx-background-color: darkblue;");
+		buttonBar.setOpacity(.9);
 		buttonBar.setMinHeight(80);
 		buttonBar.setMaxHeight(100);
 		buttonBar.setLayoutX(10);
