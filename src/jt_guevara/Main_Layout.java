@@ -13,6 +13,15 @@
  *      
  *   public HBox getMenuBar();
  *      DESCRIPTION: Returns menu bar
+ *      
+ *   public Text getMenuItem1();
+ *      DESCRIPTION: Returns the menu item 'Gallery'
+ *      
+ *   public Text getMenuItem2();
+ *      DESCRIPTION: Returns the menu item 'Settings'
+ *      
+ *   public Text getMenuItem3();
+ *      DESCRIPTION: Returns the menu item 'Exit'
  *                  
  *   public void setMenuItems();
  *      DESCRIPTION: Two text menu items are created, their style properties set and added to a menu bar. The menu bar is then added to
@@ -30,15 +39,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Main_Layout {
+	public Main_Layout() {layout = new GridPane();}//constructor
 	public GridPane layout;//main layout used for application
-	public Text gallery = new Text("Gallery");//menu items
-	private Text settings = new Text("Settings");
-	public Text exit = new Text("Exit");
-	public HBox menuBar = new HBox();//menu bar to store menu items
-	public final double MENU_FONT_SIZE = 12.4;//font size for menu items
-	public Main_Layout() {layout = new GridPane();}
-	public HBox getMenuBar() {return menuBar;}
+	final private Text gallery = new Text("Gallery");//menu items
+	final private Text settings = new Text("Settings");
+	final private Text exit = new Text("Exit");
+	private HBox menuBar = new HBox();//menu bar to store menu items
+	public final double MENU_FONT_SIZE = 12.399;//font size for menu items
 	
+	public HBox getMenuBar() {return menuBar;}
+	public Text getMenuItem1() {return gallery;}
+	public Text getMenuItem2() {return settings;}
+	public Text getMenuItem3() {return exit;}
 	
 	public void setLayout(){
 		layout.setStyle("-fx-background-color: black");

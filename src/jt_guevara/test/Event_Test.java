@@ -29,8 +29,10 @@ public class Event_Test{
 		System.out.println("MENU BAR (HOVER)\n");
 		System.out.println("GALLERY: " + menuBar.getChildren().get(0).getOnMouseEntered());
 		System.out.println("\t" + menuBar.getChildren().get(0).getOnMouseExited());
-		System.out.println("EXIT: " + menuBar.getChildren().get(1).getOnMouseEntered());
+		System.out.println("SETTINGS: " + menuBar.getChildren().get(1).getOnMouseEntered());
 		System.out.println("\t" + menuBar.getChildren().get(1).getOnMouseExited());
+		System.out.println("EXIT: " + menuBar.getChildren().get(2).getOnMouseEntered());
+		System.out.println("\t" + menuBar.getChildren().get(2).getOnMouseExited());
 		System.out.println("\n");
 		
 		
