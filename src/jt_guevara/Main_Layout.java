@@ -32,6 +32,7 @@ import javafx.scene.text.Text;
 public class Main_Layout {
 	public GridPane layout;//main layout used for application
 	public Text gallery = new Text("Gallery");//menu items
+	private Text settings = new Text("Settings");
 	public Text exit = new Text("Exit");
 	public HBox menuBar = new HBox();//menu bar to store menu items
 	public final double MENU_FONT_SIZE = 12.4;//font size for menu items
@@ -50,11 +51,14 @@ public class Main_Layout {
 		//set menu items to be used as clickable text for the user
 		gallery.setFill(Color.WHITE);
 		gallery.setFont(Font.font(MENU_FONT_SIZE));
+		settings.setFill(Color.WHITE);
+		settings.setFont(Font.font(MENU_FONT_SIZE));
 		exit.setFill(Color.WHITE);
 		exit.setFont(Font.font(MENU_FONT_SIZE));
 		//set menu bar properties
 		menuBar.setSpacing(10.0);
 		menuBar.getChildren().add(gallery);
+		menuBar.getChildren().add(settings);
 		menuBar.getChildren().add(exit);
 		layout.add(menuBar, 0, 0);
 	}

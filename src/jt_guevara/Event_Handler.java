@@ -131,13 +131,16 @@ public class Event_Handler {
 			ImageView midImgView, ImageView rightImgView) {
 		//local variables to access menu items
 		Text gallery = (Text) menuBar.getChildren().get(0);
-		Text exit = (Text) menuBar.getChildren().get(1);
+		Text settings = (Text) menuBar.getChildren().get(1);
+		Text exit = (Text) menuBar.getChildren().get(2);
 		//set click functions
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
 		exit.setOnMouseClicked(event->Platform.exit());
 		//set menu items to change color on hover
 		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
 		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
+		settings.setOnMouseEntered(event->{settings.setFill(Color.BLUE);settings.requestFocus();});
+		settings.setOnMouseExited(event->{settings.setFill(Color.WHITE);});
 		exit.setOnMouseEntered(event->{exit.setFill(Color.BLUE);});
 		exit.setOnMouseExited(event->{exit.setFill(Color.WHITE);});
 		}
