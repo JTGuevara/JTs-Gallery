@@ -199,30 +199,66 @@ public class Event_Handler {
 		//declare window and setting components 
 		Stage settings = new Stage();
 		Pane p = new Pane();
-		Scene s = new Scene(p,650,140);
-		GridPane layout = (GridPane) window.getScene().getRoot();//layout components for applying background settings
-		Text bgSetting = new Text("Change background: ");//text description for applying background settings
-		ColorPicker colorPicker = new ColorPicker();//color picker object for applying background settings
+		Scene s = new Scene(p,500,250);
+		GridPane layout = (GridPane) window.getScene().getRoot();//retrieve layout components for applying background settings
+		GridPane display = (GridPane) layout.getChildren().get(1);
+		GridPane buttonLayout = (GridPane) layout.getChildren().get(2);
+		GridPane bgSettingsTable = new GridPane();//container for background settings
+		Text bgDescription = new Text("Change Background:");//text descriptions for background settings
+		Text bgSetting = new Text("Main: ");
+		Text bgSetting2 = new Text("Gallery Interface: ");
+		Text bgSetting3 = new Text("Button Interface: ");
+		ColorPicker colorPicker = new ColorPicker();//color picker objects for applying background settings to layout components
+		ColorPicker colorPicker2 = new ColorPicker();
+		ColorPicker colorPicker3 = new ColorPicker();
 		//set up window
 		settings.setTitle("Settings");
-		settings.setWidth(650);
-		settings.setHeight(140);
+		settings.setWidth(500);
+		settings.setHeight(250);
 		settings.setScene(s);
 		p.setPadding(new Insets(10,10,10,10));
 		p.setStyle("-fx-background-color: black");
-		//apply settings to window
-		bgSetting.setFont(Font.font(20));
+		//apply setting components to window
+		bgDescription.setFont(Font.font(20));
+		bgDescription.setFill(Color.WHITE);
+		bgDescription.setLayoutX(20);
+		bgDescription.setLayoutY(50);
+		bgSettingsTable.setVgap(10);
+		bgSettingsTable.setHgap(50);
+		bgSettingsTable.setLayoutX(50);
+		bgSettingsTable.setLayoutY(75);
+		bgSetting.setFont(Font.font(17));
 		bgSetting.setFill(Color.WHITE);
-		bgSetting.setLayoutX(20);
-		bgSetting.setLayoutY(50);
+		bgSetting2.setFont(Font.font(17));
+		bgSetting2.setFill(Color.WHITE);
+		bgSetting3.setFont(Font.font(17));
+		bgSetting3.setFill(Color.WHITE);
 		colorPicker.setLayoutX(300);
-		colorPicker.setLayoutY(30);
+		colorPicker.setLayoutY(70);
+		/*apply background settings using color pickers to change background color of 
+		layout components*/
 		colorPicker.setOnAction(event->{
-			//apply background settings using a color picker to change layout background
+			//apply background settings to main layout
 			String color = colorPicker.getValue().toString();
-			layout.setStyle("-fx-background-color: #" + color.substring(2,8));
+			layout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";");
 			});
-		p.getChildren().addAll(bgSetting, colorPicker);
+		colorPicker2.setOnAction(event->{
+			//apply background settings to display
+			String color = colorPicker2.getValue().toString();
+			display.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-radius: 10px;-fx-background-radius: 10px");
+			});
+		colorPicker3.setOnAction(event->{
+			//apply background settings to button layout
+			String color = colorPicker3.getValue().toString();
+			buttonLayout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-radius: 10px;-fx-background-radius: 10px");
+			});
+		bgSettingsTable.add(bgSetting, 0, 0);
+		bgSettingsTable.add(bgSetting2, 0, 1);
+		bgSettingsTable.add(bgSetting3, 0, 2);
+		bgSettingsTable.add(colorPicker, 1, 0);
+		bgSettingsTable.add(colorPicker2, 1, 1);
+		bgSettingsTable.add(colorPicker3, 1, 2);
+		p.getChildren().addAll(bgDescription, bgSettingsTable);
 		return settings;
 	}
 
