@@ -35,6 +35,11 @@
  *               system, prompting the user to choose image files from their directory. The image files are then placed inside the Gallery. Depending on 
  *               the user's choice, the three image views(leftImgView, midImgView, rightImgView) will access the Gallery, set and render the first three 
  *               images on the screen. 
+ *               
+ *    
+ *    private Stage applySettings(Stage window);
+ *       PARAMETERS: Stage window - Parent window for creating a child window for application settings
+ *       DESCRIPTION: Creates and sets a new window with application settings. Returns window.
  * 
  * 		
  *    private static void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, 
@@ -82,7 +87,8 @@
  * 
  *       RESULT: Functionality is set to the zoom button. When the user clicks the zoom button, the center image enlarges if it is 
  *               zoomed out by opening a new pop-up window and rendering an enlarged image in the center of the user interface. When clicked again, 
- *               the pop-up window closes. Also, the button changes size and color from default when hovered over and back to default when hovered out.					 
+ *               the pop-up window closes. Also, the button changes size and color from default when hovered over and back to default when hovered out.
+ *               					 
  */
 
 package jt_guevara;
@@ -91,8 +97,10 @@ import javafx.application.Platform;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -100,6 +108,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -133,10 +142,12 @@ public class Event_Handler {
 		Text gallery = (Text) menuBar.getChildren().get(0);
 		Text settings = (Text) menuBar.getChildren().get(1);
 		Text exit = (Text) menuBar.getChildren().get(2);
-		//set click functions
+		//set functions to menu items
+		//(on click)
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
+		settings.setOnMouseClicked(event->{Stage settingsWindow = applySettings(window);settingsWindow.show();});
 		exit.setOnMouseClicked(event->Platform.exit());
-		//set menu items to change color on hover
+		//(on hover)
 		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
 		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
 		settings.setOnMouseEntered(event->{settings.setFill(Color.BLUE);settings.requestFocus();});
@@ -182,6 +193,37 @@ public class Event_Handler {
 			if(i == 2)
 				rightImgView.setImage(imageGallery.getImages().getLast());
 			}
+	}
+	
+	private static Stage applySettings(Stage window) {
+		//declare window and setting components 
+		Stage settings = new Stage();
+		Pane p = new Pane();
+		Scene s = new Scene(p,650,140);
+		GridPane layout = (GridPane) window.getScene().getRoot();//layout components for applying background settings
+		Text bgSetting = new Text("Change background: ");//text description for applying background settings
+		ColorPicker colorPicker = new ColorPicker();//color picker object for applying background settings
+		//set up window
+		settings.setTitle("Settings");
+		settings.setWidth(650);
+		settings.setHeight(140);
+		settings.setScene(s);
+		p.setPadding(new Insets(10,10,10,10));
+		p.setStyle("-fx-background-color: black");
+		//apply settings to window
+		bgSetting.setFont(Font.font(20));
+		bgSetting.setFill(Color.WHITE);
+		bgSetting.setLayoutX(20);
+		bgSetting.setLayoutY(50);
+		colorPicker.setLayoutX(300);
+		colorPicker.setLayoutY(30);
+		colorPicker.setOnAction(event->{
+			//apply background settings using a color picker to change layout background
+			String color = colorPicker.getValue().toString();
+			layout.setStyle("-fx-background-color: #" + color.substring(2,8));
+			});
+		p.getChildren().addAll(bgSetting, colorPicker);
+		return settings;
 	}
 
 	
