@@ -196,10 +196,12 @@ public class Event_Handler {
 	}
 	
 	private static Stage applySettings(Stage window) {
-		//declare window and setting components 
+		//DECLARE WINDOW AND SETTING COMPONENTS 
 		Stage settings = new Stage();
 		Pane p = new Pane();
-		Scene s = new Scene(p,500,250);
+		Scene s = new Scene(p,500,280);
+		Button OK = new Button();//setting window buttons
+		Button cancel = new Button();
 		GridPane layout = (GridPane) window.getScene().getRoot();//retrieve layout components for applying background settings
 		GridPane display = (GridPane) layout.getChildren().get(1);
 		GridPane buttonLayout = (GridPane) layout.getChildren().get(2);
@@ -211,14 +213,24 @@ public class Event_Handler {
 		ColorPicker colorPicker = new ColorPicker();//color picker objects for applying background settings to layout components
 		ColorPicker colorPicker2 = new ColorPicker();
 		ColorPicker colorPicker3 = new ColorPicker();
-		//set up window
+		//SET UP WINDOW
 		settings.setTitle("Settings");
 		settings.setWidth(500);
-		settings.setHeight(250);
+		settings.setHeight(280);
 		settings.setScene(s);
 		p.setPadding(new Insets(10,10,10,10));
 		p.setStyle("-fx-background-color: black");
-		//apply setting components to window
+		//APPLY SETTING COMPONENTS TO WINDOW
+		OK.setLayoutX(180);
+		OK.setLayoutY(200);
+		OK.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");
+		OK.setText("OK");
+		OK.setTextFill(Color.WHITE);
+		cancel.setLayoutX(240);
+		cancel.setLayoutY(200);
+		cancel.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");
+		cancel.setText("Cancel");
+		cancel.setTextFill(Color.WHITE);
 		bgDescription.setFont(Font.font(20));
 		bgDescription.setFill(Color.WHITE);
 		bgDescription.setLayoutX(20);
@@ -258,7 +270,7 @@ public class Event_Handler {
 		bgSettingsTable.add(colorPicker, 1, 0);
 		bgSettingsTable.add(colorPicker2, 1, 1);
 		bgSettingsTable.add(colorPicker3, 1, 2);
-		p.getChildren().addAll(bgDescription, bgSettingsTable);
+		p.getChildren().addAll(bgDescription, bgSettingsTable, OK, cancel);
 		return settings;
 	}
 
