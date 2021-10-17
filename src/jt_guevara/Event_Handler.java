@@ -40,8 +40,21 @@
  *    private Stage applySettings(Stage window);
  *       PARAMETERS: Stage window - Parent window for creating a child window for application settings
  *       DESCRIPTION: Creates and sets a new window with application settings. Returns window.
- * 
+ *       
+ *    
+ *    private static void setWindowButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout);
+ *       PARAMETERS: Stage settings - settings window for setting button actions
+ *                   Button OK - OK button for confirming new application settings
+ *                   Button cancel - Cancel button for modifying application settings to default 
+ *                   GridPane layout - layout component modified by cancel button 
+ *                   GridPane display - gallery display modified by cancel button
+ *                   GridPane buttonLayout - button layout modified by cancel button
+ *                   
+ *       DESCRIPTION: Sets the actions of the application setting window's 'OK' and 'Cancel' buttons. The OK button is set to close the settings window
+ *                    and confirm any application settings that are made. The 'Cancel' button resets any application settings to default and then closes
+ *                    the window.
  * 		
+ * 
  *    private static void load_buttons(GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, 
  *                  ImageView rightImgView);
  *       PARAMETERS: GridPane layout - main layout container for retrieving button bar and buttons
@@ -213,14 +226,8 @@ public class Event_Handler {
 		ColorPicker colorPicker = new ColorPicker();//color picker objects for applying background settings to layout components
 		ColorPicker colorPicker2 = new ColorPicker();
 		ColorPicker colorPicker3 = new ColorPicker();
-		//SET UP WINDOW
-		settings.setTitle("Settings");
-		settings.setWidth(500);
-		settings.setHeight(280);
-		settings.setScene(s);
-		p.setPadding(new Insets(10,10,10,10));
-		p.setStyle("-fx-background-color: black");
 		//APPLY SETTING COMPONENTS TO WINDOW
+		//(set buttons)
 		OK.setLayoutX(180);
 		OK.setLayoutY(200);
 		OK.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");
@@ -231,6 +238,8 @@ public class Event_Handler {
 		cancel.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");
 		cancel.setText("Cancel");
 		cancel.setTextFill(Color.WHITE);
+		setWindowButtons(settings, OK, cancel, layout, display, buttonLayout);
+		//(set text descriptions)
 		bgDescription.setFont(Font.font(20));
 		bgDescription.setFill(Color.WHITE);
 		bgDescription.setLayoutX(20);
@@ -264,6 +273,13 @@ public class Event_Handler {
 			String color = colorPicker3.getValue().toString();
 			buttonLayout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-radius: 10px;-fx-background-radius: 10px");
 			});
+		//SET UP WINDOW 
+		settings.setTitle("Settings");
+		settings.setWidth(500);
+		settings.setHeight(280);
+		settings.setScene(s);
+		p.setPadding(new Insets(10,10,10,10));
+		p.setStyle("-fx-background-color: black");
 		bgSettingsTable.add(bgSetting, 0, 0);
 		bgSettingsTable.add(bgSetting2, 0, 1);
 		bgSettingsTable.add(bgSetting3, 0, 2);
@@ -272,6 +288,23 @@ public class Event_Handler {
 		bgSettingsTable.add(colorPicker3, 1, 2);
 		p.getChildren().addAll(bgDescription, bgSettingsTable, OK, cancel);
 		return settings;
+	}
+	
+	private static void setWindowButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout) {
+		//OK button - confirm any new application settings and close window
+		//Cancel button - set application settings to default and close window
+		OK.setOnMouseClicked(event->{
+			settings.close();
+		});
+		cancel.setOnMouseClicked(event->{
+			//reset background settings to default
+			layout.setStyle("-fx-background-color: black");
+			display.setStyle("-fx-border-color: blue;-fx-border-width: 5px;-fx-border-color: royalblue;-fx-border-radius: 10px;"
+					+ "-fx-background-color: darkblue;-fx-background-radius: 10px");
+			buttonLayout.setStyle("-fx-border-color: royalblue;-fx-border-radius: 10px;-fx-background-radius: 10px;"
+					+ "-fx-border-width: 5px;-fx-background-color: darkblue;");
+			settings.close();
+		});
 	}
 
 	
