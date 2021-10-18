@@ -47,27 +47,29 @@ public class Layout_Test extends Application{
 	@Test
 	public void setMenuItemsTest() {
 		Main_Layout main = new Main_Layout();
-		Text item1 = main.gallery;
-		Text item2 = main.exit;
-		final double expectedFontSize = 12.4;
+		final double expectedFontSize = 12.399;
+		Text gallery = main.getMenuItem1();
+		Text settings = main.getMenuItem2();
+		Text exit = main.getMenuItem3();
 		main.set_menu_items(); //test function
-		assertTrue(expectedFontSize >= item1.getFont().getSize());
-		assertTrue(expectedFontSize >= item2.getFont().getSize());
+		assertTrue(gallery.getFont().getSize() >= expectedFontSize);
+		assertTrue(settings.getFont().getSize() >= expectedFontSize);
+		assertTrue(exit.getFont().getSize() >= expectedFontSize);
 	}
 	
 	@Test
 	public void setMenuItemsTest_2() {
 		Main_Layout main = new Main_Layout();
-		HBox menuBar = main.menuBar;
+		HBox menuBar = main.getMenuBar();
 		int expectedMenuBarSize = 2;
 		main.set_menu_items(); // test function
-		assertTrue(expectedMenuBarSize >= menuBar.getChildren().size());
+		assertTrue(menuBar.getChildren().size() >= expectedMenuBarSize);
 	}
 	
 	@Test
 	public void setMenuItemsTest_3() {
 		Main_Layout main = new Main_Layout();
-		HBox menuBar = main.menuBar;
+		HBox menuBar = main.getMenuBar();
 		int expectedSpacing = 10;
 		main.set_menu_items(); // test function
 		assertTrue(expectedSpacing >= menuBar.getSpacing());
