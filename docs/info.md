@@ -13,8 +13,8 @@ The figure below visually demonstrates the application components:
    ![app_info](https://user-images.githubusercontent.com/84116849/127747463-b1464088-26c5-42b3-80e1-5ad80478b363.png)
    
 <br/>
-<h2>SETUP</h2>
-To build the project:
+<h2>ADVANCED SETUP</h2>
+To build the project yourself:
 <ol>
   <li>Download and install OpenJDK 16.0.1 and JavaFX 11 on your computer<br/>
     <ul>
