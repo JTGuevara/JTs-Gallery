@@ -11,24 +11,27 @@ JT's Gallery is a personal project. This project is an image gallery application
 
 <h2>REQUIREMENTS</h2>
 <ol>
-  <li>Java Development Kit (version 16.0.1) (OpenJDK) (Source: https://jdk.java.net/16/)</li>
-  <li>JavaFX Development Kit (version 11.0.2) (OpenJFX) (Source: https://openjfx.io/)</li>
+  <li><em>Java Development Kit (version 16.0.1) (OpenJDK)</em>
+    (contains the Java platform (Java Runtime Environment) for running Java applications)</li>
+  <li><em>JavaFX Development Kit (version 11.0.2) (OpenJFX)</em>
+    (contains the JavaFX platform and libraries)</li>
   </ol>
   
 
 <h2>RUNNING THE IMAGE GALLERY</h2>
 <ol>
-  <li>Download the project (.zip folder) or clone the repository locally on your machine. Also make sure that you have downloaded both Java SDKs to your system.</li>
-  <li>Make sure you have Java set to run on your computer.</li><br/>
-  <i>(Example with Windows:)</i><br/>
+  <li>Download the project (.zip folder) or clone the repository locally on your machine. Also make sure to download both Java SDKs to your computer.</li>
+  <li>Configure your computer to run Java applications.</li><br/>
+  <i>(Example with Windows 10:)</i><br/>
   <ul>
     
-  <li>Go to Control Panel-->All Control Panel Items-->System-->Advanced System Settings-->Environment Variables</li>
-  <li>Depending on where your standard JDK is installed, click Edit on either your user or system path variables and add a new directory with the location of your JDK</li>
+  <li>Click on Start Menu-->Settings-->System-->About-->Advanced System Settings</li>
+  <li>In the Advanced System Settings window, click on the Advanced tab and select Environment Variables.
+  <li>Under user variables, highlight 'Path' and click Edit. Then, add a new directory with the location of your JDK.</li>
   </ul>
   <br/>
-  <li>Navigate to the project's root directory (/JTs-Gallery/..)</li>
-  <li>Open your system's command-line interface, input the following commands and press Enter:
+  <li>To run the application: open your system's command-line interface, navigate to the project's root directory (/JTs-Gallery/..), input the following 
+    commands and press Enter:
   
     java -classpath ./bin --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls -jar gallery.jar
   </li>
