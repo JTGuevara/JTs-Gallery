@@ -23,20 +23,6 @@
  *       RESULT: Functionality is set to all menu items. Each menu item is set to execute its appropriate function when the item is clicked. Also each menu item
  *               changes color when the mouse is hovered over it.
  * 
- * 
- *    private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- *       PARAMETERS: Stage window - Stage parameter used to open a file dialog screen through the user's operating system
- *                   Gallery imageGallery - Gallery object used to add and clear images via activating the menu item
- *                   ImageView leftImgView, - ImageView objects used to render images on the application window by manipulating the Gallery
- *                             midImgView,
- *                             rightImgView
- * 
- *       RESULT: Functionality is set to the menu item, 'Load Gallery'. When the user activates the menu item, a file dialog window appears on the user's
- *               system, prompting the user to choose image files from their directory. The image files are then placed inside the Gallery. Depending on 
- *               the user's choice, the three image views(leftImgView, midImgView, rightImgView) will access the Gallery, set and render the first three 
- *               images on the screen. 
- *               
- *    
  *    private Stage applySettings(Stage window);
  *       PARAMETERS: Stage window - Parent window for creating a child window for application settings
  *       DESCRIPTION: Creates and sets a new window with application settings. Returns window.
@@ -160,8 +146,8 @@ public class Event_Handler {
 		//set functions to menu items
 		//(on click)
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		//settings.setOnMouseClicked(event->{Stage settingsWindow = applySettings(window);settingsWindow.show();});
-		//exit.setOnMouseClicked(event->Platform.exit());
+		settings.setOnMouseClicked(event->{Stage settingsWindow = applySettings(window);settingsWindow.show();});
+		exit.setOnMouseClicked(event->Platform.exit());
 		//(on hover)
 		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
 		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
@@ -171,7 +157,15 @@ public class Event_Handler {
 		exit.setOnMouseExited(event->{exit.setFill(Color.WHITE);});
 		}
 	
-	
+	/*
+	private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+	      PARAMETERS: Stage window - Stage parameter used to open a file explorer screen through the user's operating system
+	                  ArrayDeque<Image> imageGallery - image gallery containing images to be displayed 
+	                  ImageView leftImgView, midImgView, rightImgView - ImageView objects used to render images on the application 
+	                            
+	      DESCRIPTION: Sets the menu item 'Gallery' to open a file explorer window for the user for uploading images to an image gallery. On window 
+	                   confirmation, the first three images of the gallery are displayed to the user. On window cancellation, the file explorer window closes
+	*/
 	private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//clear any previous image galleries, if any
