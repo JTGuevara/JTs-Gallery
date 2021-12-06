@@ -108,6 +108,8 @@ package jt_guevara;
 
 import javafx.application.Platform;
 import java.io.File;
+import java.util.ArrayDeque;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -132,7 +134,7 @@ public class Event_Handler {
 	private static boolean zoomState = false;//used to track the zoom state of the center image
 	private static Stage popup = new Stage();//pop-up window for zoomed image
 	
-	public void load_event_handlers(Stage window, GridPane layout, Gallery imageGallery)
+	public void load_event_handlers(Stage window, GridPane layout, ArrayDeque<Image> imageGallery)
 	{
 		//local variables needed to access user interface components
 		HBox menuBar = (HBox) layout.getChildren().get(0);
@@ -149,7 +151,7 @@ public class Event_Handler {
 	}
 	
 	
-	private static void set_menu_items(HBox menuBar, Stage window, Gallery imageGallery, ImageView leftImgView, 
+	private static void set_menu_items(HBox menuBar, Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, 
 			ImageView midImgView, ImageView rightImgView) {
 		//local variables to access menu items
 		Text gallery = (Text) menuBar.getChildren().get(0);
@@ -170,7 +172,7 @@ public class Event_Handler {
 		}
 	
 	
-	private static void load_gallery(Stage window, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
+	private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//check to see if a previous gallery was loaded by user and should be cleared for the new one 
 		if(imageGallery.getSize() > 0) {
@@ -308,7 +310,7 @@ public class Event_Handler {
 	}
 
 	
-	private void load_buttons(Stage window,GridPane layout, Gallery imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
+	private void load_buttons(Stage window,GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//local variables needed to access user interface buttons
 		GridPane buttonBar = (GridPane) layout.getChildren().get(2);
@@ -321,7 +323,7 @@ public class Event_Handler {
 	}
 	
 	
-	private void set_left_scroll(Button leftScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void set_left_scroll(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		leftScroll.setOnAction(new EventHandler<ActionEvent>() {
 			//temporary images used to maintain order of the image gallery when scrolling
 			Image temp1, temp2;
@@ -352,7 +354,7 @@ public class Event_Handler {
 	}
 	
 	
-	private void set_right_scroll(Button rightScroll, Gallery imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void set_right_scroll(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		rightScroll.setOnAction(new EventHandler<ActionEvent>() {
 			//temporary images used to maintain the order of the image gallery when scrolling(scrolling right is slightly different than scrolling left)
 			Image temp1, temp2, temp3;
