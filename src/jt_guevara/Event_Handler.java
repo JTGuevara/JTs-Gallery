@@ -160,8 +160,8 @@ public class Event_Handler {
 		//set functions to menu items
 		//(on click)
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		settings.setOnMouseClicked(event->{Stage settingsWindow = applySettings(window);settingsWindow.show();});
-		exit.setOnMouseClicked(event->Platform.exit());
+		//settings.setOnMouseClicked(event->{Stage settingsWindow = applySettings(window);settingsWindow.show();});
+		//exit.setOnMouseClicked(event->Platform.exit());
 		//(on hover)
 		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
 		gallery.setOnMouseExited(event->{gallery.setFill(Color.WHITE);});
@@ -174,16 +174,16 @@ public class Event_Handler {
 	
 	private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
-		//check to see if a previous gallery was loaded by user and should be cleared for the new one 
-		if(imageGallery.getSize() > 0) {
-			imageGallery.clearGallery();
+		//clear any previous image galleries, if any
+		if(imageGallery.size() > 0) {
+			imageGallery.clear();
 			leftImgView.setImage(null);
 			midImgView.setImage(null);
 			rightImgView.setImage(null);
 		}
 		
 		
-		//file dialog screen for user filtered to choose only image files
+		//file explorer window for user, filtered to only image files
 		FileChooser fc = new FileChooser();
 		fc.setTitle("Select Image(s)");
 		fc.getExtensionFilters().add(new ExtensionFilter("Image Files","*.jpg","*.png","*.jpeg"));
@@ -191,22 +191,22 @@ public class Event_Handler {
 		//set initial directory - (created for testing purposes, change directory for your specific system but disable when not needed or program will fail)
 		fc.setInitialDirectory(new File("C:/Users/Joan/Documents/Programs/Git Projects/JTs-Gallery/src/jt_guevara/test/"));
 		
-		//array list used to store file and directory paths from user
+		//temporary array list used to store user file/directory paths 
 		java.util.List<File> files = fc.showOpenMultipleDialog(window);
 		
 		//check if user does not choose any files and clicks exit
 		if(files == null)
 			return;
 		
-		//add images to the gallery, set the first three images in the image array to be displayed
+		//add images to the gallery, set the first three images in the image deque to be displayed to user
 		for(int i = 0;i < files.size();++i) {
-			imageGallery.addImage(new Image("file:" + files.get(i).getAbsolutePath()));
+			imageGallery.add(new Image("file:" + files.get(i).getAbsolutePath()));
 			if(i == 0)
-				leftImgView.setImage(imageGallery.getImages().getLast());
+				leftImgView.setImage(imageGallery.getLast());
 			if(i == 1)
-				midImgView.setImage(imageGallery.getImages().getLast());
+				midImgView.setImage(imageGallery.getLast());
 			if(i == 2)
-				rightImgView.setImage(imageGallery.getImages().getLast());
+				rightImgView.setImage(imageGallery.getLast());
 			}
 	}
 	
@@ -429,5 +429,6 @@ public class Event_Handler {
 		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: lightblue");zoom.setScaleX(zoom.getScaleX() / 1.2);
 			zoom.setScaleY(zoom.getScaleY() / 1.2);});
 	}
+	
 }
 
