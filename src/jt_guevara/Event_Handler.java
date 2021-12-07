@@ -4,13 +4,7 @@
  *    components(gallery display, menu components, buttons) that are called in response to the user's actions 
  * 
  * FUNCTIONS:
- *    public static void setComponents(Stage window, GridPane layout, Gallery imageGallery);
- *       PARAMETERS: Stage window - required JavaFX window used to set event handlers to menu items
- *                   GridPane layout - main layout container used to access application components(gallery display, canvases) for setting functions to them
- *                   ArrayDeque<Image> imageGallery - image gallery representing a collection of images; used to set menu item function for uploading images
- *                                          
- *       DESCRIPTION: Functionality is set to all application components(menu items, gallery display, buttons, settings) so they perform the specified action 
- *                   when clicked by the user
+ *    
  *                     
  *    
  *    private static void applySettingsButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout);
@@ -119,9 +113,19 @@ public class Event_Handler {
 	private static boolean zoomState = false;//used to track the zoom state of the center image
 	private static Stage popup = new Stage();//pop-up window for zoomed image
 	
-	public void load_event_handlers(Stage window, GridPane layout, ArrayDeque<Image> imageGallery)
+	/*
+	public static void setComponents(Stage window, GridPane layout, Gallery imageGallery);
+	       PARAMETERS: Stage window - required JavaFX window used to set event handlers to menu items
+	                   GridPane layout - main layout container used to access application components(gallery display, canvases) for setting functions to them
+	                   ArrayDeque<Image> imageGallery - image gallery representing a collection of images; used to set menu item function for uploading images
+	                                           
+	       DESCRIPTION: Functionality is set to all application components(menu items, gallery display, buttons, settings) so they perform the specified action 
+	                    when clicked by the user
+	*/
+	
+	public void setComponents(Stage window, GridPane layout, ArrayDeque<Image> imageGallery)
 	{
-		//local variables needed to access user interface components
+		//local variables for accessing application components
 		HBox menuBar = (HBox) layout.getChildren().get(0);
 		GridPane display = (GridPane) layout.getChildren().get(1);
 		StackPane left_canvas = (StackPane) display.getChildren().get(0);
@@ -131,22 +135,22 @@ public class Event_Handler {
 		ImageView midImgView = (ImageView) mid_canvas.getChildren().get(0);
 		ImageView rightImgView = (ImageView) right_canvas.getChildren().get(0);
 		//set functions to menu items
-		set_menu_items(menuBar,window, imageGallery, leftImgView, midImgView, rightImgView);
-		load_buttons(window,layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
+		setMenuItems(menuBar,window, imageGallery, leftImgView, midImgView, rightImgView);
+		setButtons(window,layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
 	/*
 	private static void setMenuItems(HBox menuBar, Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
 	       PARAMETERS: HBox menuBar - menu bar for setting functions to menu items 
-	                    Stage window, Gallery imageGallery, - application components used for setting menu items 
-	                    ImageView leftImgView, midImgView, 
+	                   Stage window, Gallery imageGallery, - application components used for setting menu items 
+	                   ImageView leftImgView, midImgView, 
 	                              rightImgView
 	                    
 	       DESCRIPTION: Functionality is set to all menu items. Each menu item is set to execute its appropriate function when the item is clicked. Also 
 	                    each menu item changes color when the mouse is hovered over it and away.
 	*/
 	
-	private static void set_menu_items(HBox menuBar, Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, 
+	private static void setMenuItems(HBox menuBar, Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, 
 			ImageView midImgView, ImageView rightImgView) {
 		//local variables to access menu items
 		Text gallery = (Text) menuBar.getChildren().get(0);
@@ -165,6 +169,7 @@ public class Event_Handler {
 		exit.setOnMouseEntered(event->{exit.setFill(Color.BLUE);});
 		exit.setOnMouseExited(event->{exit.setFill(Color.WHITE);});
 		}
+	
 	
 	/*
 	private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
