@@ -23,9 +23,7 @@
  *       
  *               
  *    
- *    private static void setLeftScrollHover(Button leftScroll);
- *       PARAMETERS: Button leftScroll - left scroll button for applying hovering behavior
- *       DESCRIPTION: The left-scroll button is set to change color when hovered over and change back to its default color when hovered out.
+ *    
  * 
  * 
  *    private static void setRightScrollButton(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
@@ -355,11 +353,21 @@ public class Event_Handler {
 			}
 		});
 		
+		setLeftScrollHover(leftScroll);
+	}
+	
+	/*
+	 private static void setLeftScrollHover(Button leftScroll);
+        PARAMETERS: Button leftScroll - left scroll button for applying hovering behavior
+        DESCRIPTION: The left-scroll button is set to change color when hovered over and change back to its default color when hovered out.
+	 */
+	private static void setLeftScrollHover(Button leftScroll)
+	{
 		//change size and color of button on mouse hover
 		leftScroll.setOnMouseEntered(event->{leftScroll.setStyle("-fx-background-color: blue");leftScroll.setScaleX(leftScroll.getScaleX() * 1.2);
-			leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);leftScroll.requestFocus();});
+		leftScroll.setScaleY(leftScroll.getScaleY() * 1.2);leftScroll.requestFocus();});
 		leftScroll.setOnMouseExited(event->{leftScroll.setStyle("-fx-background-color: lightblue");leftScroll.setScaleX(leftScroll.getScaleX() / 1.2);
-			leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
+		leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
 	}
 	
 	
