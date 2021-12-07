@@ -18,53 +18,13 @@
  *       DESCRIPTION: Sets the actions of the application setting window's 'OK' and 'Cancel' buttons. The OK button is set to close the settings window
  *                    and confirm any application settings that are made. The 'Cancel' button resets any application settings to default and then closes
  *                    the window.
- * 		
- *    
- *       
- *               
- *    
- *    
- * 
- * 
- *    private static void setRightScrollButton(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- *       PARAMETERS: Button rightScroll - right scroll button 
- *                   Gallery imageGallery - image gallery used to set behavior of right-scroll button 
- *                   ImageView leftImgView, - ImageView objects for rendering new images from the Gallery when scrolled
- *                             midImgView,
- *                             rightImgView
- * 
- *       DESCRIPTION: Functionality is set to the right-scroll button. When the user clicks the button, each image displayed will shift one position to the left.
- *                    The right-most image is cleared and a new image from the queue is displayed with the left-most image being cleared and hidden from view. 
- *               
- *    
- *    private static void setRightScrollHover(Button rightScroll);
- *       PARAMETERS: Button rightScroll - right scroll button for applying hovering behavior
- *       DESCRIPTION: The right-scroll button is set to change color when hovered over and change back to its default color when hovered out.
- * 
- * 
- *    private static void setZoomButton(Stage window, Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
- *       PARAMETERS: Stage window - owner window for declaring a child pop-up window
- *                   Button zoom - zoom button used to set event handler
- *                   StackPane midCanvas - middle canvas of gallery display used to access its image view
- *                   ImageView midImgView - image view for applying zoom functionality
- * 
- *       DESCRIPTION: The zoom button is set to perform an action. When the user clicks the zoom button, the center image enlarges if it is zoomed out by 
- *                   opening a new pop-up window and rendering an enlarged image in the center of the application screen. When clicked again, the pop-up window 
- *                   closes.
- *               
- *               
- *    private static void setZoomHover(Button zoom);
- *       PARAMETERS: Button zoom - zoom button for applying hovering behavior
- *       DESCRIPTION: The zoom button is set to change color when hovered over and change back to its default color when hovered out.
- *               					 
+ * 		                         					 
  */
 
 package jt_guevara;
-
 import javafx.application.Platform;
 import java.io.File;
 import java.util.ArrayDeque;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -370,44 +330,78 @@ public class Event_Handler {
 		leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
 	}
 	
+	/*
+	  private static void setRightScrollButton(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, 
+	                                           ImageView rightImgView);
+        PARAMETERS: Button rightScroll - right scroll button 
+                    Gallery imageGallery - image gallery used to set behavior of right-scroll button 
+                    ImageView leftImgView, - ImageView objects for rendering new images from the Gallery when scrolled
+                              midImgView,
+                              rightImgView
+  
+        DESCRIPTION: Functionality is set to the right-scroll button. When the user clicks the button, each image displayed will shift one position 
+                     to the left. The right-most image is cleared and a new image from the queue is displayed with the left-most image being cleared 
+                     and hidden from view.  
+	 */
 	
-	private void set_right_scroll(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void setRightScroll(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		rightScroll.setOnAction(new EventHandler<ActionEvent>() {
 			//temporary images used to maintain the order of the image gallery when scrolling(scrolling right is slightly different than scrolling left)
 			Image temp1, temp2, temp3;
 			@Override
 			public void handle(ActionEvent event) {
 				//disable scrolling when the gallery has less than 3 images
-				if(imageGallery.getSize() < 3) 
+				if(imageGallery.size() < 3) 
 					return;
 				
 				//shift each image in array one position over to simulate scroll 
-				temp1 = imageGallery.getImages().getFirst();
-				imageGallery.getImages().removeFirst();
-				imageGallery.getImages().addLast(temp1);
-				temp2 = imageGallery.getImages().getFirst();
-				imageGallery.getImages().removeFirst();
-				temp3 = imageGallery.getImages().getFirst();
-				imageGallery.getImages().removeFirst();
+				temp1 = imageGallery.getFirst();
+				imageGallery.removeFirst();
+				imageGallery.addLast(temp1);
+				temp2 = imageGallery.getFirst();
+				imageGallery.removeFirst();
+				temp3 = imageGallery.getFirst();
+				imageGallery.removeFirst();
 				
 				
-				rightImgView.setImage(imageGallery.getImages().getFirst());
-				imageGallery.getImages().addFirst(temp3);
-				midImgView.setImage(imageGallery.getImages().getFirst());
-				imageGallery.getImages().addFirst(temp2);
-				leftImgView.setImage(imageGallery.getImages().getFirst());
+				rightImgView.setImage(imageGallery.getFirst());
+				imageGallery.addFirst(temp3);
+				midImgView.setImage(imageGallery.getFirst());
+				imageGallery.addFirst(temp2);
+				leftImgView.setImage(imageGallery.getFirst());
 			}
 		});
 		
-		//change size and color of button on mouse hover
-		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");rightScroll.setScaleX(rightScroll.getScaleX() * 1.2);
-			rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);rightScroll.requestFocus();});
-		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: lightblue");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
-			rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
+		setRightScrollHover(rightScroll);
 	}
 	
+	/*
+	  private static void setRightScrollHover(Button rightScroll);
+        PARAMETERS: Button rightScroll - right scroll button for applying hovering behavior
+        DESCRIPTION: The right-scroll button is set to change color when hovered over and change back to its default color when hovered out.
+	 */
 	
-	private static void set_zoom(Stage window,Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
+	private static void setRightScrollHover(Button rightScroll) {
+		//change size and color of button on mouse hover
+		rightScroll.setOnMouseEntered(event->{rightScroll.setStyle("-fx-background-color: blue");rightScroll.setScaleX(rightScroll.getScaleX() * 1.2);
+		rightScroll.setScaleY(rightScroll.getScaleY() * 1.2);rightScroll.requestFocus();});
+		rightScroll.setOnMouseExited(event->{rightScroll.setStyle("-fx-background-color: lightblue");rightScroll.setScaleX(rightScroll.getScaleX() / 1.2);
+		rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
+	}
+	
+	/*
+	 private static void setZoomButton(Stage window, Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
+        PARAMETERS: Stage window - owner window for declaring a child pop-up window
+                    Button zoom - zoom button used to set event handler
+                    StackPane midCanvas - middle canvas of gallery display used to access its image view
+                    ImageView midImgView - image view for applying zoom functionality
+  
+        DESCRIPTION: The zoom button is set to perform an action. When the user clicks the zoom button, the center image enlarges if it is zoomed out by 
+                    opening a new pop-up window and rendering an enlarged image in the center of the application screen. When clicked again, the pop-up 
+                    window closes.
+	 */
+	
+	private static void setZoomButton(Stage window,Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
 		
 		zoom.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -440,11 +434,20 @@ public class Event_Handler {
 			}
 		});
 		
+		setZoomHover(zoom);
+	}
+	
+	/*
+	 private static void setZoomHover(Button zoom);
+        PARAMETERS: Button zoom - zoom button for applying hovering behavior
+        DESCRIPTION: The zoom button is set to change color when hovered over and change back to its default color when hovered out.
+	 */
+	private static void setZoomHover(Button zoom) {
 		//change size and color of button on mouse hover
 		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");zoom.setScaleX(zoom.getScaleX() * 1.2);
-			zoom.setScaleY(zoom.getScaleY() * 1.2);zoom.requestFocus();});
+		zoom.setScaleY(zoom.getScaleY() * 1.2);zoom.requestFocus();});
 		zoom.setOnMouseExited(event->{zoom.setStyle("-fx-background-color: lightblue");zoom.setScaleX(zoom.getScaleX() / 1.2);
-			zoom.setScaleY(zoom.getScaleY() / 1.2);});
+		zoom.setScaleY(zoom.getScaleY() / 1.2);});
 	}
 	
 }
