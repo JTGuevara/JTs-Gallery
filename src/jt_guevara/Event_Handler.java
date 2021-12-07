@@ -19,29 +19,7 @@
  *                    and confirm any application settings that are made. The 'Cancel' button resets any application settings to default and then closes
  *                    the window.
  * 		
- * 
- *    private static void setButtons(GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, 
- *                  ImageView rightImgView);
- *       PARAMETERS: GridPane layout - main layout container for retrieving button interface and buttons
- *                   ArrayDeque<Image> imageGallery - image gallery for setting event handlers to buttons
- *                   StackPane midCanvas - gallery display canvas for setting zoom function
- *                   ImageView leftImgView, - ImageView objects for setting functions to scroll buttons
- *                             midImgView,
- *                             rightImgView
- * 
- *       RESULT: Functionality is set to the left-scroll, right-scroll and zoom buttons.
- * 
- * 
- * 		
- *    private static void setLeftScrollButton(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
- *       PARAMETERS: Button leftScroll - left scroll button 
- *                   ArrayDeque<Image> imageGallery - image gallery used to set behavior of left-scroll button 
- *                   ImageView leftImgView, - ImageView objects for rendering new images on display canvases when scrolled
- *                             midImgView,
- *                             rightImgView
- * 
- *       DESCRIPTION: Functionality is set to the left-scroll button. When the user clicks the button, each image displayed will shift one position to the right.
- *               The left-most image is cleared and a new image from the queue is displayed with the right-most image being cleared and hidden from view.
+ *    
  *       
  *               
  *    
@@ -318,39 +296,61 @@ public class Event_Handler {
 		});
 	}
 
-	
-	private void load_buttons(Stage window,GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
+	/*
+	  private static void setButtons(GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, 
+                                     ImageView rightImgView);
+         PARAMETERS: GridPane layout - main layout container for retrieving button interface and buttons
+                     ArrayDeque<Image> imageGallery - image gallery for setting event handlers to buttons
+                     StackPane midCanvas - gallery display canvas for setting zoom function
+                     ImageView leftImgView, - ImageView objects for setting functions to scroll buttons
+                               midImgView,
+                               rightImgView
+  
+         RESULT: Functionality is set to the left-scroll, right-scroll and zoom buttons.
+	 */
+	private void setButtons(Stage window,GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//local variables needed to access user interface buttons
 		GridPane buttonBar = (GridPane) layout.getChildren().get(2);
 		Button leftScroll = (Button) buttonBar.getChildren().get(0);
 		Button rightScroll = (Button) buttonBar.getChildren().get(2);
 		Button zoom = (Button) buttonBar.getChildren().get(1);
-		set_left_scroll(leftScroll, imageGallery, leftImgView, midImgView, rightImgView);
-		set_right_scroll(rightScroll, imageGallery, leftImgView, midImgView, rightImgView);
-		set_zoom(window,zoom,midImgView, midCanvas, layout);
+		setLeftScroll(leftScroll, imageGallery, leftImgView, midImgView, rightImgView);
+		setRightScroll(rightScroll, imageGallery, leftImgView, midImgView, rightImgView);
+		setZoomButton(window,zoom,midImgView, midCanvas, layout);
 	}
 	
+	/*
+	 private static void setLeftScrollButton(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+        PARAMETERS: Button leftScroll - left scroll button 
+                    ArrayDeque<Image> imageGallery - image gallery used to set behavior of left-scroll button 
+                    ImageView leftImgView, - ImageView objects for rendering new images on display canvases when scrolled
+                              midImgView,
+                              rightImgView
+  
+        DESCRIPTION: Functionality is set to the left-scroll button. When the user clicks the button, each image displayed will shift one position to the right.
+                     The left-most image is cleared and a new image from the queue is displayed with the right-most image being cleared and hidden from view.
+	 */
 	
-	private void set_left_scroll(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
+	private void setLeftScroll(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		leftScroll.setOnAction(new EventHandler<ActionEvent>() {
 			//temporary images used to maintain order of the image gallery when scrolling
 			Image temp1, temp2;
 			@Override
 			public void handle(ActionEvent event) {
 				//disable scrolling when the gallery has less than 3 images 
-				if(imageGallery.getSize() < 3)
+				if(imageGallery.size() < 3)
 					return;
 				
 				//shift each image in array one position over to simulate scroll 
-				temp1 = imageGallery.getImages().getLast();
-				imageGallery.getImages().removeLast();
-				temp2 = imageGallery.getImages().getFirst();
-				imageGallery.getImages().removeFirst();
-				rightImgView.setImage(imageGallery.getImages().getFirst());
-				imageGallery.getImages().addFirst(temp2);
+				temp1 = imageGallery.getLast();
+				imageGallery.removeLast();
+				temp2 = imageGallery.getFirst();
+				imageGallery.removeFirst();
+				rightImgView.setImage(imageGallery.getFirst());
+				imageGallery.addFirst(temp2);
 				midImgView.setImage(temp2);
-				imageGallery.getImages().addFirst(temp1);
+				imageGallery.addFirst(temp1);
 				leftImgView.setImage(temp1);
 			}
 		});
