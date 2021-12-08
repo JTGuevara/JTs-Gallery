@@ -116,6 +116,34 @@ public class Settings {
 		picker.setLayoutX(300);
 		picker.setLayoutY(70);
 	}
+	/*
+	 private static void applySettings(ColorPicker color1, ColorPicker color2, ColorPicker color3, GridPane layout, GridPane display,GridPane buttonLayout);
+	    PARAMETERS: ColorPicker color1, color2, color3 - components for applying background settings to layout components
+	               GridPane layout - main layout for applying background settings
+	               GridPane display - gallery display for applying background settings
+	               GridPane buttonLayout - button interface for applying background settings
+	   DESCRIPTION: Background color settings are applied to application components.
+	 */
+	private static void applySettings(ColorPicker color1, ColorPicker color2, ColorPicker color3, GridPane layout, GridPane display,GridPane buttonLayout)
+	{
+		/*apply background settings using color pickers to change background color of 
+		layout components*/
+		color1.setOnAction(event->{
+			//apply background settings to main layout
+			String color = color1.getValue().toString();
+			layout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";");
+			});
+		color2.setOnAction(event->{
+			//apply background settings to display
+			String color = color2.getValue().toString();
+			display.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-radius: 10px;-fx-background-radius: 10px");
+			});
+		color3.setOnAction(event->{
+			//apply background settings to button layout
+			String color = color3.getValue().toString();
+			buttonLayout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-radius: 10px;-fx-background-radius: 10px");
+			});
+	}
 	
 	/*
 	 private static void applySettingsButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout);
