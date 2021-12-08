@@ -9,10 +9,8 @@ import java.io.File;
 import java.util.ArrayDeque;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -20,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -31,15 +28,15 @@ public class Event_Handler {
 	private static boolean zoomState = false;//used to track the zoom state of the center image
 	private static Stage popup = new Stage();//pop-up window for zoomed image
 	
-	/*
-	public static void setComponents(Stage window, GridPane layout, Gallery imageGallery);
-	       PARAMETERS: Stage window - required JavaFX window used to set event handlers to menu items
-	                   GridPane layout - main layout container used to access application components(gallery display, canvases) for setting functions to them
-	                   ArrayDeque<Image> imageGallery - image gallery representing a collection of images; used to set menu item function for uploading images
+/*
+public static void setComponents(Stage window, GridPane layout, Gallery imageGallery);
+	PARAMETERS: Stage window - required JavaFX window used to set event handlers to menu items
+	            GridPane layout - main layout container used to access application components(gallery display, canvases) for setting functions to them
+	            ArrayDeque<Image> imageGallery - image gallery representing a collection of images; used to set menu item function for uploading images
 	                                           
-	       DESCRIPTION: Functionality is set to all application components(menu items, gallery display, buttons, settings) so they perform the specified action 
-	                    when clicked by the user
-	*/
+	DESCRIPTION: Functionality is set to all application components(menu items, gallery display, buttons, settings) so they perform the specified action 
+	             when clicked by the user
+*/
 	
 	public void setComponents(Stage window, GridPane layout, ArrayDeque<Image> imageGallery)
 	{
@@ -57,16 +54,16 @@ public class Event_Handler {
 		setButtons(window,layout,imageGallery, mid_canvas, leftImgView, midImgView, rightImgView);
 	}
 	
-	/*
-	private static void setMenuItems(HBox menuBar, Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
-	       PARAMETERS: HBox menuBar - menu bar for setting functions to menu items 
-	                   Stage window, Gallery imageGallery, - application components used for setting menu items 
-	                   ImageView leftImgView, midImgView, 
-	                              rightImgView
+/*
+private static void setMenuItems(HBox menuBar, Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+	PARAMETERS: HBox menuBar - menu bar for setting functions to and accessing specific menu items  
+	            Stage window, Gallery imageGallery, - application components used for setting menu items 
+	            ImageView leftImgView, midImgView, rightImgView - objects for implementing a gallery upload function for a menu item
+	                           
 	                    
-	       DESCRIPTION: Functionality is set to all menu items. Each menu item is set to execute its appropriate function when the item is clicked. Also 
-	                    each menu item changes color when the mouse is hovered over it and away.
-	*/
+	DESCRIPTION: Functionality is set to all menu items. Each menu item is set to execute its appropriate function when the item is clicked. Also 
+	             each menu item changes color when the mouse is hovered over it and away.
+*/
 	
 	private static void setMenuItems(HBox menuBar, Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, 
 			ImageView midImgView, ImageView rightImgView) {
@@ -77,7 +74,7 @@ public class Event_Handler {
 		//set functions to menu items
 		//(on click)
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		settings.setOnMouseClicked(event->{Stage settingsWindow = applySettings(window);settingsWindow.show();});
+		settings.setOnMouseClicked(event->{Stage settingsWindow = Settings.generateSettingsWindow(window);settingsWindow.show();});
 		exit.setOnMouseClicked(event->Platform.exit());
 		//(on hover)
 		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
@@ -89,16 +86,16 @@ public class Event_Handler {
 		}
 	
 	
-	/*
-	private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
-	      PARAMETERS: Stage window - Stage parameter used to open a file explorer screen through the user's operating system
-	                  ArrayDeque<Image> imageGallery - image gallery containing images to be displayed 
-	                  ImageView leftImgView, midImgView, rightImgView - ImageView objects used to render images on the application 
+/*
+private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+	PARAMETERS: Stage window - Stage parameter used to open a file explorer screen through the user's operating system
+	            ArrayDeque<Image> imageGallery - image gallery containing images to be displayed 
+	            ImageView leftImgView, midImgView, rightImgView - ImageView objects used to render images on the application 
 	                            
-	      DESCRIPTION: Sets the menu item 'Gallery' to open a file explorer window for the user for uploading images to an image gallery when the item
-	                   is clicked. On window confirmation, the first three images of the gallery are displayed to the user. On window cancellation, 
-	                   the file explorer window is closed.
-	*/
+	DESCRIPTION: Sets the menu item 'Gallery' to open a file explorer window for the user for uploading images to an image gallery when the item
+	             is clicked. On window confirmation, the first three images of the gallery are displayed to the user. On window cancellation, 
+	             the file explorer window is closed.
+*/
 	private static void load_gallery(Stage window, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//clear any previous image galleries, if any
@@ -137,18 +134,17 @@ public class Event_Handler {
 			}
 	}
 	
-	/*
-	  private static void setButtons(GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, 
-                                     ImageView rightImgView);
-         PARAMETERS: GridPane layout - main layout container for retrieving button interface and buttons
-                     ArrayDeque<Image> imageGallery - image gallery for setting event handlers to buttons
-                     StackPane midCanvas - gallery display canvas for setting zoom function
-                     ImageView leftImgView, - ImageView objects for setting functions to scroll buttons
-                               midImgView,
-                               rightImgView
-  
-         RESULT: Functionality is set to the left-scroll, right-scroll and zoom buttons.
-	 */
+/*
+private static void setButtons(GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, 
+                               ImageView rightImgView);
+    PARAMETERS: GridPane layout - main layout container for retrieving button interface and buttons
+                ArrayDeque<Image> imageGallery - image gallery for setting event handlers to buttons
+                StackPane midCanvas - gallery display canvas for setting zoom function
+                ImageView leftImgView, midImgView, rightImgview- ImageView objects for setting functions to scroll buttons
+                               
+                              
+    DESCRIPTION: Functionality is set to the left-scroll, right-scroll and zoom buttons.
+*/
 	private void setButtons(Stage window,GridPane layout, ArrayDeque<Image> imageGallery, StackPane midCanvas, ImageView leftImgView, ImageView midImgView, ImageView rightImgView)
 	{
 		//local variables needed to access user interface buttons
@@ -161,17 +157,16 @@ public class Event_Handler {
 		setZoomButton(window,zoom,midImgView, midCanvas, layout);
 	}
 	
-	/*
-	 private static void setLeftScrollButton(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
-        PARAMETERS: Button leftScroll - left scroll button 
-                    ArrayDeque<Image> imageGallery - image gallery used to set behavior of left-scroll button 
-                    ImageView leftImgView, - ImageView objects for rendering new images on display canvases when scrolled
-                              midImgView,
-                              rightImgView
-  
-        DESCRIPTION: Functionality is set to the left-scroll button. When the user clicks the button, each image displayed will shift one position to the right.
-                     The left-most image is cleared and a new image from the queue is displayed with the right-most image being cleared and hidden from view.
-	 */
+/*
+private static void setLeftScrollButton(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+    PARAMETERS: Button leftScroll - left scroll button 
+                ArrayDeque<Image> imageGallery - image gallery used to set behavior of left-scroll button 
+                ImageView leftImgView, midImgView, rightImgView - ImageView objects for rendering new images on display canvases when scrolled
+                             
+                              
+    DESCRIPTION: Functionality is set to the left-scroll button. When the user clicks the button, each image displayed will shift one position to the right.
+                 The left-most image is cleared and a new image from the queue is displayed with the right-most image being cleared and hidden from view.
+*/
 	
 	private void setLeftScroll(Button leftScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		leftScroll.setOnAction(new EventHandler<ActionEvent>() {
@@ -213,19 +208,17 @@ public class Event_Handler {
 		leftScroll.setScaleY(leftScroll.getScaleY() / 1.2);});
 	}
 	
-	/*
-	  private static void setRightScrollButton(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, 
-	                                           ImageView rightImgView);
-        PARAMETERS: Button rightScroll - right scroll button 
-                    Gallery imageGallery - image gallery used to set behavior of right-scroll button 
-                    ImageView leftImgView, - ImageView objects for rendering new images from the Gallery when scrolled
-                              midImgView,
-                              rightImgView
-  
-        DESCRIPTION: Functionality is set to the right-scroll button. When the user clicks the button, each image displayed will shift one position 
-                     to the left. The right-most image is cleared and a new image from the queue is displayed with the left-most image being cleared 
-                     and hidden from view.  
-	 */
+/*
+private static void setRightScrollButton(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView);
+    PARAMETERS: Button rightScroll - right scroll button 
+                Gallery imageGallery - image gallery used to set behavior of right-scroll button 
+                ImageView leftImgView, midImgView, rightImgView - ImageView objects for rendering new images on the canvas when scrolled
+                              
+                              
+    DESCRIPTION: Functionality is set to the right-scroll button. When the user clicks the button, each image displayed will shift one position 
+                 to the left. The right-most image is cleared and a new image from the queue is displayed with the left-most image being cleared 
+                 and hidden from view.  
+*/
 	
 	private void setRightScroll(Button rightScroll, ArrayDeque<Image> imageGallery, ImageView leftImgView, ImageView midImgView, ImageView rightImgView) {
 		rightScroll.setOnAction(new EventHandler<ActionEvent>() {
@@ -258,11 +251,11 @@ public class Event_Handler {
 		setRightScrollHover(rightScroll);
 	}
 	
-	/*
-	  private static void setRightScrollHover(Button rightScroll);
-        PARAMETERS: Button rightScroll - right scroll button for applying hovering behavior
-        DESCRIPTION: The right-scroll button is set to change color when hovered over and change back to its default color when hovered out.
-	 */
+/*
+private static void setRightScrollHover(Button rightScroll);
+    PARAMETERS: Button rightScroll - right scroll button for applying hovering behavior
+    DESCRIPTION: The right-scroll button is set to change color when hovered over and change back to its default color when hovered out.
+*/
 	
 	private static void setRightScrollHover(Button rightScroll) {
 		//change size and color of button on mouse hover
@@ -272,17 +265,17 @@ public class Event_Handler {
 		rightScroll.setScaleY(rightScroll.getScaleY() / 1.2);});
 	}
 	
-	/*
-	 private static void setZoomButton(Stage window, Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
-        PARAMETERS: Stage window - owner window for declaring a child pop-up window
-                    Button zoom - zoom button used to set event handler
-                    StackPane midCanvas - middle canvas of gallery display used to access its image view
-                    ImageView midImgView - image view for applying zoom functionality
+/*
+private static void setZoomButton(Stage window, Button zoom, Gallery imageGallery, ImageView midImgView, StackPane midCanvas);
+    PARAMETERS: Stage window - owner window for declaring a child pop-up window
+                Button zoom - zoom button used to set event handler
+                StackPane midCanvas - middle canvas of gallery display used to access its image view
+                ImageView midImgView - image view for applying zoom functionality
   
-        DESCRIPTION: The zoom button is set to perform an action. When the user clicks the zoom button, the center image enlarges if it is zoomed out by 
-                    opening a new pop-up window and rendering an enlarged image in the center of the application screen. When clicked again, the pop-up 
-                    window closes.
-	 */
+    DESCRIPTION: The zoom button is set to perform an action. When the user clicks the zoom button, the center image enlarges if it is zoomed out by 
+                 opening a new pop-up window and rendering an enlarged image in the center of the application screen. When clicked again, the pop-up 
+                 window closes.
+*/
 	
 	private static void setZoomButton(Stage window,Button zoom, ImageView midImgView, StackPane midCanvas, GridPane layout) {
 		
@@ -320,11 +313,11 @@ public class Event_Handler {
 		setZoomHover(zoom);
 	}
 	
-	/*
-	 private static void setZoomHover(Button zoom);
-        PARAMETERS: Button zoom - zoom button for applying hovering behavior
-        DESCRIPTION: The zoom button is set to change color when hovered over and change back to its default color when hovered out.
-	 */
+/*
+private static void setZoomHover(Button zoom);
+    PARAMETERS: Button zoom - zoom button for applying hovering behavior
+    DESCRIPTION: The zoom button is set to change color when hovered over and change back to its default color when hovered out.
+*/
 	private static void setZoomHover(Button zoom) {
 		//change size and color of button on mouse hover
 		zoom.setOnMouseEntered(event->{zoom.setStyle("-fx-background-color: blue");zoom.setScaleX(zoom.getScaleX() * 1.2);
