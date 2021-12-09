@@ -124,14 +124,19 @@ private static void applySettings(ColorPicker color1, ColorPicker color2, ColorP
 			layout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";");
 			});
 		color2.setOnAction(event->{
-			//apply background settings to display
-			String color = color2.getValue().toString();
-			display.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-radius: 10px;-fx-background-radius: 10px");
+			//apply background settings to gallery display and canvases
+			String color = color2.getValue().darker().toString();
+			String borderColor = color2.getValue().brighter().toString();
+			display.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-width: 5px;-fx-border-radius: 10px;"
+					+ "-fx-background-radius: 10px;-fx-border-color: #" + borderColor.substring(2,8));
+			
 			});
 		color3.setOnAction(event->{
 			//apply background settings to button layout
-			String color = color3.getValue().toString();
-			buttonLayout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-radius: 10px;-fx-background-radius: 10px");
+			String color = color3.getValue().darker().toString();
+			String borderColor = color3.getValue().brighter().toString();
+			buttonLayout.setStyle("-fx-background-color: #" + color.substring(2,8) + ";-fx-border-width: 5px;-fx-border-radius: 10px;"
+					+ "-fx-background-radius: 10px;-fx-border-color: #" + borderColor.substring(2,8));
 			});
 	}
 	
