@@ -149,14 +149,12 @@ private static void applySettingsButtons(Stage settings, Button OK, Button cance
                 GridPane display - gallery display component for modifying settings to default after cancellation
                 GridPane buttonLayout - button layout component for modifying settings to default after cancellation
                    
-    DESCRIPTION: Sets the actions of the application setting window's 'OK' and 'Cancel' buttons. The OK button is set to close the settings window
-                 and confirm any application settings that are made. The 'Cancel' button resets any application settings to default and then closes
-                 the window.
+    DESCRIPTION: Sets the actions of the application setting window's 'OK' and 'Cancel' buttons. 
 */
 	
 	private static void applySettingsButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout) {
-		//OK button - confirm any new application settings and close window
-		//Cancel button - set application settings to default and close window
+		//OK button - confirm any new application settings and close window 
+		//Cancel button - set any application settings to default and close window
 		OK.setOnMouseClicked(event->{
 			settings.close();
 		});
@@ -169,6 +167,12 @@ private static void applySettingsButtons(Stage settings, Button OK, Button cance
 					+ "-fx-border-width: 5px;-fx-background-color: darkblue;");
 			settings.close();
 		});
+		
+		//change button colors when hovered over and away
+		OK.setOnMouseEntered(event->{OK.setStyle("-fx-background-color: gray");});
+		OK.setOnMouseExited(event->{OK.setStyle("-fx-background-color: black");});
+		cancel.setOnMouseEntered(event->{OK.setStyle("-fx-background-color: gray");});
+		cancel.setOnMouseExited(event->{OK.setStyle("-fx-background-color: black");});
 	}
 	
 }
