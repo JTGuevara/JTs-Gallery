@@ -169,10 +169,10 @@ private static void applySettingsButtons(Stage settings, Button OK, Button cance
 		});
 		
 		//change button colors when hovered over and away
-		OK.setOnMouseEntered(event->{OK.setStyle("-fx-background-color: gray");});
-		OK.setOnMouseExited(event->{OK.setStyle("-fx-background-color: black");});
-		cancel.setOnMouseEntered(event->{OK.setStyle("-fx-background-color: gray");});
-		cancel.setOnMouseExited(event->{OK.setStyle("-fx-background-color: black");});
+		OK.setOnMouseEntered(event->{OK.setStyle("-fx-background-color: gray;-fx-border-color: white;-fx-border-width: 1px");});
+		OK.setOnMouseExited(event->{OK.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");});
+		cancel.setOnMouseEntered(event->{cancel.setStyle("-fx-background-color: gray;-fx-border-color: white;-fx-border-width: 1px");});
+		cancel.setOnMouseExited(event->{cancel.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");});
 	}
 	
 }
