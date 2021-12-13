@@ -52,7 +52,7 @@ public class Main extends Application{
 		buttonLayout.bind_button_layout(window);
 		mainLayout.layout.add(display.getDisplay(), 0, 1);
 		mainLayout.layout.add(buttonLayout.getButtonBar(), 0, 2);
-		handler.load_event_handlers(window, mainLayout.layout, imageGallery);
+		handler.setComponents(window, mainLayout.layout, imageGallery);
 		
 		//set up JavaFX stage
 		window.setTitle(APPLICATION_NAME);

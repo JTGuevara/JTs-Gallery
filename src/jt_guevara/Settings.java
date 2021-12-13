@@ -43,7 +43,7 @@ private static Stage generateSettingsWindow(Stage window);
 		styleSettingsButtons(OK, cancel);
 		//APPLY SETTINGS 
 		applySettings(colorPicker, colorPicker2, colorPicker3, layout, display, buttonLayout);
-		applySettingsButtons(settings, OK, cancel, layout, display, buttonLayout);
+		applySettingsButtons(settings, OK, cancel, layout, display, buttonLayout, colorPicker, colorPicker2, colorPicker3);
 		//ADD SETTINGS COMPONENTS TO WINDOW
 		p.setPadding(new Insets(10,10,10,10));
 		p.setStyle("-fx-background-color: black");
@@ -148,23 +148,27 @@ private static void applySettingsButtons(Stage settings, Button OK, Button cance
                 GridPane layout - layout component for modifying settings to default after cancellation
                 GridPane display - gallery display component for modifying settings to default after cancellation
                 GridPane buttonLayout - button layout component for modifying settings to default after cancellation
+                ColorPicker color1, color2, color3 - color pickers used in cancel button for resetting background settings to default
                    
     DESCRIPTION: Sets the actions of the application setting window's 'OK' and 'Cancel' buttons. 
 */
 	
-	private static void applySettingsButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout) {
+	private static void applySettingsButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout,
+			                                 ColorPicker color1, ColorPicker color2, ColorPicker color3) {
+		//default styles for reverting to previous background settings
+		String defaultLayoutStyle = layout.getStyle();
+		String defaultDisplayStyle= display.getStyle();
+		String defaultButtonLayoutStyle = buttonLayout.getStyle();
 		//OK button - confirm any new application settings and close window 
 		//Cancel button - set any application settings to default and close window
 		OK.setOnMouseClicked(event->{
 			settings.close();
 		});
 		cancel.setOnMouseClicked(event->{
-			//reset background settings to default
-			layout.setStyle("-fx-background-color: black");
-			display.setStyle("-fx-border-color: blue;-fx-border-width: 5px;-fx-border-color: royalblue;-fx-border-radius: 10px;"
-					+ "-fx-background-color: darkblue;-fx-background-radius: 10px");
-			buttonLayout.setStyle("-fx-border-color: royalblue;-fx-border-radius: 10px;-fx-background-radius: 10px;"
-					+ "-fx-border-width: 5px;-fx-background-color: darkblue;");
+			//reset background settings to default colors
+			layout.setStyle(defaultLayoutStyle);
+			display.setStyle(defaultDisplayStyle);
+			buttonLayout.setStyle(defaultButtonLayoutStyle);
 			settings.close();
 		});
 		
