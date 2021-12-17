@@ -11,9 +11,12 @@
  */
 
 package jt_guevara;
+import java.util.ArrayDeque;
+
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
+import javafx.scene.image.Image;
 
 public class Main extends Application{
 	//launch JavaFX application (start() method)
@@ -30,10 +33,10 @@ public class Main extends Application{
 		final String APPLICATION_NAME = "JT's Gallery";//application name
 	    final double MIN_WINDOW_WIDTH = 950.0;//minimum window width and height
 	    final double MIN_WINDOW_HEIGHT = 700.0;
-		Main_Layout mainLayout = new Main_Layout();//main user interface layout container for application
+		Main_Layout mainLayout = new Main_Layout();//main user-interface layout component for application
 		Scene s = new Scene(mainLayout.layout,MIN_WINDOW_WIDTH,MIN_WINDOW_HEIGHT);//required JavaFX structure to hold layout components
-		Gallery imageGallery = new Gallery();//collection class to hold images		
-		Gallery_Display display = new Gallery_Display();//layout sub-component for displaying images 
+		ArrayDeque<Image> imageGallery = new ArrayDeque<Image>();//collection class to hold images		
+		Gallery_Display display = new Gallery_Display();//layout sub-component containing image gallery for displaying images 
 		Button_Layout buttonLayout = new Button_Layout();//layout sub-component for manipulating images
 		Event_Handler handler = new Event_Handler();//class to set functionality to user interface components
 		
@@ -49,7 +52,7 @@ public class Main extends Application{
 		buttonLayout.bind_button_layout(window);
 		mainLayout.layout.add(display.getDisplay(), 0, 1);
 		mainLayout.layout.add(buttonLayout.getButtonBar(), 0, 2);
-		handler.load_event_handlers(window, mainLayout.layout, imageGallery);
+		handler.setComponents(window, mainLayout.layout, imageGallery);
 		
 		//set up JavaFX stage
 		window.setTitle(APPLICATION_NAME);

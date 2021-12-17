@@ -1,32 +1,5 @@
 /* FILE: Main_Layout.java
- * DESCRIPTION: The Main_Layout class is used to set the style and layout of the application and menu items	
- * 
- * FUNCTIONS: 
- *   public Main_Layout();
- *      DESCRIPTION: Declares a Main_Layout by initializing a new layout(GridPane)
- *      
- *   public void setLayout();
- *      DESCRIPTION: The application layout's style and general properties are set. 
- *   
- *   public GridPane getLayout();
- *      DESCRIPTION: Returns layout
- *      
- *   public HBox getMenuBar();
- *      DESCRIPTION: Returns menu bar
- *      
- *   public Text getMenuItem1();
- *      DESCRIPTION: Returns the menu item 'Gallery'
- *      
- *   public Text getMenuItem2();
- *      DESCRIPTION: Returns the menu item 'Settings'
- *      
- *   public Text getMenuItem3();
- *      DESCRIPTION: Returns the menu item 'Exit'
- *                  
- *   public void setMenuItems();
- *      DESCRIPTION: Two text menu items are created, their style properties set and added to a menu bar. The menu bar is then added to
- *              the main application layout
- *              	
+ * DESCRIPTION: The Main_Layout class is used to set the style and layout of the application and menu items.          	
  */
 package jt_guevara;
 
@@ -52,6 +25,10 @@ public class Main_Layout {
 	public Text getMenuItem2() {return settings;}
 	public Text getMenuItem3() {return exit;}
 	
+/*
+  public void setLayout();
+     DESCRIPTION: The application layout's style and general properties are set. 	 
+*/
 	public void setLayout(){
 		layout.setStyle("-fx-background-color: black");
 		layout.setPadding(new Insets(10,10,10,10));
@@ -59,6 +36,11 @@ public class Main_Layout {
 		layout.setVgap(10);
 	}
 	
+/*
+  public void setMenuItems();
+     DESCRIPTION: Two text menu items are created, their style properties set and added to a menu bar. The menu bar is then added to
+                  the main application layout 
+*/
 	public void set_menu_items(){
 		//set menu items to be used as clickable text for the user
 		gallery.setFill(Color.WHITE);
@@ -74,4 +56,6 @@ public class Main_Layout {
 		menuBar.getChildren().add(exit);
 		layout.add(menuBar, 0, 0);
 	}
+	
+	
 }
