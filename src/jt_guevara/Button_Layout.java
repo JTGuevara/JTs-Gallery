@@ -1,47 +1,5 @@
 /* FILE: Button_Layout.java
- * CLASS DESCRIPTION: Class for generating a button layout. A Button_Layout consists of a button bar and buttons.
- * 
- * FUNCTIONS:  
- *    public Button_Layout(){}
- *       DESCRIPTION: Creates a Button_Layout
- *       
- *    public Button getLeftScroll();
- *       DESCRIPTION: Returns left-scroll button.
- *       
- *       
- *    public Button getRightScroll();
- *       DESCRIPTION: Returns right-scroll button.
- *       
- *       
- *    public Button getZoom();
- *       DESCRIPTION: Returns zoom button.
- *       
- *       
- *    public GridPane getButtonBar();
- *       DESCRIPTION: Returns the button bar
- *       	
- *    public void set_scroll_buttons();
- *       DESCRIPTION: Sets the shape of the left-scroll(<|) and right-scroll(|>) buttons along with their 
- *                    layout and style properties. 
- *
- * 
- *    public void set_zoom_button();
- *       DESCRIPTION: Sets the shape of the zoom button(+) along with its layout and style properties. 
- *       
- *       
- *    public void set_button_bar();
- *       DESCRIPTION: Sets the button bar's layout and style properties. 
- *    
- *    
- *    public void add_buttons();
- *       DESCRIPTION: Adds the left-scroll, right-scroll and zoom buttons to the button bar
- *       
- *       
- *    public void bind_button_layout(Stage window);
- *       PARAMETER: Stage window - application window used to apply property binding 
- *       DESCRIPTION: This function binds the width and height properties of the button bar to the width and height properties   
- *                    of the application window so that the button bar is automatically resized along with the window when the 
- *                    window changes.
+ * CLASS DESCRIPTION: Class for generating a button layout. A Button_Layout consists of a button bar and buttons.  
  */
 package jt_guevara;
 
@@ -59,12 +17,17 @@ public class Button_Layout {
 	private Button right_scroll = new Button();
 	private Button zoom = new Button();
 	private GridPane buttonBar = new GridPane();//button bar that contains the above buttons
-	public Button getLeftScroll() {return left_scroll;}
+	public Button getLeftScroll() {return left_scroll;}//get functions for buttons
 	public Button getRightScroll() {return right_scroll;}
 	public Button getZoom() {return zoom;}
 	
-	public GridPane getButtonBar() {return buttonBar;}
+	public GridPane getButtonBar() {return buttonBar;}//get function for button bar
 	
+/*
+public void set_scroll_buttons();
+    DESCRIPTION: Sets the shape of the left-scroll(<|) and right-scroll(|>) buttons along with their 
+                 layout and style properties. 
+*/
 	public void set_scroll_buttons()
 	{
 		//local array of doubles used to define a button shape using points(in the form(x,y))(in this case, a triangle (<|))
@@ -87,7 +50,10 @@ public class Button_Layout {
 		right_scroll.setRotate(180);//rotate button so it points right
 		right_scroll.setStyle("-fx-background-color: lightblue");
 	}
-	
+/*
+public void set_zoom_button();
+    DESCRIPTION: Sets the shape of the zoom button(+) along with its layout and style properties. 
+*/
 	public void set_zoom_button()
 	{	
 		//local array of doubles used to define a shape using points(in the form (x,y))(in this case a (+) sign)	
@@ -113,7 +79,10 @@ public class Button_Layout {
 		zoom.setScaleY(2);
 		zoom.setStyle("-fx-background-color: lightblue");
 	}
-	
+/*
+public void set_button_bar();
+     DESCRIPTION: Sets the button bar's layout and style properties. 
+*/
 	public void set_button_bar()
 	{
 		buttonBar.setAlignment(Pos.CENTER);
@@ -129,14 +98,23 @@ public class Button_Layout {
 		buttonBar.setPadding(new Insets(15,15,15,15));
 		
 	}
-	
+/*
+public void add_buttons();
+    DESCRIPTION: Adds the left-scroll, right-scroll and zoom buttons to the button bar
+*/
 	public void add_buttons() {
 		buttonBar.add(left_scroll, 0, 0);
 		buttonBar.add(zoom, 1, 0);
 		buttonBar.add(right_scroll, 2, 0);
 	}
 	
-	
+/*
+public void bind_button_layout(Stage window);
+     PARAMETER: Stage window - application window used to apply property binding 
+     DESCRIPTION: This function binds the width and height properties of the button bar to the width and height properties   
+                   of the application window so that the button bar is automatically resized along with the window when the 
+                   window changes.
+*/
 	public void bind_button_layout(Stage window) {
 		buttonBar.prefWidthProperty().bind(window.widthProperty());
 		buttonBar.prefHeightProperty().bind(window.heightProperty());
