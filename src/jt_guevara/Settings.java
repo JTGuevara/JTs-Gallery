@@ -83,7 +83,7 @@ private static void styleSettingsButtons(Button OK, Button cancel);
 	
 /*
 private static void styleSettingWindowText(GridPane bgSettingsTable, Text bgDescription, Text bgSetting, Text bgSetting2, Text bgSetting3);
-	PARAMETERS: GridPane bgSettingsTable - 
+	PARAMETERS: GridPane bgSettingsTable - table structure for background settings used to format its text
 	            Text bgDescription, bgSetting, - text descriptions for background settings
 	                     bgSetting2, bgSetting3 
 	DESCRIPTION: Each text component in the 'Settings' window has its style properties set
