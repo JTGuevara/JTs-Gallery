@@ -74,7 +74,10 @@ private static void setMenuItems(HBox menuBar, Stage window, ArrayDeque<Image> i
 		//set functions to menu items
 		//(on click)
 		gallery.setOnMouseClicked(event->load_gallery(window, imageGallery, leftImgView, midImgView, rightImgView));
-		settings.setOnMouseClicked(event->{Stage settingsWindow = Settings.generateSettingsWindow(window);settingsWindow.show();});
+		settings.setOnMouseClicked(event->{
+			SettingsWindow win = new SettingsWindow();
+			win.generateSettingsWindow(window);
+			win.getWindow().show();});
 		exit.setOnMouseClicked(event->Platform.exit());
 		//(on hover)
 		gallery.setOnMouseEntered(event->{gallery.setFill(Color.BLUE);gallery.requestFocus();});
