@@ -1,5 +1,7 @@
-/* FILE: Settings.java
-   DESCRIPTION: The settings class is used to handle application settings as well as creating the 'Settings' window and applying its style properties.
+/* FILE: SettingsWindow.java
+   DESCRIPTION: The SettingsWindow class represents the application's 'Settings' window and its sub-components used for modifying different parts
+                of the application. The class handles the creation of the window and its sub-components, the application of their style properties
+                as well as setting functionality to each of the setting sub-components for modifying other parts of the application.
 */
 package jt_guevara;
 import javafx.geometry.Insets;
@@ -13,53 +15,86 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Settings{
+public class SettingsWindow{
+	private Stage settingsWin;//settings window 
+	private GridPane bgSettingsTable;//table structure for background settings
+	private Text bgDescription;//text descriptions for background settings
+	private Text layoutSettingText;
+	private Text displaySettingText;
+	private Text buttonLayoutSettingText;
+	private Button OK;//setting window buttons
+	private Button cancel;
+	private ColorPicker bgLayoutSetting;//components for adjusting background settings
+	private ColorPicker bgDisplaySetting;
+	private ColorPicker bgButtonLayoutSetting;
+	
+/*
+public SettingsWindow();
+    DESCRIPTION: Initializes and allocates setting window and its components to memory	 
+*/
+	public SettingsWindow() {//constructor
+		settingsWin = new Stage();
+		bgSettingsTable = new GridPane();
+		bgDescription = new Text("Change Background:");
+		layoutSettingText = new Text("Main: ");
+		displaySettingText = new Text("Gallery Interface: ");
+		buttonLayoutSettingText = new Text("Button Interface: ");
+		bgLayoutSetting = new ColorPicker();
+		bgDisplaySetting = new ColorPicker();
+		bgButtonLayoutSetting = new ColorPicker();
+		OK = new Button();
+		cancel = new Button();
+	}
+	
+	public Stage getWindow() {return settingsWin;}//get functions for setting window and its components
+	public GridPane getbgSettingsTable() {return bgSettingsTable;}
+	public Text getBGDescription() {return bgDescription;}
+	public Text getLayoutSettingText() {return layoutSettingText;}
+	public Text getDisplaySettingText() {return displaySettingText;}
+	public Text getButtonLayoutSettingText() {return buttonLayoutSettingText;}
+	public ColorPicker getBGLayoutSetting() {return bgLayoutSetting;}
+	public ColorPicker getDisplaySetting() {return bgDisplaySetting;}
+	public ColorPicker getBGButtonLayoutSetting() {return bgButtonLayoutSetting;}
+	public Button getOKButton() {return OK;}
+	public Button getCancelButton() {return cancel;}
+	
+	
 /*
 private static Stage generateSettingsWindow(Stage window);
-	PARAMETERS: Stage window - Parent window required for creating a child window of application settings
-	DESCRIPTION: An application settings window is created, along with settings sub-components for adjusting application settings, and returned. 
+	PARAMETERS: Stage window - Parent window required for creating a child window of application settings and retrieving layout components
+	DESCRIPTION: An application settings window is generated, along with settings sub-components for adjusting other parts of the application
+	             (ex. layout components). The window is then returned. 
 */
 	
-	public static Stage generateSettingsWindow(Stage window) {
-		//DECLARE SETTINGS WINDOW AND ITS COMPONENTS 
-		Stage settings = new Stage();
+	public Stage generateSettingsWindow(Stage window) {
+		//DECLARE JAVAFX STRUCTURE FOR SETTINGS WINDOW
 		Pane p = new Pane();
 		Scene s = new Scene(p,500,280);
-		Button OK = new Button();//setting window buttons
-		Button cancel = new Button();
 		GridPane layout = (GridPane) window.getScene().getRoot();//retrieve layout components for applying background settings
 		GridPane display = (GridPane) layout.getChildren().get(1);
 		GridPane buttonLayout = (GridPane) layout.getChildren().get(2);
-		GridPane bgSettingsTable = new GridPane();//container for background settings
-		Text bgDescription = new Text("Change Background:");//text descriptions for background settings
-		Text bgSetting = new Text("Main: ");
-		Text bgSetting2 = new Text("Gallery Interface: ");
-		Text bgSetting3 = new Text("Button Interface: ");
-		ColorPicker colorPicker = new ColorPicker();//color picker objects for applying background settings to layout components
-		ColorPicker colorPicker2 = new ColorPicker();
-		ColorPicker colorPicker3 = new ColorPicker();
 		//STYLE SETTINGS WINDOW COMPONENTS
-		styleSettingWindowText(bgSettingsTable,bgDescription,bgSetting,bgSetting2,bgSetting3);
+		styleSettingWindowText(bgSettingsTable,bgDescription,layoutSettingText,displaySettingText,buttonLayoutSettingText);
 		styleSettingsButtons(OK, cancel);
 		//APPLY SETTINGS 
-		applySettings(colorPicker, colorPicker2, colorPicker3, layout, display, buttonLayout);
-		applySettingsButtons(settings, OK, cancel, layout, display, buttonLayout, colorPicker, colorPicker2, colorPicker3);
+		applySettings(bgLayoutSetting, bgDisplaySetting, bgButtonLayoutSetting, layout, display, buttonLayout);
+		applySettingsButtons(settingsWin, OK, cancel, layout, display, buttonLayout, bgLayoutSetting, bgDisplaySetting, bgButtonLayoutSetting);
 		//ADD SETTINGS COMPONENTS TO WINDOW
 		p.setPadding(new Insets(10,10,10,10));
 		p.setStyle("-fx-background-color: black");
-		bgSettingsTable.add(bgSetting, 0, 0);
-		bgSettingsTable.add(bgSetting2, 0, 1);
-		bgSettingsTable.add(bgSetting3, 0, 2);
-		bgSettingsTable.add(colorPicker, 1, 0);
-		bgSettingsTable.add(colorPicker2, 1, 1);
-		bgSettingsTable.add(colorPicker3, 1, 2);
+		bgSettingsTable.add(layoutSettingText, 0, 0);
+		bgSettingsTable.add(displaySettingText, 0, 1);
+		bgSettingsTable.add(buttonLayoutSettingText, 0, 2);
+		bgSettingsTable.add(bgLayoutSetting, 1, 0);
+		bgSettingsTable.add(bgDisplaySetting, 1, 1);
+		bgSettingsTable.add(bgButtonLayoutSetting, 1, 2);
 		p.getChildren().addAll(bgDescription, bgSettingsTable, OK, cancel);
-		//SET UP WINDOW
-		settings.setTitle("Settings");
-		settings.setWidth(500);
-		settings.setHeight(280);
-		settings.setScene(s);
-		return settings;
+		//SET WINDOW PARAMETERS 
+		settingsWin.setTitle("Settings");
+		settingsWin.setWidth(500);
+		settingsWin.setHeight(280);
+		settingsWin.setScene(s);
+		return settingsWin;
 	}
 	
 /*
@@ -108,11 +143,11 @@ private static void styleSettingWindowText(GridPane bgSettingsTable, Text bgDesc
 	
 /*
 private static void applySettings(ColorPicker color1, ColorPicker color2, ColorPicker color3, GridPane layout, GridPane display,GridPane buttonLayout);
-     PARAMETERS: ColorPicker color1, color2, color3 - components for applying background settings to layout components
-	             GridPane layout - main layout for applying background settings
-	             GridPane display - gallery display for applying background settings
-	             GridPane buttonLayout - button interface for applying background settings
-	 DESCRIPTION: Background color settings are applied to application components.
+     PARAMETERS: ColorPicker color1, color2, color3 - setting components for applying background settings to layout components
+	             GridPane layout - main layout for modifying background settings
+	             GridPane display - gallery display for modifying background settings
+	             GridPane buttonLayout - button interface for modifying background settings
+	 DESCRIPTION: Functionality is added to setting components for modifying application background colors.
 */
 	private static void applySettings(ColorPicker color1, ColorPicker color2, ColorPicker color3, GridPane layout, GridPane display,GridPane buttonLayout)
 	{
@@ -145,12 +180,12 @@ private static void applySettingsButtons(Stage settings, Button OK, Button cance
     PARAMETERS: Stage settings - settings window for setting 'OK' and 'Cancel' buttons
                 Button OK - OK button for confirming new application settings
                 Button cancel - Cancel button for modifying application settings to default 
-                GridPane layout - layout component for modifying settings to default after cancellation
-                GridPane display - gallery display component for modifying settings to default after cancellation
-                GridPane buttonLayout - button layout component for modifying settings to default after cancellation
-                ColorPicker color1, color2, color3 - color pickers used in cancel button for resetting background settings to default
+                GridPane layout - layout component for resetting background settings to default after pressing cancel button
+                GridPane display - gallery display component for resetting background settings to default after pressing cancel button
+                GridPane buttonLayout - button layout component for resetting background settings to default after pressing cancel button
+                ColorPicker color1, color2, color3 - color pickers used for resetting background settings to default 
                    
-    DESCRIPTION: Sets the actions of the application setting window's 'OK' and 'Cancel' buttons. 
+    DESCRIPTION: Sets functions to the setting window's 'OK' and 'Cancel' buttons. 
 */
 	
 	private static void applySettingsButtons(Stage settings, Button OK, Button cancel, GridPane layout, GridPane display, GridPane buttonLayout,
