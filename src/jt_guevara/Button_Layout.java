@@ -12,16 +12,16 @@ import javafx.stage.Stage;
 
 
 public class Button_Layout {
-	public Button_Layout() {}//constructor
-	private Button left_scroll = new Button();//left-scroll, right-scroll and zoom buttons
-	private Button right_scroll = new Button();
+	public Button_Layout() {}								//constructor
+	private Button leftScroll = new Button();				//left-scroll, right-scroll and zoom buttons
+	private Button rightScroll = new Button();
 	private Button zoom = new Button();
-	private GridPane buttonBar = new GridPane();//button bar that contains the above buttons
-	public Button getLeftScroll() {return left_scroll;}//get functions for buttons
-	public Button getRightScroll() {return right_scroll;}
+	private GridPane buttonBar = new GridPane();			//button bar that contains the above buttons
+	public Button getLeftScroll() {return leftScroll;}		//get functions for buttons
+	public Button getRightScroll() {return rightScroll;}
 	public Button getZoom() {return zoom;}
 	
-	public GridPane getButtonBar() {return buttonBar;}//get function for button bar
+	public GridPane getButtonBar() {return buttonBar;}		//get function for button bar
 	
 /*
 public void set_scroll_buttons();
@@ -39,16 +39,16 @@ public void set_scroll_buttons();
 			    };
 		//Polyline object used to set the shape of the zoom button using the points
 		Polyline shape = new Polyline(POINTS);
-		left_scroll.setShape(shape);
-		left_scroll.setScaleX(1.4);
-		left_scroll.setScaleY(1.5);
-		left_scroll.setStyle("-fx-background-color: lightblue");
+		leftScroll.setShape(shape);
+		leftScroll.setScaleX(1.4);
+		leftScroll.setScaleY(1.5);
+		leftScroll.setStyle("-fx-background-color: lightblue");
 		//do the same for the right-scroll button
-		right_scroll.setShape(shape);
-		right_scroll.setScaleX(1.4);
-		right_scroll.setScaleY(1.5);
-		right_scroll.setRotate(180);//rotate button so it points right
-		right_scroll.setStyle("-fx-background-color: lightblue");
+		rightScroll.setShape(shape);
+		rightScroll.setScaleX(1.4);
+		rightScroll.setScaleY(1.5);
+		rightScroll.setRotate(180);//rotate button so it points right
+		rightScroll.setStyle("-fx-background-color: lightblue");
 	}
 /*
 public void set_zoom_button();
@@ -103,9 +103,9 @@ public void add_buttons();
     DESCRIPTION: Adds the left-scroll, right-scroll and zoom buttons to the button bar
 */
 	public void add_buttons() {
-		buttonBar.add(left_scroll, 0, 0);
+		buttonBar.add(leftScroll, 0, 0);
 		buttonBar.add(zoom, 1, 0);
-		buttonBar.add(right_scroll, 2, 0);
+		buttonBar.add(rightScroll, 2, 0);
 	}
 	
 /*
