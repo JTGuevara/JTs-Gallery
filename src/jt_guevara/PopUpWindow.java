@@ -29,7 +29,8 @@ public void generatePopUpWindow(Stage window,Button zoom, StackPane midCanvas, I
 		//		b.) set window mode (disable any mouse input outside the pop-up window 
 		//			until it is closed)
 		//		c.) apply binding properties to zoomed image
-		//		d.) add image to JavaFX container
+		//		d.) set pop-up window to close when clicked with the mouse
+		//		d.) add image to pop-up window
 		//		e.) place pop-up window in the center of the application screen
 		//			i. calculate pop-up window coordinates using the parent window
 		//3.) show window
@@ -44,6 +45,7 @@ public void generatePopUpWindow(Stage window,Button zoom, StackPane midCanvas, I
 		zoomedImage.fitWidthProperty().bind(popup.widthProperty());
 		zoomedImage.fitHeightProperty().bind(popup.heightProperty());
 		zoomedImage.setImage(midNode.getImage());
+		p.setOnMousePressed(event->{popup.close();});
 		p.getChildren().add(zoomedImage);
 		//do not change the next two statements below, or else the pop-up window will not appear at the center!
 		popup.setX(window.getX() + window.getWidth() / 2 - popup.getWidth() / 2);
