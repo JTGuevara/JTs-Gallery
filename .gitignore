@@ -2,4 +2,5 @@
 .project
 /bin
 gallery.jar
-/src/jt_guevara/test
+/src/jt_guevara/test/Layout_Test.java
+/src/jt_guevara/test/Gallery_Display_Test.java
