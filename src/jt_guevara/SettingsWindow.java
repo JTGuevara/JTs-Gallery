@@ -69,7 +69,7 @@ private static Stage generateSettingsWindow(Stage window);
 	public Stage generateSettingsWindow(Stage window) {
 		//DECLARE JAVAFX STRUCTURE FOR SETTINGS WINDOW
 		Pane p = new Pane();
-		Scene s = new Scene(p,500,280);
+		Scene s = new Scene(p,500,300);
 		GridPane layout = (GridPane) window.getScene().getRoot();//retrieve layout components for applying background settings
 		GridPane display = (GridPane) layout.getChildren().get(1);
 		GridPane buttonLayout = (GridPane) layout.getChildren().get(2);
@@ -104,12 +104,12 @@ private static void styleSettingsButtons(Button OK, Button cancel);
 */
 	
 	private static void styleSettingsButtons(Button OK, Button cancel) {
-		OK.setLayoutX(180);
+		OK.setLayoutX(185);
 		OK.setLayoutY(200);
 		OK.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");
 		OK.setText("OK");
 		OK.setTextFill(Color.WHITE);
-		cancel.setLayoutX(240);
+		cancel.setLayoutX(245);
 		cancel.setLayoutY(200);
 		cancel.setStyle("-fx-background-color: black;-fx-border-color: white;-fx-border-width: 1px");
 		cancel.setText("Cancel");
