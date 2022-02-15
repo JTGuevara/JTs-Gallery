@@ -1,6 +1,7 @@
 /* FILE: Gallery_Display.java
- * CLASS DESCRIPTION: The Gallery_Display class is the visual representation of the image gallery. A Gallery_Display consists of four components: 
- *                   a display component(or wall) for holding image canvases, a left canvas, a middle canvas and a right canvas	                  
+ * CLASS DESCRIPTION: The Gallery_Display class is the visual representation of the image gallery. A Gallery_Display consists of a display
+ *                    component(or wall) for holding image canvases, a left canvas, a middle canvas and a right canvas. Each canvas contains
+ *                    an embedded object(ImageView) or node that actually contains and renders the image.                  
  */
 
 package jt_guevara;
@@ -12,40 +13,45 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Gallery_Display {
-	private GridPane display;//gallery display component that contains image canvases
-	private StackPane leftCanvas = new StackPane();//image canvases
+	private GridPane display;								//gallery display component that contains image canvases
+	private StackPane leftCanvas = new StackPane();			//image canvases
 	private StackPane midCanvas = new StackPane();
 	private StackPane rightCanvas = new StackPane();
+	private ImageView leftNode = new ImageView();			//objects embedded inside the canvas to contain and render the image
+	private ImageView midNode = new ImageView();
+	private ImageView rightNode = new ImageView();
 	
-	public Gallery_Display() {display = new GridPane();}//constructor
-	public GridPane getDisplay() {return display;}//get methods for display and canvases
+	public Gallery_Display() {display = new GridPane();}	//constructor
+	public GridPane getDisplay() {return display;}			//get methods for display, canvases and nodes
 	public StackPane getLeftCanvas() {return leftCanvas;}
 	public StackPane getMidCanvas() {return midCanvas;}
 	public StackPane getRightCanvas() {return rightCanvas;}
+	public ImageView getLeftNode() {return leftNode;}
+	public ImageView getMidNode() {return midNode;}
+	public ImageView getRightNode() {return rightNode;}
 	
 /*
-public void setup_gallery();
-    DESCRIPTION: Sets up gallery by setting style properties to the gallery display, setting style properties for each image canvas, 
-                 applying an image view to each canvas as well as adding all canvases to the display. To do this, setup_gallery() calls 
-                 the following private functions to accomplish its task: set_image_canvas(), set_image_view(), add_image_canvases() 	
+public void setUpDisplay();
+    DESCRIPTION: Sets up gallery display by setting style properties to the gallery display, setting style properties for each image canvas, 
+                 applying an image node to each canvas as well as adding all canvases to the display. 	
  */
-	public void setup_gallery()
+	public void setUpDisplay()
 	{
-		set_gallery_style();
-		set_image_canvas(leftCanvas);
-		set_image_canvas(midCanvas);
-		set_image_canvas(rightCanvas);
-		set_image_view(leftCanvas);
-		set_image_view(midCanvas);
-		set_image_view(rightCanvas);
-		add_image_canvases();
+		setDisplayStyle();
+		setImageCanvas(leftCanvas);
+		setImageCanvas(midCanvas);
+		setImageCanvas(rightCanvas);
+		setImageNode(leftCanvas, leftNode);
+		setImageNode(midCanvas, midNode);
+		setImageNode(rightCanvas, rightNode);
+		addImageCanvases();
 	}
 	
 /*
- private void set_gallery_style();
+ private void setDisplayStyle();
      DESCRIPTION: The gallery display has its style properties set
 */
-	 private void set_gallery_style() {
+	 private void setDisplayStyle() {
 		display.setStyle("-fx-border-color: blue;-fx-border-width: 5px;-fx-border-color: royalblue;-fx-border-radius: 10px;"
 				+ "-fx-background-color: darkblue;-fx-background-radius: 10px");
 		display.setOpacity(.9);
@@ -58,11 +64,11 @@ public void setup_gallery();
 	}
 	
 /*
- private void set_image_canvas(StackPane canvas);
+ private void setImageCanvas(StackPane canvas);
      PARAMETER: StackPane canvas - image canvas used to set style properties
      DESCRIPTION: Modifies and styles the image canvas
 */
-	private void set_image_canvas(StackPane canvas)
+	private void setImageCanvas(StackPane canvas)
 	{
 		canvas.setMinWidth(100);
 		canvas.setMinHeight(100);
@@ -72,47 +78,48 @@ public void setup_gallery();
 				+ "-fx-background-color: black;-fx-background-radius: 10px");
 	}
 /*
- private void set_image_view(StackPane canvas);
-     PARAMETER: StackPane canvas - image canvas used for adding an image view component
-     DESCRIPTION: Initializes an image view component(ImageView) and sets its properties. The image view is then binded and added
+ private void setImageNode(StackPane canvas);
+     PARAMETER: StackPane canvas - image canvas used for adding an image node
+     DESCRIPTION: Sets properties of the specified image node(ImageView). The image node is then binded and added
                   to the canvas.
 */
 	
-	private void set_image_view(StackPane canvas){
-		ImageView imgView = new ImageView();//image view - object embedded inside the canvas for rendering image on the screen
-		imgView.minWidth(100);
-		imgView.minHeight(100);
-		imgView.setFitHeight(530);
-		imgView.setFitWidth(100);
-		imgView.maxWidth(370);
-		imgView.maxHeight(530);
-		imgView.fitWidthProperty().bind(canvas.widthProperty().subtract(25));
-		imgView.fitHeightProperty().bind(canvas.heightProperty().subtract(25));
-		canvas.getChildren().add(imgView);
+	private void setImageNode(StackPane canvas, ImageView node){
+		node.minWidth(100);
+		node.minHeight(100);
+		node.setFitHeight(530);
+		node.setFitWidth(100);
+		node.maxWidth(370);
+		node.maxHeight(530);
+		//binding properties are set so the width and height of the image node is fixed to its canvas
+		node.fitWidthProperty().bind(canvas.widthProperty().subtract(25));
+		node.fitHeightProperty().bind(canvas.heightProperty().subtract(25));
+		canvas.getChildren().add(node);
 	}
 	
 /*
- private void add_image_canvases();
+ private void addImageCanvases();
      DESCRIPTION: Adds image canvases to the display
 */
-	private void add_image_canvases() {
+	private void addImageCanvases() {
 		display.add(leftCanvas, 0, 0);
 		display.add(midCanvas, 1, 0);
 		display.add(rightCanvas, 2, 0);
 	}
 	
 /*
- public void bind_gallery(Stage window);
+ public void synchronizeDisplay(Stage window);
      PARAMETER: Stage window - application window used to apply property binding
-     DESCRIPTION: This function binds(synchronizes) width and height properties of the gallery display to width and height properties of
-                  the application window so that the gallery display is automatically resized with the window when the window changes. 
-                  The same is done with each image canvas and the display. Each canvas is binded to the display so each canvas is resized
-                  along with the display. 
+     DESCRIPTION: Sets binding properties to the display and each canvas. These binding properties allow for dynamic resizing of components
+                  every time the user changes the size of the window.
 */
-	public void bind_gallery(Stage window)
+	public void synchronizeDisplay(Stage window)
 	{
+		//to set binding properties and allow for dynamic resizing of components, the width and height properties of the display are bound(synchronized)
+		//to the application window's width and height so the display is resized only when the window is changed
 		display.prefWidthProperty().bind(window.widthProperty());
 		display.prefHeightProperty().bind(window.heightProperty());
+		//the same is done with each canvas in relation to the display
 		leftCanvas.prefWidthProperty().bind(display.widthProperty());
 		leftCanvas.prefHeightProperty().bind(display.heightProperty());
 		midCanvas.prefWidthProperty().bind(display.widthProperty());
