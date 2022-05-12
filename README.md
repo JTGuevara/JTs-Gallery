@@ -11,7 +11,7 @@ JT's Gallery is a personal project. This project is an image gallery application
 
 <h2>REQUIREMENTS</h2>
 <ol>
-  <li><em>Java Development Kit (version 16.0.1) (OpenJDK)</em>
+  <li><em>Java Development Kit (version 16 or higher)(OpenJDK)</em>
     (contains the Java platform (Java Runtime Environment) for running Java applications)</li>
   <li><em>JavaFX Development Kit (version 11.0.2) (OpenJFX)</em>
     (contains the JavaFX platform and libraries)</li>
@@ -20,7 +20,7 @@ JT's Gallery is a personal project. This project is an image gallery application
 
 <h2>RUNNING THE IMAGE GALLERY</h2>
 <ol>
-  <li>Download the project (.zip folder) or clone the repository locally on your machine. Also make sure to download both Java SDKs to your computer.</li>
+  <li>Download the project (.zip folder) or clone the repository locally on your machine. Also make sure to download both Java SDKs.</li>
   <li>Configure your computer to run Java applications.</li><br/>
   <i>(Example with Windows 10:)</i><br/>
   <ul>
@@ -33,6 +33,6 @@ JT's Gallery is a personal project. This project is an image gallery application
   <li>To run the application: open your system's command-line interface, navigate to the project's root directory (/JTs-Gallery/..), input the following 
     commands and press Enter:
   
-    java -classpath ./bin --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls -jar gallery.jar
+    java -classpath ./bin --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls jt_guevara.Main
   </li>
   </ol>
