@@ -29,10 +29,10 @@ JT's Gallery is a personal project. This project is an image gallery application
   <li>In the Advanced System Settings window, click on the Advanced tab and select Environment Variables.
   <li>Under system variables, highlight 'PATH' and click Edit. Then, add a new directory with the location of your JDK.</li>
   </ul>
-
+  <br/>
   <li>Navigate to the project's root directory(/Calculator/...) using your system's file explorer and open up your system's command-line interface.
-  Input the following commands and press Enter: </li>
-
+  Input the following commands and press Enter: </li><br/>
+  
   `javac -classpath "./src" -d "./bin/jt_guevara" --module-path "<YOUR PATH TO JAVAFX SDK>/lib" --add-modules javafx.controls src/jt_guevara/Main.java`
   <br/><br/>
   <li>To run the application, input the following commands and press Enter:
